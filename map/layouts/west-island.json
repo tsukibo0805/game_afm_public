@@ -1,0 +1,40 @@
+{
+  "mapId": "west-island",
+  "displayName": "西の島",
+  "viewBox": [0, 0, 1000, 1000],
+  "defaultNodeId": "west-start",
+  "islandPath": "M180,730 C110,640 78,520 92,400 C108,268 178,168 300,128 C430,86 560,88 680,128 C800,168 918,186 948,270 C980,360 952,430 910,510 C868,590 892,650 850,730 C808,810 700,910 540,938 C380,966 250,888 200,800 C176,760 198,748 180,730 Z",
+  "nodes": {
+    "west-graveyard": { "x": 118, "y": 236 },
+    "west-spirit-forest-d": { "x": 228, "y": 318 },
+    "west-spirit-forest-c": { "x": 108, "y": 402 },
+    "west-spirit-forest-b": { "x": 228, "y": 468 },
+    "west-spirit-forest-a": { "x": 338, "y": 558 },
+    "west-church": { "x": 498, "y": 622 },
+    "west-start": { "x": 518, "y": 822 },
+    "west-north-reef": { "x": 308, "y": 868 },
+    "west-mountain-a": { "x": 578, "y": 498 },
+    "west-mountain-d": { "x": 498, "y": 378 },
+    "west-mountain-b": { "x": 698, "y": 428 },
+    "west-mountain-e": { "x": 558, "y": 258 },
+    "west-mountain-c": { "x": 738, "y": 298 },
+    "west-rune-cave": { "x": 848, "y": 448 },
+    "west-port": { "x": 848, "y": 178 }
+  },
+  "externalNodes": {
+    "sea-west-central-route": {
+      "x": 900,
+      "y": 72,
+      "displayName": "中央の島への航路",
+      "shortLabel": "航路",
+      "type": "Sea",
+      "labelAnchor": "end"
+    }
+  },
+  "regions": [
+    { "id": "coast", "label": "漂着海岸", "x": 430, "y": 930 },
+    { "id": "forest", "label": "精霊森", "x": 168, "y": 168 },
+    { "id": "mountain", "label": "山岳地帯", "x": 628, "y": 148 },
+    { "id": "port", "label": "港町", "x": 848, "y": 118 }
+  ]
+}

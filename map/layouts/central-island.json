@@ -1,0 +1,66 @@
+{
+  "mapId": "central-island",
+  "displayName": "中央の島",
+  "viewBox": [0, 0, 1880, 960],
+  "defaultNodeId": "central-almar-port",
+  "dense": true,
+  "islandPath": "M90,470 C100,300 180,140 360,90 C560,40 860,50 1120,90 C1380,130 1600,200 1740,330 C1810,410 1820,530 1740,640 C1600,790 1280,860 980,890 C700,920 390,870 230,760 C120,680 80,570 90,470 Z",
+  "impliedEdges": [
+    { "from": "sea-west-central-route", "to": "central-almar-port" }
+  ],
+  "nodes": {
+    "sea-west-central-route": { "x": 96, "y": 360, "shortLabel": "西からの船" },
+    "sea-central-west-route": { "x": 96, "y": 560, "shortLabel": "西への船" },
+    "central-almar-port": { "x": 230, "y": 460, "r": 20, "shortLabel": "アルマル港" },
+
+    "central-north-checkpoint": { "x": 310, "y": 270, "shortLabel": "北岸検問" },
+    "central-north-supply-road": { "x": 450, "y": 150, "shortLabel": "北岸街道" },
+    "central-north-naval-port": { "x": 600, "y": 110, "shortLabel": "連絡港" },
+    "central-ash-lighthouse-fort": { "x": 750, "y": 150, "shortLabel": "潮見灯台" },
+    "central-east-blockade-port": { "x": 860, "y": 280, "shortLabel": "北東中継" },
+
+    "central-harbor-market": { "x": 310, "y": 650, "shortLabel": "港湾市場" },
+    "central-south-post-town": { "x": 450, "y": 780, "shortLabel": "南岸宿場" },
+    "central-south-shrine": { "x": 600, "y": 830, "shortLabel": "南岸神殿" },
+    "central-shioho-fishing-village": { "x": 750, "y": 810, "shortLabel": "潮穂漁村" },
+    "central-black-current-ferry-ruins": { "x": 860, "y": 650, "shortLabel": "水門市" },
+
+    "central-old-spirit-shrine": { "x": 330, "y": 450, "shortLabel": "旧精霊祠" },
+    "central-abandoned-coach-road": { "x": 490, "y": 400, "shortLabel": "廃駅馬車道" },
+    "central-water-sound-shrine": { "x": 640, "y": 380, "shortLabel": "水音の祠" },
+    "central-sealed-valley": { "x": 770, "y": 400, "shortLabel": "水継ぎ村" },
+    "central-east-gate-cape": { "x": 880, "y": 410, "shortLabel": "東部関門" },
+
+    "central-first-gate": { "x": 380, "y": 550, "shortLabel": "第一検問門" },
+    "central-white-stone-road": { "x": 530, "y": 590, "shortLabel": "白石街道" },
+    "central-harmony-outer-temple": { "x": 680, "y": 560, "shortLabel": "外宮" },
+    "central-capital-outer-gate": { "x": 840, "y": 530, "shortLabel": "帝都外門" },
+
+    "central-almaria-capital": { "x": 1020, "y": 450, "r": 22, "shortLabel": "帝都" },
+    "central-capital-prison": { "x": 1060, "y": 560, "shortLabel": "地下牢" },
+
+    "central-capital-east-military-gate": { "x": 1190, "y": 450, "shortLabel": "東軍門" },
+    "central-iron-marker-road": { "x": 1330, "y": 410, "shortLabel": "鉄標街道" },
+    "central-ash-cargo-hollow": { "x": 1460, "y": 470, "shortLabel": "灰荷窪地" },
+    "central-eastern-analysis-institute": { "x": 1590, "y": 420, "shortLabel": "分析院" },
+    "central-border-sea-garrison-city": { "x": 1710, "y": 470, "shortLabel": "駐屯市" },
+    "central-eastern-blockade-port": { "x": 1790, "y": 360, "r": 18, "shortLabel": "封鎖港" }
+  },
+  "externalNodes": {
+    "sea-central-east-pursuit-route": {
+      "x": 1830,
+      "y": 230,
+      "displayName": "東の島への追跡船",
+      "shortLabel": "追跡船",
+      "type": "Sea",
+      "labelAnchor": "end"
+    }
+  },
+  "regions": [
+    { "id": "west", "label": "西岸", "x": 230, "y": 90 },
+    { "id": "north", "label": "北街道", "x": 600, "y": 54 },
+    { "id": "south", "label": "南街道", "x": 600, "y": 920 },
+    { "id": "capital", "label": "帝都圏", "x": 1020, "y": 90 },
+    { "id": "east", "label": "東部軍道", "x": 1500, "y": 90 }
+  ]
+}

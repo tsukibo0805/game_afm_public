@@ -1,0 +1,209 @@
+{
+  "id": "east-island",
+  "displayName": "東の島",
+  "nodes": [
+    {
+      "id": "sea-central-east-pursuit-route",
+      "displayName": "東の島への追跡船",
+      "type": "Sea",
+      "choices": []
+    },
+    {
+      "id": "east-landing-coast",
+      "displayName": "灰の海岸",
+      "type": "Coast",
+      "choices": [
+        {
+          "id": "east-landing-coast-to-kazeho",
+          "displayName": "封印石片を追って風穂村へ向かう",
+          "action": "Move",
+          "toNode": "east-kazeho-village"
+        }
+      ]
+    },
+    {
+      "id": "east-kazeho-village",
+      "displayName": "風穂村",
+      "type": "Village",
+      "choices": [
+        {
+          "id": "east-kazeho-village-to-landing",
+          "displayName": "灰の海岸へ戻る",
+          "action": "Move",
+          "toNode": "east-landing-coast"
+        },
+        {
+          "id": "east-kazeho-village-to-kaerimizu",
+          "displayName": "アステルと還り水の郷へ向かう",
+          "action": "Move",
+          "toNode": "east-kaerimizu-village"
+        }
+      ]
+    },
+    {
+      "id": "east-kaerimizu-village",
+      "displayName": "還り水の郷",
+      "type": "Town",
+      "choices": [
+        {
+          "id": "east-kaerimizu-village-to-kazeho",
+          "displayName": "風穂村へ戻る",
+          "action": "Move",
+          "toNode": "east-kazeho-village"
+        },
+        {
+          "id": "east-kaerimizu-village-to-blackstone",
+          "displayName": "黒石の中継所を調べる",
+          "action": "Move",
+          "toNode": "east-blackstone-waystation"
+        },
+        {
+          "id": "east-kaerimizu-village-to-spirit-valley",
+          "displayName": "アステルの案内で精霊の谷へ向かう",
+          "action": "Move",
+          "toNode": "east-spirit-valley"
+        }
+      ]
+    },
+    {
+      "id": "east-blackstone-waystation",
+      "displayName": "黒石の中継所",
+      "type": "Ruins",
+      "choices": [
+        {
+          "id": "east-blackstone-waystation-to-kaerimizu",
+          "displayName": "還り水の郷へ戻る",
+          "action": "Move",
+          "toNode": "east-kaerimizu-village"
+        },
+        {
+          "id": "east-blackstone-waystation-to-volcano",
+          "displayName": "輸送跡を追って火山麓へ向かう",
+          "action": "Move",
+          "toNode": "east-volcano-fork"
+        }
+      ]
+    },
+    {
+      "id": "east-volcano-fork",
+      "displayName": "火山麓の分かれ道",
+      "type": "Mountain",
+      "choices": [
+        {
+          "id": "east-volcano-fork-to-blackstone",
+          "displayName": "黒石の中継所へ戻る",
+          "action": "Move",
+          "toNode": "east-blackstone-waystation"
+        },
+        {
+          "id": "east-volcano-fork-to-old-circulation",
+          "displayName": "古い還流路へ入る",
+          "action": "Move",
+          "toNode": "east-old-circulation-road"
+        }
+      ]
+    },
+    {
+      "id": "east-old-circulation-road",
+      "displayName": "古い還流路",
+      "type": "Ruins",
+      "choices": [
+        {
+          "id": "east-old-circulation-road-to-volcano",
+          "displayName": "火山麓へ戻る",
+          "action": "Move",
+          "toNode": "east-volcano-fork"
+        },
+        {
+          "id": "east-old-circulation-road-to-ritual",
+          "displayName": "火口下の古祭場へ急ぐ",
+          "action": "Move",
+          "toNode": "east-crater-ritual-site"
+        }
+      ]
+    },
+    {
+      "id": "east-crater-ritual-site",
+      "displayName": "火口下の古祭場",
+      "type": "Shrine",
+      "choices": [
+        {
+          "id": "east-crater-ritual-site-retreat",
+          "displayName": "イリネアを連れて退避する",
+          "action": "Move",
+          "toNode": "east-collapse-escape-route"
+        }
+      ]
+    },
+    {
+      "id": "east-collapse-escape-route",
+      "displayName": "崩落後の退避路",
+      "type": "Ruins",
+      "choices": [
+        {
+          "id": "east-collapse-escape-route-to-refuge",
+          "displayName": "泉守りの隠れ里へ退く",
+          "action": "Move",
+          "toNode": "east-springkeeper-refuge"
+        }
+      ]
+    },
+    {
+      "id": "east-springkeeper-refuge",
+      "displayName": "泉守りの隠れ里",
+      "type": "Village",
+      "choices": [
+        {
+          "id": "east-springkeeper-refuge-to-spirit-valley",
+          "displayName": "精霊の谷へ向かう",
+          "action": "Move",
+          "toNode": "east-spirit-valley"
+        },
+        {
+          "id": "east-springkeeper-refuge-to-mountainside",
+          "displayName": "山腹の旧道へ向かう",
+          "action": "Move",
+          "toNode": "east-mountainside-old-road"
+        }
+      ]
+    },
+    {
+      "id": "east-spirit-valley",
+      "displayName": "精霊の谷",
+      "type": "Forest",
+      "choices": [
+        {
+          "id": "east-spirit-valley-to-kaerimizu",
+          "displayName": "還り水の郷へ戻る",
+          "action": "Move",
+          "toNode": "east-kaerimizu-village"
+        },
+        {
+          "id": "east-spirit-valley-to-refuge",
+          "displayName": "泉守りの隠れ里へ向かう",
+          "action": "Move",
+          "toNode": "east-springkeeper-refuge"
+        }
+      ]
+    },
+    {
+      "id": "east-mountainside-old-road",
+      "displayName": "山腹の旧道",
+      "type": "Mountain",
+      "choices": [
+        {
+          "id": "east-mountainside-old-road-to-refuge",
+          "displayName": "泉守りの隠れ里へ戻る",
+          "action": "Move",
+          "toNode": "east-springkeeper-refuge"
+        },
+        {
+          "id": "east-mountainside-old-road-to-landing",
+          "displayName": "灰の海岸へ下る",
+          "action": "Move",
+          "toNode": "east-landing-coast"
+        }
+      ]
+    }
+  ]
+}

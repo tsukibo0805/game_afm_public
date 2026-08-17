@@ -1,0 +1,580 @@
+{
+  "id": "central-island",
+  "displayName": "中央の島",
+  "nodes": [
+    {
+      "id": "sea-west-central-route",
+      "displayName": "中央の島への船",
+      "type": "Sea",
+      "choices": []
+    },
+    {
+      "id": "sea-central-west-route",
+      "displayName": "西の島への船",
+      "type": "Sea",
+      "choices": []
+    },
+    {
+      "id": "central-almar-port",
+      "displayName": "アルマル港",
+      "type": "Town",
+      "choices": [
+        {
+          "id": "central-almar-port-sail-west",
+          "displayName": "西の島へ出航する",
+          "action": "Move",
+          "toNode": "sea-central-west-route"
+        },
+        {
+          "id": "central-almar-port-to-north-checkpoint",
+          "displayName": "北岸検問所へ向かう",
+          "action": "Move",
+          "toNode": "central-north-checkpoint"
+        },
+        {
+          "id": "central-almar-port-to-harbor-market",
+          "displayName": "港湾市場へ向かう",
+          "action": "Move",
+          "toNode": "central-harbor-market"
+        },
+        {
+          "id": "central-almar-port-to-first-gate",
+          "displayName": "第一検問門へ向かう",
+          "action": "Move",
+          "toNode": "central-first-gate"
+        },
+        {
+          "id": "central-almar-port-to-old-spirit-shrine",
+          "displayName": "旧精霊祠へ向かう",
+          "action": "Move",
+          "toNode": "central-old-spirit-shrine"
+        }
+      ]
+    },
+    {
+      "id": "central-north-checkpoint",
+      "displayName": "北岸検問所",
+      "type": "Checkpoint",
+      "choices": [
+        {
+          "id": "central-north-checkpoint-to-almar-port",
+          "displayName": "アルマル港へ戻る",
+          "action": "Move",
+          "toNode": "central-almar-port"
+        },
+        {
+          "id": "central-north-checkpoint-to-north-supply-road",
+          "displayName": "北岸街道へ向かう",
+          "action": "Move",
+          "toNode": "central-north-supply-road"
+        }
+      ]
+    },
+    {
+      "id": "central-north-supply-road",
+      "displayName": "北岸街道",
+      "type": "Road",
+      "choices": [
+        {
+          "id": "central-north-supply-road-to-north-checkpoint",
+          "displayName": "北岸検問所へ戻る",
+          "action": "Move",
+          "toNode": "central-north-checkpoint"
+        },
+        {
+          "id": "central-north-supply-road-to-north-naval-port",
+          "displayName": "北岸連絡港へ向かう",
+          "action": "Move",
+          "toNode": "central-north-naval-port"
+        }
+      ]
+    },
+    {
+      "id": "central-north-naval-port",
+      "displayName": "北岸連絡港",
+      "type": "Port",
+      "choices": [
+        {
+          "id": "central-north-naval-port-to-north-supply-road",
+          "displayName": "北岸街道へ戻る",
+          "action": "Move",
+          "toNode": "central-north-supply-road"
+        },
+        {
+          "id": "central-north-naval-port-to-ash-lighthouse-fort",
+          "displayName": "潮見灯台へ向かう",
+          "action": "Move",
+          "toNode": "central-ash-lighthouse-fort"
+        }
+      ]
+    },
+    {
+      "id": "central-ash-lighthouse-fort",
+      "displayName": "潮見灯台",
+      "type": "Lighthouse",
+      "choices": [
+        {
+          "id": "central-ash-lighthouse-fort-to-north-naval-port",
+          "displayName": "北岸連絡港へ戻る",
+          "action": "Move",
+          "toNode": "central-north-naval-port"
+        },
+        {
+          "id": "central-ash-lighthouse-fort-to-east-blockade-port",
+          "displayName": "北東中継都市へ向かう",
+          "action": "Move",
+          "toNode": "central-east-blockade-port"
+        }
+      ]
+    },
+    {
+      "id": "central-east-blockade-port",
+      "displayName": "北東中継都市",
+      "type": "Town",
+      "choices": [
+        {
+          "id": "central-east-blockade-port-to-ash-lighthouse-fort",
+          "displayName": "潮見灯台へ戻る",
+          "action": "Move",
+          "toNode": "central-ash-lighthouse-fort"
+        },
+        {
+          "id": "central-east-blockade-port-to-almaria-capital",
+          "displayName": "帝都アルマリアへ向かう",
+          "action": "Move",
+          "toNode": "central-almaria-capital"
+        }
+      ]
+    },
+    {
+      "id": "central-harbor-market",
+      "displayName": "港湾市場",
+      "type": "Market",
+      "choices": [
+        {
+          "id": "central-harbor-market-to-almar-port",
+          "displayName": "アルマル港へ戻る",
+          "action": "Move",
+          "toNode": "central-almar-port"
+        },
+        {
+          "id": "central-harbor-market-to-south-post-town",
+          "displayName": "南岸宿場へ向かう",
+          "action": "Move",
+          "toNode": "central-south-post-town"
+        }
+      ]
+    },
+    {
+      "id": "central-south-post-town",
+      "displayName": "南岸宿場",
+      "type": "Town",
+      "choices": [
+        {
+          "id": "central-south-post-town-to-harbor-market",
+          "displayName": "港湾市場へ戻る",
+          "action": "Move",
+          "toNode": "central-harbor-market"
+        },
+        {
+          "id": "central-south-post-town-to-south-shrine",
+          "displayName": "南岸神殿へ向かう",
+          "action": "Move",
+          "toNode": "central-south-shrine"
+        }
+      ]
+    },
+    {
+      "id": "central-south-shrine",
+      "displayName": "南岸神殿",
+      "type": "Shrine",
+      "choices": [
+        {
+          "id": "central-south-shrine-to-south-post-town",
+          "displayName": "南岸宿場へ戻る",
+          "action": "Move",
+          "toNode": "central-south-post-town"
+        },
+        {
+          "id": "central-south-shrine-to-first-gate",
+          "displayName": "巡礼路から第一検問門へ向かう",
+          "action": "Move",
+          "toNode": "central-first-gate"
+        },
+        {
+          "id": "central-south-shrine-to-shioho-fishing-village",
+          "displayName": "潮穂の漁村へ向かう",
+          "action": "Move",
+          "toNode": "central-shioho-fishing-village"
+        }
+      ]
+    },
+    {
+      "id": "central-shioho-fishing-village",
+      "displayName": "潮穂の漁村",
+      "type": "Village",
+      "choices": [
+        {
+          "id": "central-shioho-fishing-village-to-south-shrine",
+          "displayName": "南岸神殿へ戻る",
+          "action": "Move",
+          "toNode": "central-south-shrine"
+        },
+        {
+          "id": "central-shioho-fishing-village-to-black-current-ferry-ruins",
+          "displayName": "水門市へ向かう",
+          "action": "Move",
+          "toNode": "central-black-current-ferry-ruins"
+        }
+      ]
+    },
+    {
+      "id": "central-black-current-ferry-ruins",
+      "displayName": "水門市",
+      "type": "Town",
+      "choices": [
+        {
+          "id": "central-black-current-ferry-ruins-to-shioho-fishing-village",
+          "displayName": "潮穂の漁村へ戻る",
+          "action": "Move",
+          "toNode": "central-shioho-fishing-village"
+        },
+        {
+          "id": "central-black-current-ferry-ruins-to-almaria-capital",
+          "displayName": "帝都アルマリアへ向かう",
+          "action": "Move",
+          "toNode": "central-almaria-capital"
+        }
+      ]
+    },
+    {
+      "id": "central-first-gate",
+      "displayName": "第一検問門",
+      "type": "Gate",
+      "choices": [
+        {
+          "id": "central-first-gate-to-south-shrine",
+          "displayName": "巡礼路から南岸神殿へ戻る",
+          "action": "Move",
+          "toNode": "central-south-shrine"
+        },
+        {
+          "id": "central-first-gate-to-almar-port",
+          "displayName": "アルマル港へ戻る",
+          "action": "Move",
+          "toNode": "central-almar-port"
+        },
+        {
+          "id": "central-first-gate-to-white-stone-road",
+          "displayName": "白石街道へ向かう",
+          "action": "Move",
+          "toNode": "central-white-stone-road"
+        }
+      ]
+    },
+    {
+      "id": "central-white-stone-road",
+      "displayName": "白石街道",
+      "type": "Road",
+      "choices": [
+        {
+          "id": "central-white-stone-road-to-first-gate",
+          "displayName": "第一検問門へ戻る",
+          "action": "Move",
+          "toNode": "central-first-gate"
+        },
+        {
+          "id": "central-white-stone-road-to-harmony-outer-temple",
+          "displayName": "調和神殿外宮へ向かう",
+          "action": "Move",
+          "toNode": "central-harmony-outer-temple"
+        }
+      ]
+    },
+    {
+      "id": "central-harmony-outer-temple",
+      "displayName": "調和神殿外宮",
+      "type": "Temple",
+      "choices": [
+        {
+          "id": "central-harmony-outer-temple-to-white-stone-road",
+          "displayName": "白石街道へ戻る",
+          "action": "Move",
+          "toNode": "central-white-stone-road"
+        },
+        {
+          "id": "central-harmony-outer-temple-to-capital-outer-gate",
+          "displayName": "帝都外門へ向かう",
+          "action": "Move",
+          "toNode": "central-capital-outer-gate"
+        }
+      ]
+    },
+    {
+      "id": "central-capital-outer-gate",
+      "displayName": "帝都外門",
+      "type": "Gate",
+      "choices": [
+        {
+          "id": "central-capital-outer-gate-to-harmony-outer-temple",
+          "displayName": "調和神殿外宮へ戻る",
+          "action": "Move",
+          "toNode": "central-harmony-outer-temple"
+        },
+        {
+          "id": "central-capital-outer-gate-to-almaria-capital",
+          "displayName": "帝都アルマリアへ向かう",
+          "action": "Move",
+          "toNode": "central-almaria-capital"
+        }
+      ]
+    },
+    {
+      "id": "central-almaria-capital",
+      "displayName": "帝都アルマリア",
+      "type": "Capital",
+      "choices": [
+        {
+          "id": "central-almaria-capital-to-capital-outer-gate",
+          "displayName": "帝都外門へ戻る",
+          "action": "Move",
+          "toNode": "central-capital-outer-gate"
+        },
+        {
+          "id": "central-almaria-capital-to-northeast-relay-city",
+          "displayName": "北東中継都市へ向かう",
+          "action": "Move",
+          "toNode": "central-east-blockade-port"
+        },
+        {
+          "id": "central-almaria-capital-to-watergate-city",
+          "displayName": "水門市へ向かう",
+          "action": "Move",
+          "toNode": "central-black-current-ferry-ruins"
+        },
+        {
+          "id": "central-almaria-capital-to-east-district-gate",
+          "displayName": "東部関門へ向かう",
+          "action": "Move",
+          "toNode": "central-east-gate-cape"
+        },
+        {
+          "id": "central-almaria-capital-to-east-military-gate",
+          "displayName": "東部照会書を携えて帝都東軍門へ向かう",
+          "action": "Move",
+          "toNode": "central-capital-east-military-gate"
+        }
+      ]
+    },
+    {
+      "id": "central-capital-prison",
+      "displayName": "帝都地下牢",
+      "type": "Prison",
+      "choices": [
+        {
+          "id": "central-capital-prison-exit",
+          "displayName": "開いた牢を出る",
+          "action": "Move",
+          "toNode": "central-almaria-capital"
+        }
+      ]
+    },
+    {
+      "id": "central-old-spirit-shrine",
+      "displayName": "旧精霊祠",
+      "type": "Shrine",
+      "choices": [
+        {
+          "id": "central-old-spirit-shrine-to-almar-port",
+          "displayName": "アルマル港へ戻る",
+          "action": "Move",
+          "toNode": "central-almar-port"
+        },
+        {
+          "id": "central-old-spirit-shrine-to-abandoned-coach-road",
+          "displayName": "廃駅馬車道へ向かう",
+          "action": "Move",
+          "toNode": "central-abandoned-coach-road"
+        }
+      ]
+    },
+    {
+      "id": "central-abandoned-coach-road",
+      "displayName": "廃駅馬車道",
+      "type": "Road",
+      "choices": [
+        {
+          "id": "central-abandoned-coach-road-to-old-spirit-shrine",
+          "displayName": "旧精霊祠へ戻る",
+          "action": "Move",
+          "toNode": "central-old-spirit-shrine"
+        },
+        {
+          "id": "central-abandoned-coach-road-to-water-sound-shrine",
+          "displayName": "水音の祠へ向かう",
+          "action": "Move",
+          "toNode": "central-water-sound-shrine"
+        }
+      ]
+    },
+    {
+      "id": "central-water-sound-shrine",
+      "displayName": "水音の祠",
+      "type": "Shrine",
+      "choices": [
+        {
+          "id": "central-water-sound-shrine-to-abandoned-coach-road",
+          "displayName": "廃駅馬車道へ戻る",
+          "action": "Move",
+          "toNode": "central-abandoned-coach-road"
+        },
+        {
+          "id": "central-water-sound-shrine-to-sealed-valley",
+          "displayName": "水継ぎ村へ向かう",
+          "action": "Move",
+          "toNode": "central-sealed-valley"
+        }
+      ]
+    },
+    {
+      "id": "central-sealed-valley",
+      "displayName": "水継ぎ村",
+      "type": "Village",
+      "choices": [
+        {
+          "id": "central-sealed-valley-to-water-sound-shrine",
+          "displayName": "水音の祠へ戻る",
+          "action": "Move",
+          "toNode": "central-water-sound-shrine"
+        },
+        {
+          "id": "central-sealed-valley-to-east-gate-cape",
+          "displayName": "東部関門へ向かう",
+          "action": "Move",
+          "toNode": "central-east-gate-cape"
+        }
+      ]
+    },
+    {
+      "id": "central-east-gate-cape",
+      "displayName": "東部関門",
+      "type": "Gate",
+      "choices": [
+        {
+          "id": "central-east-gate-cape-to-sealed-valley",
+          "displayName": "水継ぎ村へ戻る",
+          "action": "Move",
+          "toNode": "central-sealed-valley"
+        },
+        {
+          "id": "central-east-gate-cape-to-almaria-capital",
+          "displayName": "帝都アルマリアへ向かう",
+          "action": "Move",
+          "toNode": "central-almaria-capital"
+        }
+      ]
+    },
+    {
+      "id": "central-capital-east-military-gate",
+      "displayName": "帝都東軍門",
+      "type": "Gate",
+      "choices": [
+        {
+          "id": "central-capital-east-military-gate-to-almaria-capital",
+          "displayName": "帝都アルマリアへ戻る",
+          "action": "Move",
+          "toNode": "central-almaria-capital"
+        },
+        {
+          "id": "central-capital-east-military-gate-to-iron-marker-road",
+          "displayName": "鉄標街道へ向かう",
+          "action": "Move",
+          "toNode": "central-iron-marker-road"
+        }
+      ]
+    },
+    {
+      "id": "central-iron-marker-road",
+      "displayName": "鉄標街道",
+      "type": "Road",
+      "choices": [
+        {
+          "id": "central-iron-marker-road-to-east-military-gate",
+          "displayName": "帝都東軍門へ戻る",
+          "action": "Move",
+          "toNode": "central-capital-east-military-gate"
+        },
+        {
+          "id": "central-iron-marker-road-to-ash-cargo-hollow",
+          "displayName": "灰荷の窪地へ向かう",
+          "action": "Move",
+          "toNode": "central-ash-cargo-hollow"
+        }
+      ]
+    },
+    {
+      "id": "central-ash-cargo-hollow",
+      "displayName": "灰荷の窪地",
+      "type": "Road",
+      "choices": [
+        {
+          "id": "central-ash-cargo-hollow-to-iron-marker-road",
+          "displayName": "鉄標街道へ戻る",
+          "action": "Move",
+          "toNode": "central-iron-marker-road"
+        },
+        {
+          "id": "central-ash-cargo-hollow-to-eastern-analysis-institute",
+          "displayName": "東部分析院へ向かう",
+          "action": "Move",
+          "toNode": "central-eastern-analysis-institute"
+        }
+      ]
+    },
+    {
+      "id": "central-eastern-analysis-institute",
+      "displayName": "東部分析院",
+      "type": "Town",
+      "choices": [
+        {
+          "id": "central-eastern-analysis-institute-to-ash-cargo-hollow",
+          "displayName": "灰荷の窪地へ戻る",
+          "action": "Move",
+          "toNode": "central-ash-cargo-hollow"
+        },
+        {
+          "id": "central-eastern-analysis-institute-to-border-garrison",
+          "displayName": "境海駐屯市へ急ぐ",
+          "action": "Move",
+          "toNode": "central-border-sea-garrison-city"
+        }
+      ]
+    },
+    {
+      "id": "central-border-sea-garrison-city",
+      "displayName": "境海駐屯市",
+      "type": "Town",
+      "choices": [
+        {
+          "id": "central-border-sea-garrison-city-to-eastern-blockade-port",
+          "displayName": "逃走した別働隊を追う",
+          "action": "Move",
+          "toNode": "central-eastern-blockade-port"
+        }
+      ]
+    },
+    {
+      "id": "central-eastern-blockade-port",
+      "displayName": "東端封鎖港",
+      "type": "Port",
+      "choices": [
+        {
+          "id": "central-eastern-blockade-port-board-pursuit-ship",
+          "displayName": "追跡船に乗る",
+          "action": "Move",
+          "toNode": "sea-central-east-pursuit-route"
+        }
+      ]
+    }
+  ]
+}

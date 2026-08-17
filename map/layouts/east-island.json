@@ -1,0 +1,31 @@
+{
+  "mapId": "east-island",
+  "displayName": "東の島",
+  "viewBox": [0, 0, 1080, 1280],
+  "defaultNodeId": "east-landing-coast",
+  "islandPath": "M170,1040 C110,900 130,700 200,500 C270,300 430,140 620,100 C780,64 930,90 1000,200 C1070,310 1080,480 1020,660 C960,850 1000,1000 900,1140 C790,1260 540,1290 340,1220 C210,1170 150,1100 170,1040 Z",
+  "impliedEdges": [
+    { "from": "sea-central-east-pursuit-route", "to": "east-landing-coast" }
+  ],
+  "nodes": {
+    "sea-central-east-pursuit-route": { "x": 80, "y": 1020, "shortLabel": "追跡船" },
+    "east-landing-coast": { "x": 240, "y": 1060, "shortLabel": "灰の海岸" },
+    "east-kazeho-village": { "x": 360, "y": 880, "shortLabel": "風穂村" },
+    "east-kaerimizu-village": { "x": 500, "y": 680, "r": 20, "shortLabel": "還り水の郷" },
+    "east-blackstone-waystation": { "x": 640, "y": 520, "shortLabel": "黒石中継所" },
+    "east-volcano-fork": { "x": 760, "y": 380, "shortLabel": "火山麓" },
+    "east-old-circulation-road": { "x": 840, "y": 250, "shortLabel": "古い還流路" },
+    "east-crater-ritual-site": { "x": 900, "y": 130, "r": 18, "shortLabel": "古祭場" },
+    "east-collapse-escape-route": { "x": 920, "y": 560, "shortLabel": "退避路" },
+    "east-spirit-valley": { "x": 660, "y": 840, "shortLabel": "精霊の谷" },
+    "east-springkeeper-refuge": { "x": 800, "y": 980, "shortLabel": "隠れ里" },
+    "east-mountainside-old-road": { "x": 480, "y": 1120, "shortLabel": "山腹旧道" }
+  },
+  "externalNodes": {},
+  "regions": [
+    { "id": "southwest", "label": "南西海岸", "x": 280, "y": 1220 },
+    { "id": "center", "label": "還り水", "x": 430, "y": 620 },
+    { "id": "volcano", "label": "火山", "x": 900, "y": 70 },
+    { "id": "southeast", "label": "精霊の谷", "x": 780, "y": 780 }
+  ]
+}

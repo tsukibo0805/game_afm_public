@@ -1,0 +1,309 @@
+{
+  "id": "west-island",
+  "displayName": "西の島",
+  "nodes": [
+    {
+      "id": "west-start",
+      "displayName": "始まりの地",
+      "type": "Town",
+      "choices": [
+        {
+          "id": "west-start-move-church",
+          "displayName": "西方教会方面へ向かう",
+          "action": "Move",
+          "toNode": "west-church"
+        },
+        {
+          "id": "west-start-move-north-reef",
+          "displayName": "北の磯へ向かう",
+          "action": "Move",
+          "toNode": "west-north-reef"
+        }
+      ]
+    },
+    {
+      "id": "west-north-reef",
+      "displayName": "北の磯",
+      "type": "Coast",
+      "choices": [
+        {
+          "id": "west-north-reef-move-start",
+          "displayName": "始まりの地へ戻る",
+          "action": "Move",
+          "toNode": "west-start"
+        }
+      ]
+    },
+    {
+      "id": "west-church",
+      "displayName": "西方教会",
+      "type": "Church",
+      "choices": [
+        {
+          "id": "west-church-move-forest",
+          "displayName": "精霊森へ向かう",
+          "action": "Move",
+          "toNode": "west-spirit-forest-a"
+        },
+        {
+          "id": "west-church-move-mountain-a",
+          "displayName": "山岳街道へ向かう",
+          "action": "Move",
+          "toNode": "west-mountain-a"
+        },
+        {
+          "id": "west-church-move-start",
+          "displayName": "始まりの地へ向かう",
+          "action": "Move",
+          "toNode": "west-start"
+        }
+      ]
+    },
+    {
+      "id": "west-port",
+      "displayName": "港町",
+      "type": "Town",
+      "choices": [
+        {
+          "id": "west-port-sail-central",
+          "displayName": "中央の島へ出航する",
+          "action": "Move",
+          "toNode": "sea-west-central-route"
+        },
+        {
+          "id": "west-port-move-mountain-c",
+          "displayName": "山岳街道へ戻る",
+          "action": "Move",
+          "toNode": "west-mountain-c"
+        }
+      ]
+    },
+    {
+      "id": "west-mountain-a",
+      "displayName": "山岳A 送り路の分岐",
+      "type": "Mountain",
+      "choices": [
+        {
+          "id": "west-mountain-a-move-b",
+          "displayName": "急な近道を登る",
+          "action": "Move",
+          "toNode": "west-mountain-b"
+        },
+        {
+          "id": "west-mountain-a-move-d",
+          "displayName": "平坦な迂回路へ進む",
+          "action": "Move",
+          "toNode": "west-mountain-d"
+        },
+        {
+          "id": "west-mountain-a-move-church",
+          "displayName": "西方教会方面へ",
+          "action": "Move",
+          "toNode": "west-church"
+        }
+      ]
+    },
+    {
+      "id": "west-mountain-b",
+      "displayName": "山岳B 祈り石の急坂",
+      "type": "Mountain",
+      "choices": [
+        {
+          "id": "west-mountain-b-move-a",
+          "displayName": "山裾へ",
+          "action": "Move",
+          "toNode": "west-mountain-a"
+        },
+        {
+          "id": "west-mountain-b-move-c",
+          "displayName": "急坂を越える",
+          "action": "Move",
+          "toNode": "west-mountain-c"
+        },
+        {
+          "id": "west-mountain-b-move-rune-cave",
+          "displayName": "ルーン洞窟へ向かう",
+          "action": "Move",
+          "toNode": "west-rune-cave"
+        }
+      ]
+    },
+    {
+      "id": "west-rune-cave",
+      "displayName": "ルーン洞窟",
+      "type": "Cave",
+      "choices": [
+        {
+          "id": "west-rune-cave-move-mountain-b",
+          "displayName": "山岳へ",
+          "action": "Move",
+          "toNode": "west-mountain-b"
+        }
+      ]
+    },
+    {
+      "id": "west-mountain-c",
+      "displayName": "山岳C 潮見峠",
+      "type": "Mountain",
+      "choices": [
+        {
+          "id": "west-mountain-c-move-b",
+          "displayName": "急坂へ",
+          "action": "Move",
+          "toNode": "west-mountain-b"
+        },
+        {
+          "id": "west-mountain-c-move-e",
+          "displayName": "平坦な道へ",
+          "action": "Move",
+          "toNode": "west-mountain-e"
+        },
+        {
+          "id": "west-mountain-c-move-port",
+          "displayName": "港町へ向かう",
+          "action": "Move",
+          "toNode": "west-port"
+        }
+      ]
+    },
+    {
+      "id": "west-mountain-d",
+      "displayName": "山岳D 荷車の迂回路",
+      "type": "Mountain",
+      "choices": [
+        {
+          "id": "west-mountain-d-move-a",
+          "displayName": "分岐点へ",
+          "action": "Move",
+          "toNode": "west-mountain-a"
+        },
+        {
+          "id": "west-mountain-d-move-e",
+          "displayName": "緩い尾根道を進む",
+          "action": "Move",
+          "toNode": "west-mountain-e"
+        }
+      ]
+    },
+    {
+      "id": "west-mountain-e",
+      "displayName": "山岳E 風渡りの尾根",
+      "type": "Mountain",
+      "choices": [
+        {
+          "id": "west-mountain-e-move-d",
+          "displayName": "尾根道へ",
+          "action": "Move",
+          "toNode": "west-mountain-d"
+        },
+        {
+          "id": "west-mountain-e-move-c",
+          "displayName": "港町側の峠へ",
+          "action": "Move",
+          "toNode": "west-mountain-c"
+        }
+      ]
+    },
+    {
+      "id": "west-spirit-forest-a",
+      "displayName": "精霊森A 鐘の森口",
+      "type": "Forest",
+      "choices": [
+        {
+          "id": "west-spirit-forest-a-move-b",
+          "displayName": "森の奥へ進む",
+          "action": "Move",
+          "toNode": "west-spirit-forest-b"
+        },
+        {
+          "id": "west-spirit-forest-a-move-church",
+          "displayName": "西方教会へ",
+          "action": "Move",
+          "toNode": "west-church"
+        }
+      ]
+    },
+    {
+      "id": "west-spirit-forest-b",
+      "displayName": "精霊森B 白花の分かれ道",
+      "type": "Forest",
+      "choices": [
+        {
+          "id": "west-spirit-forest-b-move-a",
+          "displayName": "教会側の道へ",
+          "action": "Move",
+          "toNode": "west-spirit-forest-a"
+        },
+        {
+          "id": "west-spirit-forest-b-move-c",
+          "displayName": "細い小径へ",
+          "action": "Move",
+          "toNode": "west-spirit-forest-c"
+        },
+        {
+          "id": "west-spirit-forest-b-move-d",
+          "displayName": "暗い森の奥へ",
+          "action": "Move",
+          "toNode": "west-spirit-forest-d"
+        }
+      ]
+    },
+    {
+      "id": "west-spirit-forest-c",
+      "displayName": "精霊森C 歌忘れの小径",
+      "type": "Forest",
+      "choices": [
+        {
+          "id": "west-spirit-forest-c-move-b",
+          "displayName": "分岐点へ",
+          "action": "Move",
+          "toNode": "west-spirit-forest-b"
+        },
+        {
+          "id": "west-spirit-forest-c-move-d",
+          "displayName": "木立の奥へ",
+          "action": "Move",
+          "toNode": "west-spirit-forest-d"
+        }
+      ]
+    },
+    {
+      "id": "west-spirit-forest-d",
+      "displayName": "精霊森D 墓守の根道",
+      "type": "Forest",
+      "choices": [
+        {
+          "id": "west-spirit-forest-d-move-b",
+          "displayName": "広い道へ",
+          "action": "Move",
+          "toNode": "west-spirit-forest-b"
+        },
+        {
+          "id": "west-spirit-forest-d-move-c",
+          "displayName": "細い小径へ",
+          "action": "Move",
+          "toNode": "west-spirit-forest-c"
+        },
+        {
+          "id": "west-spirit-forest-d-move-graveyard",
+          "displayName": "森の墓地へ",
+          "action": "Move",
+          "toNode": "west-graveyard"
+        }
+      ]
+    },
+    {
+      "id": "west-graveyard",
+      "displayName": "森の墓地",
+      "type": "Graveyard",
+      "choices": [
+        {
+          "id": "west-graveyard-move-forest-d",
+          "displayName": "精霊森へ",
+          "action": "Move",
+          "toNode": "west-spirit-forest-d"
+        }
+      ]
+    }
+  ]
+}
