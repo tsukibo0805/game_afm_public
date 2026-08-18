@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
-<nav class="site-nav"><a class="brand" href="index.html">Au Fil des Mers</a><a href="index.html" class="is-current">紹介</a><a href="guide/index.html">遊び方</a><a href="map/index.html">地図</a></nav>
-<article class="page">
+<nav class="site-nav"><a class="brand" href="index.html">Au Fil des Mers</a><a href="index.html" class="is-current">紹介</a><a href="guide/index.html">遊び方</a><a href="guide/images.html">図解</a><a href="map/index.html">地図</a></nav>
+<main class="page">
 <h1>Au Fil des Mers ゲーム紹介</h1>
 <h2>海の向こうから、冒険記が届く</h2>
 <p>嵐の夜、古代文明の痕跡を追う船が沈んだ。</p>
@@ -56,13 +56,14 @@
 <hr>
 <h2>舞台となる世界</h2>
 <p>最初の冒険の舞台は<strong>西の島</strong>です。海岸から西方教会へ進み、精霊森、山岳街道、ルーン洞窟、港町を巡ります。</p>
-<pre><code>graph LR
-    Start[&quot;始まりの地&quot;] --- Church[&quot;西方教会&quot;]
-    Start --- Reef[&quot;北の磯&quot;]
-    Church --- Forest[&quot;精霊森&quot;]
-    Church --- Mountain[&quot;山岳街道&quot;]
-    Mountain --- Cave[&quot;ルーン洞窟&quot;]
-    Mountain --- Port[&quot;港町&quot;]</code></pre>
+<ul>
+<li>始まりの地 ↔ 西方教会</li>
+<li>始まりの地 ↔ 北の磯</li>
+<li>西方教会 ↔ 精霊森</li>
+<li>西方教会 ↔ 山岳街道</li>
+<li>山岳街道 ↔ ルーン洞窟</li>
+<li>山岳街道 ↔ 港町</li>
+</ul>
 <table>
 <tr><th>場所</th><th>旅人から見た姿</th></tr>
 <tr><td>始まりの地</td><td>難破の末に流れ着く海岸と、小さな集落</td></tr>
@@ -126,7 +127,7 @@
 <p>朝に届いた冒険記を昼休みに読む。 夜の結果を眺めながら、明日の行き先を決める。</p>
 <p>一日にほんの数分。 それでも、海の向こうに続きが待っている。</p>
 <p>そんな旅を目指しています。</p>
-</article>
-<footer class="site-footer">Au Fil des Mers プレイヤー向け案内。ゲーム本体とは別の公開サイトです。</footer>
+</main>
+<footer class="site-footer">Au Fil des Mers プレイヤー向け案内。ゲーム本体とは別の公開サイトです。<a href="rights.html">権利と利用条件</a></footer>
 </body>
 </html>

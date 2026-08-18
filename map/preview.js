@@ -4,6 +4,21 @@ const MAPS = [
   { id: "east-island", displayName: "東の島" },
 ];
 
+const MAP_ILLUSTRATIONS = {
+  "west-island": {
+    alt: "西の島を羊皮紙に手描きした地図。南の海岸、中央の教会、西の森、北の山、東の港町が描かれている。",
+    caption: "西の島の概略図。",
+  },
+  "central-island": {
+    alt: "中央の島を羊皮紙に手描きした地図。西の港、中央の城郭都市、東の城門港を街道が結び、北の山地や集落が描かれている。",
+    caption: "中央の島の概略図。",
+  },
+  "east-island": {
+    alt: "東の島を羊皮紙に手描きした地図。西の港、中央の水辺の集落、北東の火山、南東の森、南西の荒地と難破船が描かれている。",
+    caption: "東の島の概略図。",
+  },
+};
+
 const TYPE_LABELS = {
   Town: "街",
   Coast: "海岸",
@@ -349,6 +364,18 @@ function updateTabs(mapId) {
   });
 }
 
+function updateIllustration(mapId) {
+  const image = document.getElementById("map-illustration-image");
+  const caption = document.getElementById("map-illustration-caption");
+  const illustration = MAP_ILLUSTRATIONS[mapId];
+  if (!image || !caption || !illustration) {
+    return;
+  }
+  image.src = `${mapId}.png`;
+  image.alt = illustration.alt;
+  caption.textContent = `${illustration.caption} 詳しい接続は下の現在地ビューアで確認できます。`;
+}
+
 async function loadIsland(mapId) {
   const spec = MAPS.find((item) => item.id === mapId) || MAPS[0];
   const loadToken = state.loadToken + 1;
@@ -399,6 +426,7 @@ async function loadIsland(mapId) {
     window.history.replaceState(null, "", `#${spec.id}`);
   }
   updateTabs(spec.id);
+  updateIllustration(spec.id);
   buildPositions();
   fillSelect();
   drawMap();

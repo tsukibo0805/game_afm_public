@@ -10,9 +10,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 SRC_PREVIEW = ROOT / "tools" / "west-island-map-preview"
 SRC_DOCS = ROOT / "docs"
+SRC_GUIDES = SRC_DOCS / "ユーザー向け"
+SRC_MAP_IMAGES = ROOT / "image" / "maps"
 OUT = Path(__file__).resolve().parent
 
 LINK_MAP = {
+    "README.md": "index.html",
     "../ゲーム紹介.md": "../index.html",
     "ゲーム紹介.md": "../index.html",
     "行動と定時更新.md": "action.html",
@@ -42,6 +45,27 @@ GUIDES = [
     ("装備・仲間・依頼.md", "party.html", "装備・仲間・依頼"),
     ("用語・FAQ.md", "faq.html", "用語・FAQ"),
     ("スキルと戦闘の変更案内.md", "skills-combat.html", "スキルと戦闘の変更案内"),
+]
+
+IMAGE_CARDS = [
+    ("はじめかた", "冒険の始め方.png", "冒険の始め方", "index.html"),
+    ("基本", "ゲームの基本サイクル.png", "ゲームの基本サイクル", "action.html"),
+    ("冒険", "探索と移動.png", "探索と移動", "explore.html"),
+    ("冒険", "依頼・手掛かり.png", "依頼・手掛かり", "party.html"),
+    ("戦闘", "戦闘とスキル.png", "戦闘とスキル", "battle.html"),
+    ("戦闘", "属性・弱点・連携.png", "属性・弱点・連携", "skills-combat.html"),
+    ("成長", "成長.png", "成長", "growth.html"),
+    ("成長", "職業と転職.png", "職業と転職", "growth.html"),
+    ("成長", "スキル習得.png", "スキル習得", "growth.html"),
+    ("成長", "装備.png", "装備", "party.html"),
+    ("仲間", "使い魔.png", "使い魔", "party.html"),
+    ("仲間", "使い魔・継承.png", "使い魔・継承", "party.html"),
+    ("仲間", "パーティ.png", "パーティ", "party.html"),
+    ("仲間", "パーティ・行動と戦闘.png", "パーティ・行動と戦闘", "party.html"),
+    ("所持品・依頼", "アイテム・所持品.png", "アイテム・所持品", "party.html"),
+    ("所持品・依頼", "報酬・経済.png", "報酬・経済", "party.html"),
+    ("結果・案内", "更新結果・通知.png", "更新結果・通知", "action.html"),
+    ("結果・案内", "困ったとき.png", "困ったとき", "faq.html"),
 ]
 
 
@@ -163,6 +187,7 @@ def nav_html(current: str, prefix: str) -> str:
     links = [
         ("index.html", "紹介", current == "intro"),
         ("guide/index.html", "遊び方", current == "guide"),
+        ("guide/images.html", "図解", current == "images"),
         ("map/index.html", "地図", current == "map"),
     ]
     items = []
@@ -188,10 +213,10 @@ def page_html(title: str, body: str, current: str, prefix: str) -> str:
 </head>
 <body>
 {nav_html(current, prefix)}
-<article class="page">
+<main class="page">
 {body}
-</article>
-<footer class="site-footer">Au Fil des Mers プレイヤー向け案内。ゲーム本体とは別の公開サイトです。</footer>
+</main>
+<footer class="site-footer">Au Fil des Mers プレイヤー向け案内。ゲーム本体とは別の公開サイトです。<a href="{prefix}rights.html">権利と利用条件</a></footer>
 </body>
 </html>
 """
@@ -223,6 +248,8 @@ def copy_map() -> None:
         shutil.copy2(SRC_PREVIEW / name, dest / name)
     for folder in ("layouts", "fallbacks"):
         shutil.copytree(SRC_PREVIEW / folder, dest / folder)
+    for map_id in ("west-island", "central-island", "east-island"):
+        shutil.copy2(SRC_MAP_IMAGES / f"{map_id}.png", dest / f"{map_id}.png")
     js_path = dest / "preview.js"
     js = js_path.read_text(encoding="utf-8")
     js = js.replace(
@@ -244,18 +271,19 @@ def copy_map() -> None:
   <title>島マップ — Au Fil des Mers</title>
   <link rel="stylesheet" href="../site.css">
   <link rel="stylesheet" href="preview.css">
-  <style>body { grid-template-rows: auto auto 1fr; }</style>
+  <style>body { grid-template-rows: auto auto auto 1fr auto; }</style>
 </head>
 <body>
 <nav class="site-nav">
   <a class="brand" href="../index.html">Au Fil des Mers</a>
   <a href="../index.html">紹介</a>
   <a href="../guide/index.html">遊び方</a>
+  <a href="../guide/images.html">図解</a>
   <a href="index.html" class="is-current">地図</a>
 </nav>
   <header class="top-bar">
     <h1>島マップ</h1>
-    <p class="lede">ノードを選ぶと、現在地と行ける場所が地図上で分かります。</p>
+    <p class="lede">西・中央・東の島を切り替え、現在地と行ける場所を確認できます。</p>
     <div class="island-tabs" role="tablist" aria-label="島の選択">
       <button type="button" role="tab" data-map="west-island" aria-selected="true">西の島</button>
       <button type="button" role="tab" data-map="central-island" aria-selected="false">中央の島</button>
@@ -263,6 +291,11 @@ def copy_map() -> None:
     </div>
     <p class="status" id="status">読み込み中…</p>
   </header>
+
+  <figure class="map-illustration">
+    <img id="map-illustration-image" src="west-island.png" alt="西の島を羊皮紙に手描きした地図。南の海岸、中央の教会、西の森、北の山、東の港町が描かれている。">
+    <figcaption id="map-illustration-caption">西の島の概略図。詳しい接続は下の現在地ビューアで確認できます。</figcaption>
+  </figure>
 
   <main class="layout">
     <aside class="panel">
@@ -296,6 +329,7 @@ def copy_map() -> None:
       <svg id="map" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="島のノード接続図"></svg>
     </section>
   </main>
+  <footer class="site-footer">Au Fil des Mers プレイヤー向け案内。<a href="../rights.html">権利と利用条件</a></footer>
   <script src="preview.js"></script>
 </body>
 </html>
@@ -305,25 +339,103 @@ def copy_map() -> None:
 
 def build_guides() -> None:
     intro = (SRC_DOCS / "ゲーム紹介.md").read_text(encoding="utf-8")
+    intro = re.sub(
+        r"```mermaid\n.*?```",
+        "- 始まりの地 ↔ 西方教会\n"
+        "- 始まりの地 ↔ 北の磯\n"
+        "- 西方教会 ↔ 精霊森\n"
+        "- 西方教会 ↔ 山岳街道\n"
+        "- 山岳街道 ↔ ルーン洞窟\n"
+        "- 山岳街道 ↔ 港町",
+        intro,
+        count=1,
+        flags=re.S,
+    )
     intro = rewrite_links(intro, in_guide=False)
     write(OUT / "index.html", page_html("ゲーム紹介", markdown_to_html(intro), "intro", ""))
 
     cards = []
     for source_name, dest_name, title in GUIDES:
-        source = SRC_DOCS / "ユーザー向け" / source_name
+        source = SRC_GUIDES / source_name
         text = rewrite_links(source.read_text(encoding="utf-8"), in_guide=True)
         write(OUT / "guide" / dest_name, page_html(title, markdown_to_html(text), "guide", "../"))
         cards.append(f'<li><a href="{dest_name}"><strong>{html.escape(title)}</strong></a></li>')
 
-    guide_index = strip_internal_sections((SRC_DOCS / "ユーザー向け" / "README.md").read_text(encoding="utf-8"))
+    guide_index = strip_internal_sections((SRC_GUIDES / "README.md").read_text(encoding="utf-8"))
     guide_index = rewrite_links(guide_index, in_guide=True)
-    extra = "<h2>ガイド一覧</h2>\n<ul class=\"guide-list\">\n" + "\n".join(cards) + "\n</ul>"
+    extra = (
+        "<h2>ガイド一覧</h2>\n<ul class=\"guide-list\">\n"
+        + "\n".join(cards)
+        + "\n</ul>\n"
+        + '<p class="image-guide-link"><a href="images.html">18枚の図解で遊び方を見る</a></p>'
+    )
     write(OUT / "guide" / "index.html", page_html("遊び方", markdown_to_html(guide_index) + extra, "guide", "../"))
+
+
+def image_alt_texts() -> dict[str, str]:
+    result: dict[str, str] = {}
+    for source_name in ("初見プレイヤー向け説明画像原稿.md", "ゲームシステム別説明画像原稿.md"):
+        quote = ""
+        for line in (SRC_GUIDES / source_name).read_text(encoding="utf-8").splitlines():
+            if line.startswith("> "):
+                quote = line[2:].strip()
+                continue
+            match = re.search(r"!\[[^]]*\]\(([^)]+\.png)\)", line)
+            if match and quote:
+                result[match.group(1)] = quote
+                quote = ""
+    return result
+
+
+def build_image_guide() -> None:
+    image_dest = OUT / "images" / "guide"
+    if image_dest.exists():
+        shutil.rmtree(image_dest)
+    image_dest.mkdir(parents=True)
+
+    alt_texts = image_alt_texts()
+    cards = []
+    for index, (category, filename, title, guide_href) in enumerate(IMAGE_CARDS, start=1):
+        source = SRC_GUIDES / filename
+        if not source.exists():
+            raise FileNotFoundError(source)
+        alt_text = alt_texts.get(filename)
+        if not alt_text:
+            raise ValueError(f"代替テキストが見つかりません: {filename}")
+        shutil.copy2(source, image_dest / filename)
+        description_id = f"image-description-{index}"
+        cards.append(
+            '<article class="image-card">'
+            f'<p class="image-category">{html.escape(category)}</p>'
+            f'<h2>{html.escape(title)}</h2>'
+            f'<a href="../images/guide/{html.escape(filename, quote=True)}">'
+            f'<img src="../images/guide/{html.escape(filename, quote=True)}" '
+            f'alt="{html.escape(alt_text, quote=True)}" aria-describedby="{description_id}"></a>'
+            '<details><summary>画像の内容を文章で読む</summary>'
+            f'<p id="{description_id}">{html.escape(alt_text)}</p></details>'
+            f'<p><a href="{guide_href}">関連する詳しいガイド</a></p>'
+            "</article>"
+        )
+
+    lead = (
+        "<h1>図解で分かる遊び方</h1>"
+        "<p>登録から冒険、戦闘、成長までを18枚の説明カードにまとめています。"
+        "画像を選ぶと原寸で開けます。詳しい説明は各カードのガイドも参照してください。</p>"
+    )
+    body = lead + '<div class="image-grid">' + "".join(cards) + "</div>"
+    write(OUT / "guide" / "images.html", page_html("図解で分かる遊び方", body, "images", "../"))
+
+
+def build_rights_page() -> None:
+    rights = (OUT / "RIGHTS.md").read_text(encoding="utf-8")
+    write(OUT / "rights.html", page_html("権利と利用条件", markdown_to_html(rights), "", ""))
 
 
 def main() -> None:
     copy_map()
     build_guides()
+    build_image_guide()
+    build_rights_page()
     print(f"built {OUT}")
 
 
