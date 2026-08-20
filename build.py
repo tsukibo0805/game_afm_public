@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""game_afm の案内とマップ試作から、GitHub Pages 用の静的サイトを組み立てる。"""
+"""game_afm の案内・マップ・職業スキルから、GitHub Pages 用の静的サイトを組み立てる。"""
 from __future__ import annotations
 
 import html
@@ -9,6 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 SRC_PREVIEW = ROOT / "tools" / "west-island-map-preview"
+SRC_SKILLS_PREVIEW = ROOT / "tools" / "job-skills-preview"
 SRC_DOCS = ROOT / "docs"
 SRC_GUIDES = SRC_DOCS / "ユーザー向け"
 SRC_MAP_IMAGES = ROOT / "image" / "maps"
@@ -189,6 +190,7 @@ def nav_html(current: str, prefix: str) -> str:
         ("guide/index.html", "遊び方", current == "guide"),
         ("guide/images.html", "図解", current == "images"),
         ("map/index.html", "地図", current == "map"),
+        ("skills/index.html", "職業スキル", current == "skills"),
     ]
     items = []
     for href, label, active in links:
@@ -280,6 +282,7 @@ def copy_map() -> None:
   <a href="../guide/index.html">遊び方</a>
   <a href="../guide/images.html">図解</a>
   <a href="index.html" class="is-current">地図</a>
+  <a href="../skills/index.html">職業スキル</a>
 </nav>
   <header class="top-bar">
     <h1>島マップ</h1>
@@ -335,6 +338,31 @@ def copy_map() -> None:
 </html>
 """,
     )
+
+
+def copy_skills() -> None:
+    dest = OUT / "skills"
+    if dest.exists():
+        shutil.rmtree(dest)
+    dest.mkdir()
+    for name in ("preview.css", "preview.js"):
+        shutil.copy2(SRC_SKILLS_PREVIEW / name, dest / name)
+
+    page = (SRC_SKILLS_PREVIEW / "index.html").read_text(encoding="utf-8")
+    page = page.replace(
+        '  <link rel="stylesheet" href="preview.css">',
+        '  <link rel="stylesheet" href="../site.css">\n  <link rel="stylesheet" href="preview.css">',
+        1,
+    )
+    page = page.replace("<body>", f"<body>\n{nav_html('skills', '../')}", 1)
+    page = page.replace(
+        '  <script src="preview.js"></script>',
+        '  <footer class="site-footer">Au Fil des Mers プレイヤー向け案内。'
+        '<a href="../rights.html">権利と利用条件</a></footer>\n'
+        '  <script src="preview.js"></script>',
+        1,
+    )
+    write(dest / "index.html", page)
 
 
 def build_guides() -> None:
@@ -433,6 +461,7 @@ def build_rights_page() -> None:
 
 def main() -> None:
     copy_map()
+    copy_skills()
     build_guides()
     build_image_guide()
     build_rights_page()

@@ -1,6 +1,6 @@
 # Au Fil des Mers プレイヤー向けサイト
 
-Discordゲーム「Au Fil des Mers」の公開案内、図解ガイド、西・中央・東の島マップの現在地ビューアです。
+Discordゲーム「Au Fil des Mers」の公開案内、図解ガイド、職業スキル一覧、西・中央・東の島マップの現在地ビューアです。
 制作リポジトリ `game_afm` とは分け、GitHub Pages で静的配信するためのコピーです。
 
 ## 含めるもの
@@ -9,6 +9,7 @@ Discordゲーム「Au Fil des Mers」の公開案内、図解ガイド、西・�
 - プレイヤー向けガイド（遊び方、戦闘、成長など）
 - プレイヤー向け説明画像18点
 - 西・中央・東の島マップと現在地ビューア
+- 基本職・中級職・上級職の職業ツリーと全職業スキル一覧
 
 含めないもの:
 
@@ -35,6 +36,7 @@ GitHub の Settings → Pages で、Source を `main` の `/ (root)` にしま�
 https://tsukibo0805.github.io/game_afm_public/
 https://tsukibo0805.github.io/game_afm_public/guide/images.html
 https://tsukibo0805.github.io/game_afm_public/map/
+https://tsukibo0805.github.io/game_afm_public/skills/
 ```
 
 Jekyll を使わないため、ルートに `.nojekyll` を置いてあります。
@@ -44,6 +46,7 @@ Jekyll を使わないため、ルートに `.nojekyll` を置いてあります
 正本は `game_afm` 側です。
 
 - マップ試作: `tools/west-island-map-preview/`
+- 職業スキル一覧: `tools/job-skills-preview/`
 - 案内文: `docs/ゲーム紹介.md` と `docs/ユーザー向け/`
 - 説明画像: `docs/ユーザー向け/*.png`
 - 三島の概略図: `image/maps/west-island.png`、`central-island.png`、`east-island.png`

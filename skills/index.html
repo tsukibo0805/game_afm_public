@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>職業スキル一覧 — Au Fil des Mers</title>
+  <link rel="stylesheet" href="../site.css">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+<nav class="site-nav"><a class="brand" href="../index.html">Au Fil des Mers</a><a href="../index.html">紹介</a><a href="../guide/index.html">遊び方</a><a href="../guide/images.html">図解</a><a href="../map/index.html">地図</a><a href="../skills/index.html" class="is-current">職業スキル</a></nav>
+  <header class="hero">
+    <p class="eyebrow">AFM Job Skill Guide</p>
+    <h1>職業スキル一覧</h1>
+    <p class="lead">
+      職業レベル3・6・9・12・15で、順にスキル書を獲得します。
+      属性アイコンとパワーソースで技の性質をつかみ、気になる技だけ開いて詳細を確認できます。
+    </p>
+  </header>
+
+  <main class="skills-page">
+    <div class="toolbar" aria-label="職業の絞り込み">
+      <div class="filters">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">すべて</button>
+        <button class="filter" type="button" data-filter="basic" aria-pressed="false">基本職</button>
+        <button class="filter" type="button" data-filter="advanced" aria-pressed="false">中級職</button>
+        <button class="filter" type="button" data-filter="expert" aria-pressed="false">上級職</button>
+      </div>
+      <p class="toolbar-note">現在遊べる21職・105スキルを掲載</p>
+    </div>
+
+    <nav class="job-tree" aria-label="職業ツリーからスキル一覧を探す">
+      <div class="job-tree-header">
+        <h2>職業ツリーから探す</h2>
+        <p>職業名を選ぶと、その職業のスキルへ移動します。</p>
+      </div>
+      <ol class="job-tree-roots">
+        <li class="job-tree-root">
+          <a class="tree-link basic" href="#job-knight">騎士</a>
+          <ol class="job-tree-branches">
+            <li class="job-tree-branch">
+              <a class="tree-link intermediate" href="#job-martial-artist">武術家</a>
+              <ol class="job-tree-leaves">
+                <li><a class="tree-link expert" href="#job-war-god">武神</a></li>
+                <li><a class="tree-link expert" href="#job-asura">修羅</a></li>
+              </ol>
+            </li>
+            <li class="job-tree-branch">
+              <a class="tree-link intermediate" href="#job-guardian">ガーディアン</a>
+              <ol class="job-tree-leaves">
+                <li><a class="tree-link expert" href="#job-divine-knight">ディバインナイト</a></li>
+                <li><a class="tree-link expert" href="#job-rune-knight">ルーンナイト</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li class="job-tree-root">
+          <a class="tree-link basic" href="#job-mage">魔術師</a>
+          <ol class="job-tree-branches">
+            <li class="job-tree-branch">
+              <a class="tree-link intermediate" href="#job-alchemist">錬金術師</a>
+              <ol class="job-tree-leaves">
+                <li><a class="tree-link expert" href="#job-astrologer">星術師</a></li>
+                <li><a class="tree-link expert" href="#job-sage">賢者</a></li>
+              </ol>
+            </li>
+            <li class="job-tree-branch">
+              <a class="tree-link intermediate" href="#job-arcanist">アルカニスト</a>
+              <ol class="job-tree-leaves">
+                <li><a class="tree-link expert" href="#job-sorcerer">妖術師</a></li>
+                <li><a class="tree-link expert" href="#job-jester">道化師</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li class="job-tree-root">
+          <a class="tree-link basic" href="#job-cleric">僧侶</a>
+          <ol class="job-tree-branches">
+            <li class="job-tree-branch">
+              <a class="tree-link intermediate" href="#job-priest">神官</a>
+              <ol class="job-tree-leaves">
+                <li><a class="tree-link expert" href="#job-bishop">ビショップ</a></li>
+                <li><a class="tree-link expert" href="#job-inquisitor">インクイジター</a></li>
+              </ol>
+            </li>
+            <li class="job-tree-branch">
+              <a class="tree-link intermediate" href="#job-exorcist">エクソシスト</a>
+              <ol class="job-tree-leaves">
+                <li><a class="tree-link expert" href="#job-hexer">呪術師</a></li>
+                <li><a class="tree-link expert" href="#job-medium">憑霊師</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </nav>
+
+    <ul class="legend" aria-label="属性アイコンとパワーソースの凡例">
+      <li><span class="mini-icon attr-weapon">武</span>装備武器</li>
+      <li><span class="mini-icon attr-magic">魔</span>装備魔石</li>
+      <li><span class="mini-icon attr-spirit">霊</span>装備霊符</li>
+      <li><span class="mini-icon attr-close">近</span>近距離</li>
+      <li><span class="mini-icon attr-neutral">無</span>無属性</li>
+      <li><span class="mini-icon attr-mixed">複</span>複合</li>
+      <li><span class="mini-icon attr-none">―</span>属性なし</li>
+      <li class="legend-separator" aria-hidden="true"></li>
+      <li><strong>PS</strong> 効果量に使う能力値</li>
+    </ul>
+
+    <section class="jobs" aria-label="職業別スキル">
+      <article class="job" data-tier="basic">
+        <header class="job-header">
+          <div class="job-mark" aria-hidden="true">♞</div>
+          <div class="job-title">
+            <h2>騎士</h2>
+            <p>連続攻撃と味方の護衛</p>
+          </div>
+          <span class="tier">基本職</span>
+        </header>
+        <ol class="skill-list">
+          <li><details class="skill"><summary><span class="role-icon attack" aria-label="攻撃">剣</span><span class="skill-name">2回攻撃</span><span class="effect">敵1体を2回攻撃</span></summary><div class="skill-meta"><span class="badge">Lv 3</span><span class="badge activation">A</span><span class="badge">単体</span><span class="badge">武器で変化</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon guard" aria-label="防御">盾</span><span class="skill-name">かばう</span><span class="effect">味方への攻撃を引き受ける</span></summary><div class="skill-meta"><span class="badge">Lv 6</span><span class="badge activation">A</span><span class="badge">味方</span><span class="badge">装備不要</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon attack" aria-label="攻撃">剣</span><span class="skill-name">範囲攻撃</span><span class="effect">複数の敵をまとめて攻撃</span></summary><div class="skill-meta"><span class="badge">Lv 9</span><span class="badge activation">A</span><span class="badge">複数</span><span class="badge">武器で変化</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon support" aria-label="補助">星</span><span class="skill-name">ためる</span><span class="effect">次の攻撃へ力を蓄える</span></summary><div class="skill-meta"><span class="badge">Lv 12</span><span class="badge activation">A</span><span class="badge">自分</span><span class="badge">装備不要</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon attack" aria-label="攻撃">剣</span><span class="skill-name">チャージ攻撃</span><span class="effect">準備して強力な一撃</span></summary><div class="skill-meta"><span class="badge">Lv 15</span><span class="badge activation">S1</span><span class="badge">単体</span><span class="badge">武器で変化</span></div></details></li>
+        </ol>
+      </article>
+
+      <article class="job" data-tier="basic">
+        <header class="job-header">
+          <div class="job-mark" aria-hidden="true">✦</div>
+          <div class="job-title">
+            <h2>魔術師</h2>
+            <p>属性魔法とフィールド操作</p>
+          </div>
+          <span class="tier">基本職</span>
+        </header>
+        <ol class="skill-list">
+          <li><details class="skill"><summary><span class="role-icon attack" aria-label="攻撃">剣</span><span class="skill-name">連続魔法</span><span class="effect">敵1体へ連続で魔法攻撃</span></summary><div class="skill-meta"><span class="badge">Lv 3</span><span class="badge activation">A</span><span class="badge">単体</span><span class="badge">魔石で変化</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon special" aria-label="特殊">◆</span><span class="skill-name">フィールド展開</span><span class="effect">戦場を魔石の属性へ変える</span></summary><div class="skill-meta"><span class="badge">Lv 6</span><span class="badge activation">A</span><span class="badge">戦場</span><span class="badge">要: 魔石</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon attack" aria-label="攻撃">剣</span><span class="skill-name">全体魔法</span><span class="effect">敵全体へ魔法攻撃</span></summary><div class="skill-meta"><span class="badge">Lv 9</span><span class="badge activation">A</span><span class="badge">敵全体</span><span class="badge">魔石で変化</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon special" aria-label="特殊">◆</span><span class="skill-name">フィールドキャンセル</span><span class="effect">戦場の属性効果を消す</span></summary><div class="skill-meta"><span class="badge">Lv 12</span><span class="badge activation">A</span><span class="badge">戦場</span><span class="badge">要: 魔石</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon attack" aria-label="攻撃">剣</span><span class="skill-name">詠唱魔法</span><span class="effect">詠唱して大魔法を放つ</span></summary><div class="skill-meta"><span class="badge">Lv 15</span><span class="badge activation">S1</span><span class="badge">攻撃</span><span class="badge">魔石で変化</span></div></details></li>
+        </ol>
+      </article>
+
+      <article class="job" data-tier="basic">
+        <header class="job-header">
+          <div class="job-mark" aria-hidden="true">☼</div>
+          <div class="job-title">
+            <h2>僧侶</h2>
+            <p>回復・蘇生と霊力攻撃</p>
+          </div>
+          <span class="tier">基本職</span>
+        </header>
+        <ol class="skill-list">
+          <li><details class="skill"><summary><span class="role-icon heal" aria-label="回復">＋</span><span class="skill-name">回復魔法</span><span class="effect">味方1人のHPを回復</span></summary><div class="skill-meta"><span class="badge">Lv 3</span><span class="badge activation">A</span><span class="badge">味方単体</span><span class="badge">装備不要</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon heal" aria-label="回復">＋</span><span class="skill-name">毎ターン回復</span><span class="effect">味方を継続的に回復</span></summary><div class="skill-meta"><span class="badge">Lv 6</span><span class="badge activation">A</span><span class="badge">味方</span><span class="badge">継続</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon heal" aria-label="回復">＋</span><span class="skill-name">蘇生術</span><span class="effect">倒れた味方を復活させる</span></summary><div class="skill-meta"><span class="badge">Lv 9</span><span class="badge activation">A</span><span class="badge">味方単体</span><span class="badge">蘇生</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon attack" aria-label="攻撃">剣</span><span class="skill-name">霊撃</span><span class="effect">霊力で敵を攻撃</span></summary><div class="skill-meta"><span class="badge">Lv 12</span><span class="badge activation">A</span><span class="badge">攻撃</span><span class="badge">霊符で変化</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon heal" aria-label="回復">＋</span><span class="skill-name">大回復魔法</span><span class="effect">祈りを捧げて大きく回復</span></summary><div class="skill-meta"><span class="badge">Lv 15</span><span class="badge activation">S1</span><span class="badge">味方</span><span class="badge">大回復</span></div></details></li>
+        </ol>
+      </article>
+
+      <article class="job" data-tier="advanced">
+        <header class="job-header">
+          <div class="job-mark" aria-hidden="true">拳</div>
+          <div class="job-title">
+            <h2>武術家</h2>
+            <p>手数と体勢崩しで攻める</p>
+          </div>
+          <span class="tier">騎士系</span>
+        </header>
+        <ol class="skill-list">
+          <li><details class="skill"><summary><span class="role-icon attack" aria-label="攻撃">剣</span><span class="skill-name">三連撃</span><span class="effect">敵1体を3回攻撃</span></summary><div class="skill-meta"><span class="badge">Lv 3</span><span class="badge activation">A</span><span class="badge">単体</span><span class="badge">3回</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon special" aria-label="特殊">◆</span><span class="skill-name">浮身崩し</span><span class="effect">攻撃しながら体勢を崩す</span></summary><div class="skill-meta"><span class="badge">Lv 6</span><span class="badge activation">A</span><span class="badge">単体</span><span class="badge">体勢変化</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon attack" aria-label="攻撃">剣</span><span class="skill-name">ショックウェイブ</span><span class="effect">衝撃波で複数の敵を攻撃</span></summary><div class="skill-meta"><span class="badge">Lv 9</span><span class="badge activation">A</span><span class="badge">複数</span><span class="badge">装備不要</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon support" aria-label="補助">星</span><span class="skill-name">積極姿勢</span><span class="effect">攻めを重視する姿勢になる</span></summary><div class="skill-meta"><span class="badge">Lv 12</span><span class="badge activation">P</span><span class="badge">自動</span><span class="badge">パッシブ</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon attack" aria-label="攻撃">剣</span><span class="skill-name">全体2回攻撃</span><span class="effect">敵全体を2回ずつ攻撃</span></summary><div class="skill-meta"><span class="badge">Lv 15</span><span class="badge activation">S2</span><span class="badge">敵全体</span><span class="badge">2回</span></div></details></li>
+        </ol>
+      </article>
+
+      <article class="job" data-tier="advanced">
+        <header class="job-header">
+          <div class="job-mark" aria-hidden="true">盾</div>
+          <div class="job-title">
+            <h2>ガーディアン</h2>
+            <p>受け流しと反撃で守る</p>
+          </div>
+          <span class="tier">騎士系</span>
+        </header>
+        <ol class="skill-list">
+          <li><details class="skill"><summary><span class="role-icon guard" aria-label="防御">盾</span><span class="skill-name">パリィ</span><span class="effect">敵の攻撃を受け流す</span></summary><div class="skill-meta"><span class="badge">Lv 3</span><span class="badge activation">A</span><span class="badge">自分</span><span class="badge">防御</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon guard" aria-label="防御">盾</span><span class="skill-name">カウンター</span><span class="effect">攻撃を受けて反撃する</span></summary><div class="skill-meta"><span class="badge">Lv 6</span><span class="badge activation">A</span><span class="badge">反撃</span><span class="badge">装備不要</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon guard" aria-label="防御">盾</span><span class="skill-name">魔バリア</span><span class="effect">味方を魔法障壁で守る</span></summary><div class="skill-meta"><span class="badge">Lv 9</span><span class="badge activation">A</span><span class="badge">味方</span><span class="badge">障壁</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon support" aria-label="補助">星</span><span class="skill-name">慎重姿勢</span><span class="effect">守りを重視する姿勢になる</span></summary><div class="skill-meta"><span class="badge">Lv 12</span><span class="badge activation">P</span><span class="badge">自動</span><span class="badge">パッシブ</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon guard" aria-label="防御">盾</span><span class="skill-name">ハルモニアンシールド</span><span class="effect">強固な盾で味方を守る</span></summary><div class="skill-meta"><span class="badge">Lv 15</span><span class="badge activation">S2</span><span class="badge">味方</span><span class="badge">大防御</span></div></details></li>
+        </ol>
+      </article>
+
+      <article class="job" data-tier="advanced">
+        <header class="job-header">
+          <div class="job-mark" aria-hidden="true">⚗</div>
+          <div class="job-title">
+            <h2>錬金術師</h2>
+            <p>魔力を集めて属性を操る</p>
+          </div>
+          <span class="tier">魔術師系</span>
+        </header>
+        <ol class="skill-list">
+          <li><details class="skill"><summary><span class="role-icon attack" aria-label="攻撃">剣</span><span class="skill-name">三連魔法</span><span class="effect">敵1体へ3連続の魔法攻撃</span></summary><div class="skill-meta"><span class="badge">Lv 3</span><span class="badge activation">A</span><span class="badge">単体</span><span class="badge">3回</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon support" aria-label="補助">星</span><span class="skill-name">魔力収束</span><span class="effect">魔力を集中して次へ備える</span></summary><div class="skill-meta"><span class="badge">Lv 6</span><span class="badge activation">A</span><span class="badge">自分</span><span class="badge">準備</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon attack" aria-label="攻撃">剣</span><span class="skill-name">属性強化全体攻撃</span><span class="effect">強めた属性で敵全体を攻撃</span></summary><div class="skill-meta"><span class="badge">Lv 9</span><span class="badge activation">A</span><span class="badge">敵全体</span><span class="badge">属性</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon support" aria-label="補助">星</span><span class="skill-name">クイック</span><span class="effect">素早く次の行動へつなぐ</span></summary><div class="skill-meta"><span class="badge">Lv 12</span><span class="badge activation">A</span><span class="badge">自分</span><span class="badge">補助</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon special" aria-label="特殊">◆</span><span class="skill-name">高等変成術</span><span class="effect">高度な変成で戦況を変える</span></summary><div class="skill-meta"><span class="badge">Lv 15</span><span class="badge activation">S2</span><span class="badge">特殊</span><span class="badge">魔法</span></div></details></li>
+        </ol>
+      </article>
+
+      <article class="job" data-tier="advanced">
+        <header class="job-header">
+          <div class="job-mark" aria-hidden="true">◇</div>
+          <div class="job-title">
+            <h2>アルカニスト</h2>
+            <p>道具と術式で敵を翻弄</p>
+          </div>
+          <span class="tier">魔術師系</span>
+        </header>
+        <ol class="skill-list">
+          <li><details class="skill"><summary><span class="role-icon special" aria-label="特殊">◆</span><span class="skill-name">魔相転換</span><span class="effect">魔力の性質を切り替える</span></summary><div class="skill-meta"><span class="badge">Lv 3</span><span class="badge activation">A</span><span class="badge">自分</span><span class="badge">属性</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon attack" aria-label="攻撃">剣</span><span class="skill-name">カード投げ</span><span class="effect">カードを投げて敵を攻撃</span></summary><div class="skill-meta"><span class="badge">Lv 6</span><span class="badge activation">A</span><span class="badge">攻撃</span><span class="badge">道具</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon attack" aria-label="攻撃">剣</span><span class="skill-name">お札投げ</span><span class="effect">お札を投げて敵を攻撃</span></summary><div class="skill-meta"><span class="badge">Lv 9</span><span class="badge activation">A</span><span class="badge">攻撃</span><span class="badge">道具</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon special" aria-label="特殊">◆</span><span class="skill-name">トラップ</span><span class="effect">罠を仕掛けて敵を待ち受ける</span></summary><div class="skill-meta"><span class="badge">Lv 12</span><span class="badge activation">A</span><span class="badge">敵</span><span class="badge">罠</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon special" aria-label="特殊">◆</span><span class="skill-name">三相秘術</span><span class="effect">三つの術式を重ねて放つ</span></summary><div class="skill-meta"><span class="badge">Lv 15</span><span class="badge activation">S2</span><span class="badge">特殊</span><span class="badge">魔法</span></div></details></li>
+        </ol>
+      </article>
+
+      <article class="job" data-tier="advanced">
+        <header class="job-header">
+          <div class="job-mark" aria-hidden="true">祈</div>
+          <div class="job-title">
+            <h2>神官</h2>
+            <p>全体回復と弱体解除</p>
+          </div>
+          <span class="tier">僧侶系</span>
+        </header>
+        <ol class="skill-list">
+          <li><details class="skill"><summary><span class="role-icon heal" aria-label="回復">＋</span><span class="skill-name">全体回復</span><span class="effect">味方全体のHPを回復</span></summary><div class="skill-meta"><span class="badge">Lv 3</span><span class="badge activation">A</span><span class="badge">味方全体</span><span class="badge">回復</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon heal" aria-label="回復">＋</span><span class="skill-name">継続ダメージ解除</span><span class="effect">味方の継続ダメージを解除</span></summary><div class="skill-meta"><span class="badge">Lv 6</span><span class="badge activation">A</span><span class="badge">味方</span><span class="badge">解除</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon support" aria-label="補助">星</span><span class="skill-name">スロウ</span><span class="effect">敵の動きを鈍らせる</span></summary><div class="skill-meta"><span class="badge">Lv 9</span><span class="badge activation">A</span><span class="badge">敵</span><span class="badge">弱体</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon heal" aria-label="回復">＋</span><span class="skill-name">呪効果解除</span><span class="effect">味方にかかった呪いを解除</span></summary><div class="skill-meta"><span class="badge">Lv 12</span><span class="badge activation">A</span><span class="badge">味方</span><span class="badge">解除</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon special" aria-label="特殊">◆</span><span class="skill-name">裁きの祈り</span><span class="effect">祈りで敵へ裁きを下す</span></summary><div class="skill-meta"><span class="badge">Lv 15</span><span class="badge activation">S2</span><span class="badge">敵</span><span class="badge">祈り</span></div></details></li>
+        </ol>
+      </article>
+
+      <article class="job" data-tier="advanced">
+        <header class="job-header">
+          <div class="job-mark" aria-hidden="true">霊</div>
+          <div class="job-title">
+            <h2>エクソシスト</h2>
+            <p>霊力を攻防へ変える</p>
+          </div>
+          <span class="tier">僧侶系</span>
+        </header>
+        <ol class="skill-list">
+          <li><details class="skill"><summary><span class="role-icon guard" aria-label="防御">盾</span><span class="skill-name">霊壁展開</span><span class="effect">霊力の壁で味方を守る</span></summary><div class="skill-meta"><span class="badge">Lv 3</span><span class="badge activation">A</span><span class="badge">味方</span><span class="badge">障壁</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon heal" aria-label="回復">＋</span><span class="skill-name">魂返し</span><span class="effect">倒れた味方の魂を呼び戻す</span></summary><div class="skill-meta"><span class="badge">Lv 6</span><span class="badge activation">A</span><span class="badge">味方単体</span><span class="badge">蘇生</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon attack" aria-label="攻撃">剣</span><span class="skill-name">3連続攻撃</span><span class="effect">霊力で敵を3回攻撃</span></summary><div class="skill-meta"><span class="badge">Lv 9</span><span class="badge activation">A</span><span class="badge">単体</span><span class="badge">3回</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon special" aria-label="特殊">◆</span><span class="skill-name">魔力変換</span><span class="effect">魔力を別の力へ変換する</span></summary><div class="skill-meta"><span class="badge">Lv 12</span><span class="badge activation">A</span><span class="badge">自分</span><span class="badge">変換</span></div></details></li>
+          <li><details class="skill"><summary><span class="role-icon special" aria-label="特殊">◆</span><span class="skill-name">大降霊</span><span class="effect">強大な霊を呼び降ろす</span></summary><div class="skill-meta"><span class="badge">Lv 15</span><span class="badge activation">S2</span><span class="badge">特殊</span><span class="badge">降霊</span></div></details></li>
+        </ol>
+      </article>
+    </section>
+
+    <p class="footnote">
+      <strong>見方：</strong> Aは設定したターンに使う技、Sは準備を含む技、Pは自動で働く技です。
+      詳しい威力・属性・現在の装備条件はゲーム内の <code>/skills</code> で確認します。
+    </p>
+  </main>
+
+  <footer class="site-footer">Au Fil des Mers プレイヤー向け案内。<a href="../rights.html">権利と利用条件</a></footer>
+  <script src="preview.js"></script>
+</body>
+</html>
