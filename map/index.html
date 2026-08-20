@@ -19,7 +19,7 @@
 </nav>
   <header class="top-bar">
     <h1>島マップ</h1>
-    <p class="lede">西・中央・東の島を切り替え、現在地と行ける場所を確認できます。</p>
+    <p class="lede">西・中央・東の島を切り替え、現在地、行ける場所、主な施設を確認できます。</p>
     <div class="island-tabs" role="tablist" aria-label="島の選択">
       <button type="button" role="tab" data-map="west-island" aria-selected="true">西の島</button>
       <button type="button" role="tab" data-map="central-island" aria-selected="false">中央の島</button>
@@ -58,6 +58,8 @@
           <li><span class="badge">隣接</span> いま行けるノードと道</li>
           <li>円の色はノード種別です</li>
         </ul>
+        <h4>施設</h4>
+        <ul id="facility-legend" class="facility-legend"></ul>
       </section>
     </aside>
 

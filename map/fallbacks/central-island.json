@@ -49,6 +49,11 @@
           "action": "Move",
           "toNode": "central-old-spirit-shrine"
         }
+      ],
+      "facilities": [
+        "weapon-smith",
+        "job-center",
+        "quest-board"
       ]
     },
     {
@@ -144,6 +149,11 @@
           "action": "Move",
           "toNode": "central-almaria-capital"
         }
+      ],
+      "facilities": [
+        "weapon-smith",
+        "job-center",
+        "quest-board"
       ]
     },
     {
@@ -163,6 +173,9 @@
           "action": "Move",
           "toNode": "central-south-post-town"
         }
+      ],
+      "facilities": [
+        "general-store"
       ]
     },
     {
@@ -245,6 +258,11 @@
           "action": "Move",
           "toNode": "central-almaria-capital"
         }
+      ],
+      "facilities": [
+        "general-store",
+        "job-center",
+        "quest-board"
       ]
     },
     {
@@ -364,6 +382,11 @@
           "action": "Move",
           "toNode": "central-capital-east-military-gate"
         }
+      ],
+      "facilities": [
+        "weapon-smith",
+        "book-shop",
+        "job-center"
       ]
     },
     {
@@ -434,6 +457,9 @@
           "action": "Move",
           "toNode": "central-sealed-valley"
         }
+      ],
+      "facilities": [
+        "familiar-shrine"
       ]
     },
     {

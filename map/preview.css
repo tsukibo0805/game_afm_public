@@ -151,6 +151,12 @@ select {
   font-size: 14px;
 }
 
+.legend h4 {
+  margin: 14px 0 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
 .moves ul,
 .legend ul {
   margin: 0;
@@ -185,6 +191,32 @@ select {
   background: #3d3429;
   color: var(--accent);
   font-size: 12px;
+}
+
+.facility-legend {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 12px;
+  list-style: none;
+  padding-left: 0 !important;
+}
+
+.facility-legend li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  min-width: 0;
+  font-size: 13px;
+}
+
+.facility-legend-icon {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  min-height: 0;
+  background: transparent;
+  border-radius: 0;
 }
 
 .map-wrap {
@@ -305,6 +337,38 @@ svg {
   paint-order: stroke;
   stroke: #9a3a16;
   stroke-width: 4px;
+  pointer-events: none;
+}
+
+.facility-marker,
+.facility-legend-symbol {
+  pointer-events: none;
+}
+
+.facility-marker-bg {
+  fill: #fff8e8;
+  stroke: #4b3a28;
+  stroke-width: 1.5;
+}
+
+.facility-icon-line {
+  fill: none;
+  stroke: #3a2d22;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.facility-icon-fill {
+  fill: #6a4e32;
+  stroke: #3a2d22;
+  stroke-width: 0.8;
+}
+
+.facility-icon-text {
+  fill: #3a2d22;
+  font-size: 13px;
+  font-weight: 800;
   pointer-events: none;
 }
 

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import html
+import json
 import re
 import shutil
 from pathlib import Path
@@ -14,6 +15,16 @@ SRC_DOCS = ROOT / "docs"
 SRC_GUIDES = SRC_DOCS / "ユーザー向け"
 SRC_MAP_IMAGES = ROOT / "image" / "maps"
 OUT = Path(__file__).resolve().parent
+
+FACILITY_ACTIONS = (
+    ("weapon-smith", "VisitWeaponSmith"),
+    ("book-shop", "VisitBookShop"),
+    ("general-store", "VisitGeneralStore"),
+    ("job-center", "VisitJobCenter"),
+    ("offering-shrine", "VisitOfferingShrine"),
+    ("familiar-shrine", "VisitShrine"),
+    ("quest-board", "VisitQuestBoard"),
+)
 
 LINK_MAP = {
     "README.md": "index.html",
@@ -241,6 +252,46 @@ def write(path: Path, text: str) -> None:
     path.write_text(text, encoding="utf-8")
 
 
+def facility_ids_for_node(node: dict[str, object]) -> list[str]:
+    choices = node.get("choices", [])
+    action_ids = {
+        str(choice.get("action", ""))
+        for choice in choices
+        if isinstance(choice, dict)
+    }
+    result = []
+    for facility_id, action_id in FACILITY_ACTIONS:
+        if action_id not in action_ids:
+            continue
+        if facility_id == "familiar-shrine" and not any(
+            isinstance(choice, dict)
+            and choice.get("action") == action_id
+            and is_familiar_shrine_choice(choice)
+            for choice in choices
+        ):
+            continue
+        result.append(facility_id)
+    return result
+
+
+def is_familiar_shrine_choice(choice: dict[str, object]) -> bool:
+    choice_id = str(choice.get("id", ""))
+    return choice_id == "west-start-shrine" or choice_id.endswith("-visit-familiar-shrine")
+
+
+def add_facilities_to_public_fallback(map_id: str, fallback_path: Path) -> None:
+    source = json.loads((ROOT / "data" / "maps" / f"{map_id}.json").read_text(encoding="utf-8"))
+    fallback = json.loads(fallback_path.read_text(encoding="utf-8"))
+    source_nodes = {node["id"]: node for node in source["nodes"]}
+    for fallback_node in fallback["nodes"]:
+        facility_ids = facility_ids_for_node(source_nodes[fallback_node["id"]])
+        if facility_ids:
+            fallback_node["facilities"] = facility_ids
+        else:
+            fallback_node.pop("facilities", None)
+    fallback_path.write_text(json.dumps(fallback, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
 def copy_map() -> None:
     dest = OUT / "map"
     if dest.exists():
@@ -251,6 +302,7 @@ def copy_map() -> None:
     for folder in ("layouts", "fallbacks"):
         shutil.copytree(SRC_PREVIEW / folder, dest / folder)
     for map_id in ("west-island", "central-island", "east-island"):
+        add_facilities_to_public_fallback(map_id, dest / "fallbacks" / f"{map_id}.json")
         shutil.copy2(SRC_MAP_IMAGES / f"{map_id}.png", dest / f"{map_id}.png")
     js_path = dest / "preview.js"
     js = js_path.read_text(encoding="utf-8")
@@ -286,7 +338,7 @@ def copy_map() -> None:
 </nav>
   <header class="top-bar">
     <h1>島マップ</h1>
-    <p class="lede">西・中央・東の島を切り替え、現在地と行ける場所を確認できます。</p>
+    <p class="lede">西・中央・東の島を切り替え、現在地、行ける場所、主な施設を確認できます。</p>
     <div class="island-tabs" role="tablist" aria-label="島の選択">
       <button type="button" role="tab" data-map="west-island" aria-selected="true">西の島</button>
       <button type="button" role="tab" data-map="central-island" aria-selected="false">中央の島</button>
@@ -325,6 +377,8 @@ def copy_map() -> None:
           <li><span class="badge">隣接</span> いま行けるノードと道</li>
           <li>円の色はノード種別です</li>
         </ul>
+        <h4>施設</h4>
+        <ul id="facility-legend" class="facility-legend"></ul>
       </section>
     </aside>
 

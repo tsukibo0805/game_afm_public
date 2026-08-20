@@ -63,6 +63,9 @@
           "action": "Move",
           "toNode": "east-spirit-valley"
         }
+      ],
+      "facilities": [
+        "familiar-shrine"
       ]
     },
     {

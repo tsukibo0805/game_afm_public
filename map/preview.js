@@ -42,6 +42,16 @@ const TYPE_LABELS = {
   Ruins: "遺跡",
 };
 
+const FACILITY_DEFINITIONS = [
+  { id: "weapon-smith", action: "VisitWeaponSmith", label: "武器職人" },
+  { id: "book-shop", action: "VisitBookShop", label: "本屋" },
+  { id: "general-store", action: "VisitGeneralStore", label: "よろず屋" },
+  { id: "job-center", action: "VisitJobCenter", label: "職業斡旋所" },
+  { id: "offering-shrine", action: "VisitOfferingShrine", label: "奉納礼拝堂" },
+  { id: "familiar-shrine", action: "VisitShrine", label: "使い魔の祠" },
+  { id: "quest-board", action: "VisitQuestBoard", label: "依頼掲示板" },
+];
+
 const svgNs = "http://www.w3.org/2000/svg";
 
 const state = {
@@ -130,6 +140,61 @@ function nodeType(nodeId) {
   }
   const external = state.layout.externalNodes && state.layout.externalNodes[nodeId];
   return (external && external.type) || "Unknown";
+}
+
+function facilitiesForNode(nodeId) {
+  const node = state.nodesById[nodeId];
+  if (!node) {
+    return [];
+  }
+  const facilityIds = new Set(Array.isArray(node.facilities) ? node.facilities : []);
+  const choices = node.choices || [];
+  const actionIds = new Set(choices.map((choice) => choice.action));
+  FACILITY_DEFINITIONS.forEach((facility) => {
+    if (facility.id === "familiar-shrine") {
+      if (choices.some((choice) => choice.action === facility.action && isFamiliarShrineChoice(choice))) {
+        facilityIds.add(facility.id);
+      }
+    } else if (actionIds.has(facility.action)) {
+      facilityIds.add(facility.id);
+    }
+  });
+  return FACILITY_DEFINITIONS.filter((facility) => facilityIds.has(facility.id));
+}
+
+function isFamiliarShrineChoice(choice) {
+  return choice.id === "west-start-shrine" || choice.id.endsWith("-visit-familiar-shrine");
+}
+
+function appendFacilityIconShape(group, facilityId) {
+  if (facilityId === "weapon-smith") {
+    group.appendChild(svgEl("path", { class: "facility-icon-line", d: "M-7 7 3-3 M0-7 7 0 M-2-9 9 2" }));
+  } else if (facilityId === "book-shop") {
+    group.appendChild(svgEl("path", { class: "facility-icon-line", d: "M0-6C-3-8-6-8-8-7V6C-5 5-2 5 0 7M0-6C3-8 6-8 8-7V6C5 5 2 5 0 7Z" }));
+  } else if (facilityId === "general-store") {
+    group.appendChild(svgEl("path", { class: "facility-icon-line", d: "M-8 6-5-4 0-8 5-4 8 6ZM-5-4 0 0 5-4M0-8V7" }));
+  } else if (facilityId === "job-center") {
+    group.appendChild(svgEl("path", { class: "facility-icon-line", d: "M0-9V9M0-6H7L4-3H0M0 1H-7L-4 4H0" }));
+  } else if (facilityId === "offering-shrine") {
+    const text = svgEl("text", { class: "facility-icon-text", x: 0, y: 5, "text-anchor": "middle" });
+    text.textContent = "納";
+    group.appendChild(text);
+  } else if (facilityId === "familiar-shrine") {
+    group.appendChild(svgEl("ellipse", { class: "facility-icon-fill", cx: 0, cy: 4, rx: 5, ry: 4 }));
+    [[-6, -3], [-2, -6], [3, -6], [7, -2]].forEach(([cx, cy]) => {
+      group.appendChild(svgEl("circle", { class: "facility-icon-fill", cx, cy, r: 2.2 }));
+    });
+  } else if (facilityId === "quest-board") {
+    group.appendChild(svgEl("path", { class: "facility-icon-line", d: "M-7-7H7V6H-7ZM-4-3H4M-4 1H3M-4 5H1" }));
+    group.appendChild(svgEl("circle", { class: "facility-icon-fill", cx: 0, cy: -7, r: 1.5 }));
+  }
+}
+
+function facilityIcon(facilityId, className) {
+  const group = svgEl("g", { class: className });
+  group.appendChild(svgEl("rect", { class: "facility-marker-bg", x: -11, y: -11, width: 22, height: 22, rx: 5 }));
+  appendFacilityIconShape(group, facilityId);
+  return group;
 }
 
 function mapLabel(nodeId) {
@@ -227,12 +292,14 @@ function drawMap() {
       return;
     }
     const radius = nodeRadius(id);
+    const facilities = facilitiesForNode(id);
+    const facilityNames = facilities.map((facility) => facility.label);
     const group = svgEl("g", {
       class: `node type-${nodeType(id)}`,
       "data-id": id,
       tabindex: state.nodesById[id] ? "0" : "-1",
       role: "button",
-      "aria-label": displayName(id),
+      "aria-label": facilityNames.length > 0 ? `${displayName(id)}。施設: ${facilityNames.join("、")}` : displayName(id),
     });
     group.appendChild(svgEl("circle", { class: "pulse", cx: point.x, cy: point.y, r: radius + 2 }));
     group.appendChild(svgEl("circle", { class: "node-ring", cx: point.x, cy: point.y, r: radius + 10 }));
@@ -251,10 +318,19 @@ function drawMap() {
     label.textContent = mapLabel(id);
     group.appendChild(label);
 
+    const markerGap = 24;
+    const markerStartX = point.x - ((facilities.length - 1) * markerGap) / 2;
+    facilities.forEach((facility, index) => {
+      const icon = facilityIcon(facility.id, `facility-marker facility-${facility.id}`);
+      icon.setAttribute("transform", `translate(${markerStartX + index * markerGap} ${point.y - radius - 18})`);
+      icon.setAttribute("aria-hidden", "true");
+      group.appendChild(icon);
+    });
+
     const flag = svgEl("text", {
       class: "current-flag",
       x: point.x,
-      y: point.y - radius - 12,
+      y: point.y - radius - (facilities.length > 0 ? 40 : 12),
       "text-anchor": "middle",
     });
     flag.textContent = "現在地";
@@ -271,6 +347,29 @@ function drawMap() {
       });
     }
     nodesLayer.appendChild(group);
+  });
+}
+
+function fillFacilityLegend() {
+  const legend = document.getElementById("facility-legend");
+  if (!legend) {
+    return;
+  }
+  legend.replaceChildren();
+  FACILITY_DEFINITIONS.forEach((facility) => {
+    const item = document.createElement("li");
+    const icon = svgEl("svg", {
+      class: "facility-legend-icon",
+      viewBox: "-12 -12 24 24",
+      "aria-hidden": "true",
+      focusable: "false",
+    });
+    icon.appendChild(facilityIcon(facility.id, `facility-legend-symbol facility-${facility.id}`));
+    const label = document.createElement("span");
+    label.textContent = facility.label;
+    item.appendChild(icon);
+    item.appendChild(label);
+    legend.appendChild(item);
   });
 }
 
@@ -435,6 +534,7 @@ async function loadIsland(mapId) {
 }
 
 function bindUi() {
+  fillFacilityLegend();
   document.getElementById("node-select").addEventListener("change", (event) => {
     setCurrent(event.target.value);
   });
