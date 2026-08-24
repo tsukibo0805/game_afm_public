@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""game_afm の案内・マップ・職業スキルから、GitHub Pages 用の静的サイトを組み立てる。"""
+"""game_afm の案内・マップ・スキル資料から、GitHub Pages 用の静的サイトを組み立てる。"""
 from __future__ import annotations
 
 import html
@@ -14,6 +14,7 @@ SRC_SKILLS_PREVIEW = ROOT / "tools" / "job-skills-preview"
 SRC_DOCS = ROOT / "docs"
 SRC_GUIDES = SRC_DOCS / "ユーザー向け"
 SRC_MAP_IMAGES = ROOT / "image" / "maps"
+SKILL_DESIGN = SRC_DOCS / "ゲームデザイン" / "スキル一覧.md"
 OUT = Path(__file__).resolve().parent
 
 FACILITY_ACTIONS = (
@@ -201,7 +202,7 @@ def nav_html(current: str, prefix: str) -> str:
         ("guide/index.html", "遊び方", current == "guide"),
         ("guide/images.html", "図解", current == "images"),
         ("map/index.html", "地図", current == "map"),
-        ("skills/index.html", "職業スキル", current == "skills"),
+        ("skills/index.html", "スキル", current == "skills"),
     ]
     items = []
     for href, label, active in links:
@@ -334,7 +335,7 @@ def copy_map() -> None:
   <a href="../guide/index.html">遊び方</a>
   <a href="../guide/images.html">図解</a>
   <a href="index.html" class="is-current">地図</a>
-  <a href="../skills/index.html">職業スキル</a>
+  <a href="../skills/index.html">スキル</a>
 </nav>
   <header class="top-bar">
     <h1>島マップ</h1>
@@ -394,6 +395,102 @@ def copy_map() -> None:
     )
 
 
+def parse_skill_catalog() -> dict[str, object]:
+    design = SKILL_DESIGN.read_text(encoding="utf-8")
+
+    job_section = design[
+        design.index("### 職業スキル詳細") : design.index("### 上級職の役割")
+    ]
+    job_pattern = re.compile(
+        r"^\| (\d+)戦 \| `(skill-\d{4})` \| ([^|]+?) \| (A|S\d|P) \| ([^|]+?) \| (.+) \|$",
+        re.M,
+    )
+    job_skills = {
+        name: {
+            "id": skill_id,
+            "battleCount": int(battle_count),
+            "activation": activation,
+            "equipment": equipment,
+            "effect": effect,
+        }
+        for battle_count, skill_id, name, activation, equipment, effect
+        in job_pattern.findall(job_section)
+    }
+
+    equipment_section = design[
+        design.index("## 装備由来スキル") : design.index("## 使い魔スキル")
+    ]
+    equipment_pattern = re.compile(
+        r"^\| ([^|]+?) \| `(skill-\d{4})` ([^（]+)（(A|S\d|P)） \| (.+?) \| "
+        r"`(skill-\d{4})` ([^（]+)（(A|S\d|P)） \| (.+) \|$",
+        re.M,
+    )
+    equipment_groups = []
+    for heading, category, slug in (
+        ("武器技", "武器", "weapons"),
+        ("魔石技", "魔石", "magic-stones"),
+        ("霊符技", "霊符", "spirit-threads"),
+    ):
+        start = equipment_section.index(f"### {heading}")
+        next_heading = equipment_section.find("\n### ", start + 4)
+        block = equipment_section[start : next_heading if next_heading >= 0 else None]
+        entries = []
+        for row in equipment_pattern.findall(block):
+            equipment, id50, name50, activation50, effect50, id100, name100, activation100, effect100 = row
+            entries.append({
+                "equipment": equipment,
+                "slug": re.sub(r"[^a-z0-9]+", "-", id50.lower()).strip("-"),
+                "skills": [
+                    {
+                        "milestone": 50,
+                        "id": id50,
+                        "name": name50,
+                        "activation": activation50,
+                        "effect": effect50,
+                        "acquisition": "成長値50でスキル書を獲得し、/skillsで使用",
+                    },
+                    {
+                        "milestone": 100,
+                        "id": id100,
+                        "name": name100,
+                        "activation": activation100,
+                        "effect": effect100,
+                        "acquisition": "成長値100の完成装備を専用ノードへ奉納し、得た書を/skillsで使用",
+                    },
+                ],
+            })
+        equipment_groups.append({"category": category, "slug": slug, "entries": entries})
+
+    familiar_section = design[
+        design.index("## 使い魔スキル") : design.index("## 敵スキル")
+    ]
+    familiar_pattern = re.compile(
+        r"^\| ([^|]+?) \| `(skill-\d{4})` \| ([^|]+?) \| (A|S\d|P) \| (.+?) \| (.+) \|$",
+        re.M,
+    )
+    familiar_skills = [
+        {
+            "family": family,
+            "id": skill_id,
+            "name": name,
+            "activation": activation,
+            "effect": effect,
+            "acquisition": acquisition,
+        }
+        for family, skill_id, name, activation, effect, acquisition
+        in familiar_pattern.findall(familiar_section)
+    ]
+
+    if len(job_skills) != 105 or sum(len(group["entries"]) for group in equipment_groups) != 27 or len(familiar_skills) != 14:
+        raise ValueError("スキル一覧.mdから公開用スキルカタログを期待件数で生成できませんでした")
+
+    return {
+        "jobSkills": job_skills,
+        "equipmentGroups": equipment_groups,
+        "familiarSkills": familiar_skills,
+    }
+
+
 def copy_skills() -> None:
     dest = OUT / "skills"
     if dest.exists():
@@ -401,6 +498,10 @@ def copy_skills() -> None:
     dest.mkdir()
     for name in ("preview.css", "preview.js"):
         shutil.copy2(SRC_SKILLS_PREVIEW / name, dest / name)
+
+    catalog_json = json.dumps(parse_skill_catalog(), ensure_ascii=False, separators=(",", ":"))
+    catalog_json = catalog_json.replace("</", "<\\/")
+    write(dest / "catalog-data.js", f"window.skillCatalog = Object.freeze({catalog_json});\n")
 
     page = (SRC_SKILLS_PREVIEW / "index.html").read_text(encoding="utf-8")
     page = page.replace(
@@ -413,6 +514,7 @@ def copy_skills() -> None:
         '  <script src="preview.js"></script>',
         '  <footer class="site-footer">Au Fil des Mers プレイヤー向け案内。'
         '<a href="../rights.html">権利と利用条件</a></footer>\n'
+        '  <script src="catalog-data.js"></script>\n'
         '  <script src="preview.js"></script>',
         1,
     )

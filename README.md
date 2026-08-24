@@ -1,6 +1,6 @@
 # Au Fil des Mers プレイヤー向けサイト
 
-Discordゲーム「Au Fil des Mers」の公開案内、図解ガイド、職業スキル一覧、西・中央・東の島マップの現在地ビューアです。
+Discordゲーム「Au Fil des Mers」の公開案内、図解ガイド、スキル一覧、西・中央・東の島マップの現在地ビューアです。
 制作リポジトリ `game_afm` とは分け、GitHub Pages で静的配信するためのコピーです。
 
 ## 含めるもの
@@ -9,7 +9,9 @@ Discordゲーム「Au Fil des Mers」の公開案内、図解ガイド、職業�
 - プレイヤー向けガイド（遊び方、戦闘、成長など）
 - プレイヤー向け説明画像18点
 - 西・中央・東の島マップと現在地ビューア
-- 基本職・中級職・上級職の職業ツリーと全職業スキル一覧
+- 職業ツリーから探せる職業スキル一覧
+- 装備一覧から探せる50・100ターン装備スキル一覧
+- 犬・猫・鳥の系統別に探せる使い魔専用スキル一覧
 
 含めないもの:
 
@@ -46,7 +48,8 @@ Jekyll を使わないため、ルートに `.nojekyll` を置いてあります
 正本は `game_afm` 側です。
 
 - マップ試作: `tools/west-island-map-preview/`
-- 職業スキル一覧: `tools/job-skills-preview/`
+- スキル一覧の表示テンプレート: `tools/job-skills-preview/`
+- スキル効果・習得方法の正本: `docs/ゲームデザイン/スキル一覧.md`
 - 案内文: `docs/ゲーム紹介.md` と `docs/ユーザー向け/`
 - 説明画像: `docs/ユーザー向け/*.png`
 - 三島の概略図: `image/maps/west-island.png`、`central-island.png`、`east-island.png`
@@ -57,7 +60,7 @@ Jekyll を使わないため、ルートに `.nojekyll` を置いてあります
 python3 tools/player-pages/build.py
 ```
 
-公開Webへ手動アップする場合も、生成後の `tools/player-pages/` 一式をアップロードする。職業スキルページは `skills/index.html`、`skills/preview.js`、`skills/preview.css` が一組なので、一部だけを差し替えない。
+公開Webへ手動アップする場合も、生成後の `tools/player-pages/` 一式をアップロードする。スキルページは `skills/index.html`、`skills/catalog-data.js`、`skills/preview.js`、`skills/preview.css` が一組なので、一部だけを差し替えない。
 
 生成後は、専用にcloneした公開リポジトリへ生成物を同期し、差分を確認してから公開します。次の例では公開リポジトリを隣のディレクトリへcloneしています。
 

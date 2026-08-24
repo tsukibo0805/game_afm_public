@@ -3,22 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>職業スキル一覧 — Au Fil des Mers</title>
+  <title>スキル — Au Fil des Mers</title>
   <link rel="stylesheet" href="../site.css">
   <link rel="stylesheet" href="preview.css">
 </head>
 <body>
-<nav class="site-nav"><a class="brand" href="../index.html">Au Fil des Mers</a><a href="../index.html">紹介</a><a href="../guide/index.html">遊び方</a><a href="../guide/images.html">図解</a><a href="../map/index.html">地図</a><a href="../skills/index.html" class="is-current">職業スキル</a></nav>
+<nav class="site-nav"><a class="brand" href="../index.html">Au Fil des Mers</a><a href="../index.html">紹介</a><a href="../guide/index.html">遊び方</a><a href="../guide/images.html">図解</a><a href="../map/index.html">地図</a><a href="../skills/index.html" class="is-current">スキル</a></nav>
   <header class="hero">
-    <p class="eyebrow">AFM Job Skill Guide</p>
-    <h1>職業スキル一覧</h1>
+    <p class="eyebrow">AFM Skill Guide</p>
+    <h1>スキル</h1>
     <p class="lead">
-      現在職で3・6・9・12・15戦を完了すると、順にスキル書を獲得します。
-      属性アイコンとパワーソースで技の性質をつかみ、技を開くと効果・計算式と使用装備を確認できます。
+      職業、装備、使い魔の系統から、現在使えるスキルを探せます。
+      技を開くと、習得方法、効果・計算式、使用条件を確認できます。
     </p>
   </header>
 
   <main class="skills-page">
+    <nav class="skill-source-nav" aria-label="スキルの種類から探す">
+      <a href="#job-skills"><strong>職業スキル</strong><span>職業ツリーから探す</span></a>
+      <a href="#equipment-skills"><strong>装備スキル</strong><span>装備一覧から探す</span></a>
+      <a href="#familiar-skills"><strong>使い魔スキル</strong><span>犬・猫・鳥から探す</span></a>
+    </nav>
+
+    <section id="job-skills" class="skill-source-section" aria-labelledby="job-skills-title">
+      <header class="section-heading">
+        <p class="section-kicker">JOB SKILLS</p>
+        <h2 id="job-skills-title">職業スキル</h2>
+        <p>現在職で3・6・9・12・15戦を完了すると、順にスキル書を獲得します。</p>
+      </header>
+
     <div class="toolbar" aria-label="職業の絞り込み">
       <div class="filters">
         <button class="filter" type="button" data-filter="all" aria-pressed="true">すべて</button>
@@ -276,6 +289,32 @@
         </ol>
       </article>
     </section>
+    </section>
+
+    <section id="equipment-skills" class="skill-source-section" aria-labelledby="equipment-skills-title">
+      <header class="section-heading">
+        <p class="section-kicker">EQUIPMENT SKILLS</p>
+        <h2 id="equipment-skills-title">装備スキル</h2>
+        <p>武器・魔石・霊符を選ぶと、成長値50と100で得られる技を確認できます。正式習得後も、技の元になった同じ装備種が必要です。</p>
+      </header>
+      <nav id="equipment-index" class="choice-index" aria-label="装備一覧からスキルを探す"></nav>
+      <div id="equipment-groups" class="catalog-groups"></div>
+    </section>
+
+    <section id="familiar-skills" class="skill-source-section" aria-labelledby="familiar-skills-title">
+      <header class="section-heading">
+        <p class="section-kicker">FAMILIAR SKILLS</p>
+        <h2 id="familiar-skills-title">使い魔専用スキル</h2>
+        <p>系統を選ぶと、その使い魔が自動解放する専用技と全系統共通の技を確認できます。効果量には使い魔自身の能力を使います。</p>
+      </header>
+      <div class="filters familiar-filters" aria-label="使い魔の系統で絞り込む">
+        <button class="filter" type="button" data-familiar-filter="all" aria-pressed="true">すべて</button>
+        <button class="filter" type="button" data-familiar-filter="犬" aria-pressed="false">犬</button>
+        <button class="filter" type="button" data-familiar-filter="猫" aria-pressed="false">猫</button>
+        <button class="filter" type="button" data-familiar-filter="鳥" aria-pressed="false">鳥</button>
+      </div>
+      <div id="familiar-catalog" class="catalog-grid" aria-live="polite"></div>
+    </section>
 
     <p class="footnote">
       <strong>見方：</strong> Aは設定したターンに使う技、Sは準備を含む技、Pは自動で働く技です。
@@ -284,6 +323,7 @@
   </main>
 
   <footer class="site-footer">Au Fil des Mers プレイヤー向け案内。<a href="../rights.html">権利と利用条件</a></footer>
+  <script src="catalog-data.js"></script>
   <script src="preview.js"></script>
 </body>
 </html>

@@ -138,6 +138,12 @@ const skillDetails = Object.freeze({
   "幽界侵食": {"id": "skill-0186","battleCount": 15,"activation": "S3","equipment": "霊符/魔石","effect": "敵全体へ（霊感70%・装備霊符属性＋魔力30%・装備魔石属性）×技威力5・2回 → 味方全体へ幻影"}
 });
 
+const publicCatalog = window.skillCatalog || Object.freeze({
+  jobSkills: skillDetails,
+  equipmentGroups: [],
+  familiarSkills: []
+});
+
 const expertJobs = [
   {
     name: "武神",
@@ -450,7 +456,7 @@ document.querySelectorAll(".job").forEach((job) => {
 document.querySelectorAll(".skill").forEach((skill) => {
   const name = skill.querySelector(".skill-name").textContent.trim();
   const profile = skillProfiles[name];
-  const detail = skillDetails[name];
+  const detail = publicCatalog.jobSkills[name] || skillDetails[name];
   const icon = skill.querySelector(".role-icon");
 
   if (!profile || !detail) {
@@ -542,3 +548,132 @@ filters.forEach((button) => {
     });
   });
 });
+
+const makeTextElement = (tagName, className, text) => {
+  const element = document.createElement(tagName);
+  element.className = className;
+  element.textContent = text;
+  return element;
+};
+
+const makeCatalogSkill = (skill, context) => {
+  const details = document.createElement("details");
+  const summary = document.createElement("summary");
+  const summaryLead = document.createElement("span");
+  const name = makeTextElement("strong", "catalog-skill-name", skill.name);
+  const activation = makeTextElement("span", "badge activation", skill.activation);
+  const body = document.createElement("div");
+
+  details.className = "catalog-skill";
+  summaryLead.className = "catalog-skill-summary";
+  summaryLead.append(
+    makeTextElement("span", "catalog-milestone", context),
+    name
+  );
+  summary.append(summaryLead, activation);
+  body.className = "catalog-skill-body";
+  body.append(
+    makeTextElement("p", "skill-detail-label", "効果・計算式"),
+    makeTextElement("p", "skill-detail-effect", skill.effect),
+    makeTextElement("p", "skill-detail-equipment", `取得・付与: ${skill.acquisition}`)
+  );
+  details.append(summary, body);
+  return details;
+};
+
+const equipmentIndex = document.querySelector("#equipment-index");
+const equipmentGroups = document.querySelector("#equipment-groups");
+
+publicCatalog.equipmentGroups.forEach((group) => {
+  const indexGroup = document.createElement("section");
+  const indexLinks = document.createElement("div");
+  const catalogGroup = document.createElement("section");
+  const cards = document.createElement("div");
+
+  indexGroup.className = "choice-group";
+  indexLinks.className = "choice-links";
+  indexGroup.append(makeTextElement("h3", "", group.category), indexLinks);
+
+  catalogGroup.className = "catalog-group";
+  catalogGroup.id = `equipment-${group.slug}`;
+  catalogGroup.append(makeTextElement("h3", "catalog-group-title", `${group.category}から習得するスキル`));
+  cards.className = "catalog-grid equipment-grid";
+
+  group.entries.forEach((entry) => {
+    const anchor = document.createElement("a");
+    const article = document.createElement("article");
+    const header = document.createElement("header");
+
+    anchor.href = `#equipment-${entry.slug}`;
+    anchor.textContent = entry.equipment;
+    indexLinks.append(anchor);
+
+    article.className = "catalog-card equipment-card";
+    article.id = `equipment-${entry.slug}`;
+    header.className = "catalog-card-header";
+    header.append(
+      makeTextElement("h4", "", entry.equipment),
+      makeTextElement("span", "tier", group.category)
+    );
+    article.append(header);
+    entry.skills.forEach((skill) => {
+      article.append(makeCatalogSkill(skill, `${skill.milestone}ターン技`));
+    });
+    cards.append(article);
+  });
+
+  catalogGroup.append(cards);
+  equipmentIndex.append(indexGroup);
+  equipmentGroups.append(catalogGroup);
+});
+
+const familiarCatalog = document.querySelector("#familiar-catalog");
+const familiarFilters = document.querySelectorAll("[data-familiar-filter]");
+
+const renderFamiliarSkills = (selectedFamily) => {
+  familiarCatalog.replaceChildren();
+  const visibleSkills = publicCatalog.familiarSkills.filter((skill) => (
+    selectedFamily === "all" || skill.family === "共通" || skill.family === selectedFamily
+  ));
+
+  visibleSkills.forEach((skill) => {
+    const article = document.createElement("article");
+    const header = document.createElement("header");
+
+    article.className = "catalog-card familiar-card";
+    article.dataset.family = skill.family;
+    header.className = "catalog-card-header";
+    header.append(
+      makeTextElement("h3", "", skill.name),
+      makeTextElement("span", "tier", skill.family)
+    );
+    const familyLabel = skill.family === "共通" ? "全系統共通" : `${skill.family}系統`;
+    article.append(header, makeCatalogSkill(skill, familyLabel));
+    familiarCatalog.append(article);
+  });
+};
+
+familiarFilters.forEach((button) => {
+  button.addEventListener("click", () => {
+    familiarFilters.forEach((filter) => {
+      filter.setAttribute("aria-pressed", String(filter === button));
+    });
+    renderFamiliarSkills(button.dataset.familiarFilter);
+  });
+});
+
+renderFamiliarSkills("all");
+
+const scrollToCurrentHash = () => {
+  if (!window.location.hash) {
+    return;
+  }
+
+  const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+  if (target) {
+    target.scrollIntoView({ block: "start" });
+  }
+};
+
+scrollToCurrentHash();
+window.addEventListener("load", scrollToCurrentHash, { once: true });
