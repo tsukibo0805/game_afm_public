@@ -57,6 +57,8 @@ Jekyll を使わないため、ルートに `.nojekyll` を置いてあります
 python3 tools/player-pages/build.py
 ```
 
+公開Webへ手動アップする場合も、生成後の `tools/player-pages/` 一式をアップロードする。職業スキルページは `skills/index.html`、`skills/preview.js`、`skills/preview.css` が一組なので、一部だけを差し替えない。
+
 生成後は、専用にcloneした公開リポジトリへ生成物を同期し、差分を確認してから公開します。次の例では公開リポジトリを隣のディレクトリへcloneしています。
 
 ```bash

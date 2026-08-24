@@ -144,6 +144,27 @@ h1 {
   align-items: center;
 }
 
+.formula-guide {
+  margin: 0 0 24px;
+  padding: 18px 20px;
+  border: 1px solid rgba(226, 177, 90, 0.38);
+  border-radius: 14px;
+  background: var(--accent-soft);
+}
+
+.formula-guide h2 {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 16px;
+}
+
+.formula-guide p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.75;
+}
+
 .mini-icon {
   display: inline-grid;
   width: 22px;
@@ -474,6 +495,36 @@ h1 {
   margin: -1px 0 12px 46px;
 }
 
+.skill-detail {
+  margin: 0 4px 14px 46px;
+  padding: 12px 14px;
+  border-left: 3px solid rgba(226, 177, 90, 0.62);
+  border-radius: 0 10px 10px 0;
+  background: rgba(21, 18, 14, 0.64);
+}
+
+.skill-detail p {
+  margin: 0;
+}
+
+.skill-detail-label {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.skill-detail-effect {
+  margin-top: 4px !important;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.skill-detail-equipment {
+  margin-top: 6px !important;
+  color: var(--muted);
+  font-size: 11px;
+}
+
 .badge {
   display: inline-flex;
   align-items: center;
@@ -562,6 +613,10 @@ code {
   }
 
   .skill-meta {
+    margin-left: 48px;
+  }
+
+  .skill-detail {
     margin-left: 48px;
   }
 }

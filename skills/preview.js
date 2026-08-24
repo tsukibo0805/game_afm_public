@@ -22,12 +22,120 @@ const jobIds = {
   "憑霊師": "job-medium"
 };
 
-const makeSkill = (name, effect, level, activation, ...tags) => ({
+const makeSkill = (name, effect, battleCount, activation, ...tags) => ({
   name,
   effect,
-  level,
+  battleCount,
   activation,
   tags
+});
+
+const skillDetails = Object.freeze({
+  "2回攻撃": {"id": "skill-0001","battleCount": 3,"activation": "A","equipment": "武器","effect": "敵ランダムへ（力100%・装備武器区分）×技威力1.2・2回（各ヒット再抽選）"},
+  "かばう": {"id": "skill-0002","battleCount": 6,"activation": "A","equipment": "不要","effect": "味方への次の敵攻撃をかばう"},
+  "範囲攻撃": {"id": "skill-0003","battleCount": 9,"activation": "A","equipment": "武器","effect": "敵全体へ（力100%・装備武器区分）×技威力0.3"},
+  "ためる": {"id": "skill-0004","battleCount": 12,"activation": "A","equipment": "不要","effect": "次の力依存行動の力成分を2.1倍"},
+  "チャージ攻撃": {"id": "skill-0005","battleCount": 15,"activation": "S1","equipment": "武器","effect": "敵全体へ（力100%・装備武器区分）×技威力1.2"},
+  "連続魔法": {"id": "skill-0006","battleCount": 3,"activation": "A","equipment": "不要","effect": "敵ランダムへ（魔力100%・装備魔石属性/無属性）×技威力1・2回（各ヒット再抽選）"},
+  "フィールド展開": {"id": "skill-0007","battleCount": 6,"activation": "A","equipment": "魔石","effect": "装備魔石属性フィールドを展開"},
+  "全体魔法": {"id": "skill-0008","battleCount": 9,"activation": "A","equipment": "不要","effect": "敵全体へ（魔力100%・装備魔石属性/無属性）×技威力0.25"},
+  "フィールドキャンセル": {"id": "skill-0009","battleCount": 12,"activation": "A","equipment": "魔石","effect": "装備魔石属性フィールドを解除"},
+  "詠唱魔法": {"id": "skill-0010","battleCount": 15,"activation": "S1","equipment": "不要","effect": "敵単体へ（魔力100%・装備魔石属性/無属性）×技威力4.5"},
+  "回復魔法": {"id": "skill-0011","battleCount": 3,"activation": "A","equipment": "不要","effect": "HP欠損率最大の味方1人を回復：（霊感100%）×回復力2.5"},
+  "毎ターン回復": {"id": "skill-0012","battleCount": 6,"activation": "A","equipment": "不要","effect": "味方全体へ継続回復：（霊感100%）・能力1につき最大HPの0.8%（上限15%）"},
+  "蘇生術": {"id": "skill-0013","battleCount": 9,"activation": "A","equipment": "不要","effect": "戦闘不能の味方1人を蘇生：（霊感100%）・能力1につき最大HPの2.5%"},
+  "霊撃": {"id": "skill-0014","battleCount": 12,"activation": "A","equipment": "霊符","effect": "敵単体へ（霊感100%・装備霊符属性）×技威力1.2"},
+  "大回復魔法": {"id": "skill-0015","battleCount": 15,"activation": "S1","equipment": "不要","effect": "味方全体を回復：（霊感100%）・能力1につき最大HPの8%（上限100%）"},
+  "三連撃": {"id": "skill-0016","battleCount": 3,"activation": "A","equipment": "不要","effect": "敵単体へ（力100%・装備武器区分/近距離）×技威力1.65・3回"},
+  "浮身崩し": {"id": "skill-0017","battleCount": 6,"activation": "A","equipment": "不要","effect": "敵単体を一時的にリフト姿勢へ変更"},
+  "ショックウェイブ": {"id": "skill-0018","battleCount": 9,"activation": "A","equipment": "不要","effect": "敵全体へ（力100%・近距離）×技威力0.25"},
+  "積極姿勢": {"id": "skill-0019","battleCount": 12,"activation": "P","equipment": "不要","effect": "積極姿勢を付与"},
+  "全体2回攻撃": {"id": "skill-0020","battleCount": 15,"activation": "S2","equipment": "不要","effect": "敵全体へ（力100%・装備武器区分/近距離）×技威力3・2回"},
+  "パリィ": {"id": "skill-0021","battleCount": 3,"activation": "A","equipment": "不要","effect": "次の敵攻撃を受け流し、被ダメージを0.4倍"},
+  "カウンター": {"id": "skill-0022","battleCount": 6,"activation": "A","equipment": "不要","effect": "次の敵攻撃を0.5倍に軽減して反撃：（力100%・装備武器区分/近距離）×技威力1.5"},
+  "魔バリア": {"id": "skill-0023","battleCount": 9,"activation": "A","equipment": "魔石","effect": "味方側へ装備魔石属性障壁"},
+  "慎重姿勢": {"id": "skill-0024","battleCount": 12,"activation": "P","equipment": "不要","effect": "慎重姿勢を付与"},
+  "ハルモニアンシールド": {"id": "skill-0025","battleCount": 15,"activation": "S2","equipment": "魔石＋霊符","effect": "味方側へ装備魔石属性障壁 → 味方側へ装備霊符属性障壁"},
+  "三連魔法": {"id": "skill-0026","battleCount": 3,"activation": "A","equipment": "不要","effect": "敵単体へ（魔力100%・装備魔石属性/無属性）×技威力1.65・3回"},
+  "魔力収束": {"id": "skill-0027","battleCount": 6,"activation": "A","equipment": "魔石","effect": "次の魔力依存行動の魔力成分を2.1倍"},
+  "属性強化全体攻撃": {"id": "skill-0028","battleCount": 9,"activation": "A","equipment": "魔石","effect": "敵全体へ（魔力100%・装備魔石属性）×技威力0.25"},
+  "クイック": {"id": "skill-0029","battleCount": 12,"activation": "A","equipment": "不要","effect": "自身を次ターン先頭へ予約"},
+  "高等変成術": {"id": "skill-0030","battleCount": 15,"activation": "S2","equipment": "魔石","effect": "敵単体へ（魔力100%・装備魔石属性）×技威力11"},
+  "魔相転換": {"id": "skill-0031","battleCount": 3,"activation": "A","equipment": "魔石","effect": "装備魔石属性フィールドを別の魔法属性へ変成"},
+  "カード投げ": {"id": "skill-0032","battleCount": 6,"activation": "A","equipment": "不要","effect": "敵単体へ（力70%・無属性＋魔力30%・装備魔石属性/無属性）×技威力2.2"},
+  "お札投げ": {"id": "skill-0033","battleCount": 9,"activation": "A","equipment": "不要","effect": "敵単体へ（力30%・無属性＋霊感70%・装備霊符属性/無属性）×技威力2.2"},
+  "トラップ": {"id": "skill-0034","battleCount": 12,"activation": "A","equipment": "不要","effect": "敵単体へスタン"},
+  "三相秘術": {"id": "skill-0035","battleCount": 15,"activation": "S2","equipment": "不要","effect": "敵全体へ（力25%・無属性＋魔力50%・装備魔石属性/無属性＋霊感25%・装備霊符属性/無属性）×技威力8"},
+  "全体回復": {"id": "skill-0036","battleCount": 3,"activation": "A","equipment": "不要","effect": "味方全体を回復：（霊感100%）×回復力0.5"},
+  "継続ダメージ解除": {"id": "skill-0037","battleCount": 6,"activation": "A","equipment": "不要","effect": "味方全体の継続ダメージを解除"},
+  "スロウ": {"id": "skill-0038","battleCount": 9,"activation": "A","equipment": "不要","effect": "敵単体を次ターン最後へ予約"},
+  "呪効果解除": {"id": "skill-0039","battleCount": 12,"activation": "A","equipment": "不要","effect": "味方全体の呪いを解除"},
+  "裁きの祈り": {"id": "skill-0040","battleCount": 15,"activation": "S2","equipment": "霊符","effect": "敵単体へ（霊感100%・装備霊符属性）×技威力11"},
+  "霊壁展開": {"id": "skill-0041","battleCount": 3,"activation": "A","equipment": "霊符","effect": "味方側へ装備霊符属性障壁"},
+  "魂返し": {"id": "skill-0042","battleCount": 6,"activation": "A","equipment": "不要","effect": "次の敵攻撃を0.5倍に軽減して反撃：（霊感100%・装備霊符属性/無属性）×技威力1.5"},
+  "3連続攻撃": {"id": "skill-0043","battleCount": 9,"activation": "A","equipment": "不要","effect": "敵ランダムへ（霊感100%・装備霊符属性/無属性）×技威力1.65・3回（各ヒット再抽選）"},
+  "魔力変換": {"id": "skill-0044","battleCount": 12,"activation": "A","equipment": "不要","effect": "戦闘中、魔力を霊感へ変換"},
+  "大降霊": {"id": "skill-0045","battleCount": 15,"activation": "S2","equipment": "不要","effect": "敵全体へ（霊感100%・装備霊符属性/無属性）×技威力8"},
+  "装心解放": {"id": "skill-0127","battleCount": 3,"activation": "A","equipment": "武器","effect": "敵単体へ（力100%・装備武器区分）×技威力2.8"},
+  "連環破": {"id": "skill-0128","battleCount": 6,"activation": "A","equipment": "武器","effect": "敵単体へ（力100%・装備武器区分）×技威力2.4・4回"},
+  "無拍子": {"id": "skill-0129","battleCount": 9,"activation": "A","equipment": "不要","effect": "自身を次ターン先頭へ予約"},
+  "極点破": {"id": "skill-0130","battleCount": 12,"activation": "S1","equipment": "武器","effect": "敵単体へ（力100%・装備武器区分・近/中/遠スレイヤー）×技威力4.5"},
+  "武神顕現": {"id": "skill-0131","battleCount": 15,"activation": "S3","equipment": "武器","effect": "敵単体へ（力100%・装備武器区分）×技威力10・5回"},
+  "刹那連撃": {"id": "skill-0132","battleCount": 3,"activation": "A","equipment": "不要","effect": "敵ランダムへ（力100%・無属性）×技威力3・4回（各ヒット再抽選）"},
+  "血路開き": {"id": "skill-0133","battleCount": 6,"activation": "A","equipment": "不要","effect": "敵全体へ（力100%・無属性）×技威力2 → 自身の現在HPを30%消費"},
+  "死線撃": {"id": "skill-0134","battleCount": 9,"activation": "A","equipment": "不要","effect": "敵単体へ（力100%・無属性）×技威力2.4・自身の欠損HP率で増幅"},
+  "狂乱舞": {"id": "skill-0135","battleCount": 12,"activation": "S1","equipment": "不要","effect": "敵ランダムへ（力100%・無属性）×技威力5.4・6回（各ヒット再抽選） → 自身の現在HPを30%消費"},
+  "修羅界": {"id": "skill-0136","battleCount": 15,"activation": "S3","equipment": "不要","effect": "敵全体へ（力100%・無属性）×技威力4・3回・自身の欠損HP率で増幅"},
+  "霊装撃": {"id": "skill-0137","battleCount": 3,"activation": "A","equipment": "武器/霊符","effect": "敵単体へ（力70%・装備武器区分＋霊感30%・装備霊符属性）×技威力3"},
+  "献身護法": {"id": "skill-0138","battleCount": 6,"activation": "A","equipment": "不要","effect": "自身を回復：（霊感100%）×回復力2 → 味方への次の敵攻撃をかばう"},
+  "霊護結界": {"id": "skill-0139","battleCount": 9,"activation": "A","equipment": "霊符","effect": "味方側へ装備霊符属性障壁"},
+  "神気反照": {"id": "skill-0140","battleCount": 12,"activation": "A","equipment": "武器/霊符","effect": "次の敵攻撃を0.4倍に軽減して反撃：（力70%・装備武器区分＋霊感30%・装備霊符属性）×技威力2.4"},
+  "神威両断": {"id": "skill-0141","battleCount": 15,"activation": "S3","equipment": "武器/霊符","effect": "敵単体へ（力70%・装備武器区分＋霊感30%・装備霊符属性）×技威力8 → 味方全体を回復：（霊感100%）×回復力1"},
+  "魔の衝撃": {"id": "skill-0142","battleCount": 3,"activation": "A","equipment": "武器/魔石","effect": "敵単体へ（力70%・装備武器区分＋魔力30%・装備魔石属性）×技威力3"},
+  "刻印展開": {"id": "skill-0143","battleCount": 6,"activation": "A","equipment": "武器/魔石","effect": "装備魔石属性フィールドを展開 → 敵単体へ（力70%・装備武器区分＋魔力30%・装備魔石属性）×技威力1.8"},
+  "ルーンシールド": {"id": "skill-0144","battleCount": 9,"activation": "A","equipment": "不要","effect": "次ターン、風・火・水・大地レジスト"},
+  "エレメンタルフュージョン": {"id": "skill-0145","battleCount": 12,"activation": "S1","equipment": "武器/魔石","effect": "敵全体へ（力70%・装備武器区分＋魔力30%・装備魔石属性・風/火/水/大地スレイヤー）×技威力3.8"},
+  "刻印解放": {"id": "skill-0146","battleCount": 15,"activation": "S3","equipment": "武器/魔石","effect": "敵単体へ（力70%・装備武器区分＋魔力30%・装備魔石属性）×技威力10・3回"},
+  "隕石": {"id": "skill-0147","battleCount": 3,"activation": "A","equipment": "不要","effect": "敵単体へ（魔力100%・無属性）×技威力2.4・3回"},
+  "流星雨": {"id": "skill-0148","battleCount": 6,"activation": "S1","equipment": "不要","effect": "敵ランダムへ（魔力100%・無属性）×技威力5・6回（各ヒット再抽選）"},
+  "グラビトンフィールド": {"id": "skill-0149","battleCount": 9,"activation": "A","equipment": "不要","effect": "敵全体を一時的にダウン姿勢へ変更"},
+  "エレメンタルスター": {"id": "skill-0150","battleCount": 12,"activation": "S2","equipment": "魔石","effect": "敵単体へ（魔力100%・装備魔石属性）×技威力8・2回"},
+  "天球崩壊": {"id": "skill-0151","battleCount": 15,"activation": "S4","equipment": "不要","effect": "敵全体へ（魔力100%・無属性）×技威力10・3回"},
+  "精霊解放": {"id": "skill-0152","battleCount": 3,"activation": "A","equipment": "魔石","effect": "敵単体へ（魔力100%・装備魔石属性）×技威力3"},
+  "浄化術": {"id": "skill-0153","battleCount": 6,"activation": "A","equipment": "不要","effect": "味方全体の継続ダメージを解除 → 味方全体の呪いを解除"},
+  "命の秘薬": {"id": "skill-0154","battleCount": 9,"activation": "A","equipment": "不要","effect": "味方全体を回復：（魔力100%）×回復力0.8"},
+  "精霊への枷": {"id": "skill-0155","battleCount": 12,"activation": "S1","equipment": "魔石","effect": "風・火・水・大地フィールドを装備魔石属性へ置換"},
+  "アルス・マグナ": {"id": "skill-0156","battleCount": 15,"activation": "S3","equipment": "魔石","effect": "敵全体へ（魔力100%・装備魔石属性（非隣接スレイヤー））×技威力8・2回"},
+  "ファントムビュレット": {"id": "skill-0157","battleCount": 3,"activation": "A","equipment": "霊符/魔石","effect": "敵単体へ（霊感70%・装備霊符属性＋魔力30%・装備魔石属性）×技威力3"},
+  "瘴気の手": {"id": "skill-0158","battleCount": 6,"activation": "A","equipment": "霊符/魔石","effect": "敵単体へ（霊感70%・装備霊符属性＋魔力30%・装備魔石属性）×技威力1.8 → 命中対象へ継続ダメージ：（霊感70%＋魔力30%）×継続威力0.4"},
+  "金縛り": {"id": "skill-0159","battleCount": 9,"activation": "A","equipment": "不要","effect": "敵単体へスタン"},
+  "異空の狭間": {"id": "skill-0160","battleCount": 12,"activation": "S1","equipment": "不要","effect": "敵全体へスタン"},
+  "百鬼夜行": {"id": "skill-0161","battleCount": 15,"activation": "S3","equipment": "霊符/魔石","effect": "敵全体へ（霊感70%・装備霊符属性＋魔力30%・装備魔石属性）×技威力6・2回 → 命中対象へ継続ダメージ：（霊感70%＋魔力30%）×継続威力0.6"},
+  "ワイルドカード": {"id": "skill-0162","battleCount": 3,"activation": "A","equipment": "武器/魔石","effect": "敵ランダムへ（魔力70%・装備魔石属性＋力30%・装備武器区分）×技威力2.4・4回（各ヒット再抽選）"},
+  "ディレイトリック": {"id": "skill-0163","battleCount": 6,"activation": "A","equipment": "不要","effect": "敵単体を次ターン最後へ予約"},
+  "ミスディレクション": {"id": "skill-0164","battleCount": 9,"activation": "A","equipment": "不要","effect": "自身へ幻影"},
+  "びっくり箱": {"id": "skill-0165","battleCount": 12,"activation": "S1","equipment": "武器/魔石","effect": "敵全体へ（魔力70%・装備魔石属性＋力30%・装備武器区分）×技威力2 → 命中対象へスタン"},
+  "グランドフィナーレ": {"id": "skill-0166","battleCount": 15,"activation": "S3","equipment": "武器/魔石","effect": "敵ランダムへ（魔力70%・装備魔石属性＋力30%・装備武器区分）×技威力8・10回（各ヒット再抽選）"},
+  "魂の叫び": {"id": "skill-0167","battleCount": 3,"activation": "A","equipment": "不要","effect": "敵単体へ（霊感100%・装備霊符属性/無属性）×技威力2.8"},
+  "恩寵": {"id": "skill-0168","battleCount": 6,"activation": "A","equipment": "不要","effect": "HP欠損率最大の味方1人を回復：（霊感100%）×回復力2 → 回復対象へ祝福"},
+  "ヒーリングフィールド": {"id": "skill-0169","battleCount": 9,"activation": "S1","equipment": "不要","effect": "味方全体を回復：（霊感100%）・能力1につき最大HPの4%（上限100%）"},
+  "復活の鐘": {"id": "skill-0170","battleCount": 12,"activation": "S1","equipment": "不要","effect": "味方全体を蘇生：（霊感100%）・能力1につき最大HPの2.5% → 蘇生対象へ継続回復：（霊感100%）・能力1につき最大HPの15%（上限15%）"},
+  "葬炎": {"id": "skill-0171","battleCount": 15,"activation": "S3","equipment": "不要","effect": "敵全体へ（霊感100%・装備霊符属性/無属性）×技威力6 → 味方全体を回復：（霊感100%）×回復力1.5"},
+  "二律裁定": {"id": "skill-0172","battleCount": 3,"activation": "A","equipment": "不要","effect": "敵単体へ（霊感100%・聖）×技威力1.4 → 敵単体へ（霊感100%・邪）×技威力1.4"},
+  "沈黙の楔": {"id": "skill-0173","battleCount": 6,"activation": "A","equipment": "不要","effect": "敵単体へ（霊感100%・装備霊符属性/無属性）×技威力1.8 → 命中対象へ攻撃封印"},
+  "贖罪": {"id": "skill-0174","battleCount": 9,"activation": "A","equipment": "不要","effect": "敵単体へ（霊感100%・装備霊符属性/無属性）×技威力2.4 → 命中対象への実ダメージの50%を吸収"},
+  "異端審問": {"id": "skill-0175","battleCount": 12,"activation": "S1","equipment": "不要","effect": "敵全体へ（霊感100%・装備霊符属性/無属性・聖/邪スレイヤー）×技威力3.2"},
+  "最後の審判": {"id": "skill-0176","battleCount": 15,"activation": "S3","equipment": "不要","effect": "敵全体へ（霊感100%・装備霊符属性/無属性）×技威力6・2回 → 命中対象へ呪い（反動40%）"},
+  "呪刻": {"id": "skill-0177","battleCount": 3,"activation": "A","equipment": "武器/霊符","effect": "敵単体へ（霊感70%・装備霊符属性＋力30%・装備武器区分）×技威力3"},
+  "衰微の印": {"id": "skill-0178","battleCount": 6,"activation": "A","equipment": "武器/霊符","effect": "敵単体へ（霊感70%・装備霊符属性＋力30%・装備武器区分）×技威力1.8 → 命中対象へ継続ダメージ：（霊感70%＋力30%）×継続威力0.4"},
+  "封殺の印": {"id": "skill-0179","battleCount": 9,"activation": "A","equipment": "武器/霊符","effect": "敵単体へ（霊感70%・装備霊符属性＋力30%・装備武器区分）×技威力1.8 → 命中対象へ攻撃封印"},
+  "因果応報": {"id": "skill-0180","battleCount": 12,"activation": "A","equipment": "武器/霊符","effect": "次の敵攻撃に反撃：（霊感70%・装備霊符属性＋力30%・装備武器区分）×技威力2"},
+  "呪殺陣": {"id": "skill-0181","battleCount": 15,"activation": "S3","equipment": "武器/霊符","effect": "敵全体へ（霊感70%・装備霊符属性＋力30%・装備武器区分）×技威力6・2回 → 命中対象へ呪い（反動40%）"},
+  "魂討ち": {"id": "skill-0182","battleCount": 3,"activation": "A","equipment": "霊符/魔石","effect": "敵単体へ（霊感70%・装備霊符属性＋魔力30%・装備魔石属性）×技威力3"},
+  "身代わり霊": {"id": "skill-0183","battleCount": 6,"activation": "A","equipment": "不要","effect": "自身以外のHP欠損率最大の味方1人へ幻影"},
+  "憑依治療": {"id": "skill-0184","battleCount": 9,"activation": "A","equipment": "不要","effect": "自身以外のHP欠損率最大の味方1人と現在HPを交換"},
+  "霊体反照": {"id": "skill-0185","battleCount": 12,"activation": "S2","equipment": "不要","effect": "敵全体へ自身の欠損HP比例ダメージ"},
+  "幽界侵食": {"id": "skill-0186","battleCount": 15,"activation": "S3","equipment": "霊符/魔石","effect": "敵全体へ（霊感70%・装備霊符属性＋魔力30%・装備魔石属性）×技威力5・2回 → 味方全体へ幻影"}
 });
 
 const expertJobs = [
@@ -322,7 +430,7 @@ expertJobs.forEach((job) => {
               <span class="effect">${skill.effect}</span>
             </summary>
             <div class="skill-meta">
-              <span class="badge">Lv ${skill.level}</span>
+              <span class="badge">${skill.battleCount}戦</span>
               <span class="badge activation">${skill.activation}</span>
               ${skill.tags.map((tag) => `<span class="badge">${tag}</span>`).join("")}
             </div>
@@ -342,9 +450,10 @@ document.querySelectorAll(".job").forEach((job) => {
 document.querySelectorAll(".skill").forEach((skill) => {
   const name = skill.querySelector(".skill-name").textContent.trim();
   const profile = skillProfiles[name];
+  const detail = skillDetails[name];
   const icon = skill.querySelector(".role-icon");
 
-  if (!profile) {
+  if (!profile || !detail) {
     return;
   }
 
@@ -374,6 +483,24 @@ document.querySelectorAll(".skill").forEach((skill) => {
   powerBadge.className = "badge";
   powerBadge.textContent = `PS: ${powerSource}`;
   meta.append(attributeBadge, powerBadge);
+
+  const battleCountBadge = meta.querySelector(".badge");
+  battleCountBadge.textContent = `${detail.battleCount}戦`;
+
+  const detailPanel = document.createElement("div");
+  const effectLabel = document.createElement("p");
+  const effectText = document.createElement("p");
+  const equipmentText = document.createElement("p");
+
+  detailPanel.className = "skill-detail";
+  effectLabel.className = "skill-detail-label";
+  effectLabel.textContent = "効果・計算式";
+  effectText.className = "skill-detail-effect";
+  effectText.textContent = detail.effect;
+  equipmentText.className = "skill-detail-equipment";
+  equipmentText.textContent = `使用装備: ${detail.equipment}`;
+  detailPanel.append(effectLabel, effectText, equipmentText);
+  skill.append(detailPanel);
 });
 
 const filters = document.querySelectorAll("[data-filter]");
