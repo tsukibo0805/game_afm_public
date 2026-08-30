@@ -42,6 +42,7 @@
     "central-capital-east-military-gate": { "x": 1190, "y": 450, "shortLabel": "東軍門" },
     "central-iron-marker-road": { "x": 1330, "y": 410, "shortLabel": "鉄標街道" },
     "central-ash-cargo-hollow": { "x": 1460, "y": 470, "shortLabel": "灰荷窪地" },
+    "central-old-cargo-inspection-depot": { "x": 1460, "y": 590, "shortLabel": "旧検査庫" },
     "central-eastern-analysis-institute": { "x": 1590, "y": 420, "shortLabel": "分析院" },
     "central-border-sea-garrison-city": { "x": 1710, "y": 470, "shortLabel": "駐屯市" },
     "central-eastern-blockade-port": { "x": 1790, "y": 360, "r": 18, "shortLabel": "封鎖港" }

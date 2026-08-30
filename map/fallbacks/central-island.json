@@ -554,6 +554,25 @@
           "displayName": "東部分析院へ向かう",
           "action": "Move",
           "toNode": "central-eastern-analysis-institute"
+        },
+        {
+          "id": "central-ash-cargo-hollow-to-old-cargo-inspection-depot",
+          "displayName": "封鎖された検査庫へ入る",
+          "action": "Move",
+          "toNode": "central-old-cargo-inspection-depot"
+        }
+      ]
+    },
+    {
+      "id": "central-old-cargo-inspection-depot",
+      "displayName": "旧荷役検査庫",
+      "type": "Ruins",
+      "choices": [
+        {
+          "id": "central-old-cargo-move-ash-hollow",
+          "displayName": "灰荷の窪地へ戻る",
+          "action": "Move",
+          "toNode": "central-ash-cargo-hollow"
         }
       ]
     },

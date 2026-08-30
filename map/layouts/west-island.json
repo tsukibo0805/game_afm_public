@@ -19,6 +19,7 @@
     "west-mountain-e": { "x": 558, "y": 258 },
     "west-mountain-c": { "x": 738, "y": 298 },
     "west-rune-cave": { "x": 848, "y": 448 },
+    "west-star-cycle-ritual-chamber": { "x": 930, "y": 510, "shortLabel": "星巡り祭室" },
     "west-port": { "x": 848, "y": 178 }
   },
   "externalNodes": {

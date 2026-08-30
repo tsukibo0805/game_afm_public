@@ -152,6 +152,25 @@
           "displayName": "山岳へ",
           "action": "Move",
           "toNode": "west-mountain-b"
+        },
+        {
+          "id": "west-rune-cave-move-star-cycle-ritual-chamber",
+          "displayName": "洞窟奥の祭室へ進む",
+          "action": "Move",
+          "toNode": "west-star-cycle-ritual-chamber"
+        }
+      ]
+    },
+    {
+      "id": "west-star-cycle-ritual-chamber",
+      "displayName": "星巡りの祭室",
+      "type": "Shrine",
+      "choices": [
+        {
+          "id": "west-star-cycle-move-rune-cave",
+          "displayName": "ルーン洞窟へ戻る",
+          "action": "Move",
+          "toNode": "west-rune-cave"
         }
       ]
     },

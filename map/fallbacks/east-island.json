@@ -65,6 +65,7 @@
         }
       ],
       "facilities": [
+        "book-shop",
         "familiar-shrine"
       ]
     },
@@ -148,6 +149,25 @@
           "displayName": "泉守りの隠れ里へ退く",
           "action": "Move",
           "toNode": "east-springkeeper-refuge"
+        },
+        {
+          "id": "east-spirit-valley-to-ash-rainbow-hall",
+          "displayName": "未踏神殿群の三相殿へ向かう",
+          "action": "Move",
+          "toNode": "east-ash-rainbow-triphase-hall"
+        }
+      ]
+    },
+    {
+      "id": "east-ash-rainbow-triphase-hall",
+      "displayName": "灰虹の三相殿",
+      "type": "Shrine",
+      "choices": [
+        {
+          "id": "east-ash-rainbow-move-spirit-valley",
+          "displayName": "精霊の谷へ戻る",
+          "action": "Move",
+          "toNode": "east-spirit-valley"
         }
       ]
     },
