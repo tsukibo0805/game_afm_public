@@ -6,7 +6,7 @@ Discordゲーム「Au Fil des Mers」の公開案内、図解ガイド、スキ�
 ## 含めるもの
 
 - ゲーム紹介
-- プレイヤー向けガイド（遊び方、戦闘、成長など）
+- プレイヤー向けガイド（遊び方、戦闘、成長、装備と素材など）
 - プレイヤー向け説明画像18点
 - 西・中央・東の島マップと現在地ビューア
 - 職業ツリーから探せる職業スキル一覧
@@ -21,7 +21,9 @@ Discordゲーム「Au Fil des Mers」の公開案内、図解ガイド、スキ�
 
 ## GitHub Pages として公開する
 
-このフォルダを公開リポジトリのルートにします。例:
+このフォルダ一式を公開リポジトリのルートへ手動アップロードします。公開作業はユーザーが行い、AIは公開リポジトリのclone、commit、push、GitHub認証確認を行いません。
+
+初回構築時は、ユーザーが公開リポジトリとGitHub Pagesを設定します。構成例:
 
 ```bash
 cd tools/player-pages
@@ -60,19 +62,16 @@ Jekyll を使わないため、ルートに `.nojekyll` を置いてあります
 python3 tools/player-pages/build.py
 ```
 
-公開Webへ手動アップする場合も、生成後の `tools/player-pages/` 一式をアップロードする。スキルページは `skills/index.html`、`skills/catalog-data.js`、`skills/preview.js`、`skills/preview.css` が一組なので、一部だけを差し替えない。
+生成後は、ユーザーが `tools/player-pages/` 一式を手動アップロードします。スキルページは `skills/index.html`、`skills/catalog-data.js`、`skills/preview.js`、`skills/preview.css` が一組なので、一部だけを差し替えません。公開リポジトリ上で `build.py` だけを実行しても、正本資料がないため再生成できません。
 
-生成後は、専用にcloneした公開リポジトリへ生成物を同期し、差分を確認してから公開します。次の例では公開リポジトリを隣のディレクトリへcloneしています。
+AIの完了条件は次のとおりです。
 
-```bash
-git clone git@github.com:tsukibo0805/game_afm_public.git ../game_afm_public
-python3 tools/player-pages/build.py
-rsync -a --delete --exclude='.git/' --exclude='__pycache__/' tools/player-pages/ ../game_afm_public/
-git -C ../game_afm_public diff --check
-git -C ../game_afm_public status --short
-```
+- `python3 tools/player-pages/build.py` が成功している
+- `python3 -m unittest tools/test_player_pages.py` が成功している
+- JavaScript構文確認と生成差分確認が成功している
+- ユーザーへ `tools/player-pages/` 一式が手動アップロード対象であると報告している
 
-`rsync --delete` は公開専用のcloneだけを対象にします。差分確認後、公開リポジトリ側でコミットして `main` へpushするとGitHub Pagesへ反映されます。公開リポジトリ上で `build.py` だけを実行しても、正本資料がないため再生成できません。
+手動アップロードの完了連絡があるまで、公開済みとは扱いません。
 
 ## 権利と利用条件
 

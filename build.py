@@ -36,6 +36,7 @@ LINK_MAP = {
     "戦闘.md": "battle.html",
     "スキルと成長.md": "growth.html",
     "装備・仲間・依頼.md": "party.html",
+    "装備と素材.md": "equipment-materials.html",
     "用語・FAQ.md": "faq.html",
     "スキルと戦闘の変更案内.md": "skills-combat.html",
     "ユーザー向け/スキルと戦闘の変更案内.md": "guide/skills-combat.html",
@@ -56,6 +57,7 @@ GUIDES = [
     ("戦闘.md", "battle.html", "戦闘"),
     ("スキルと成長.md", "growth.html", "スキルと成長"),
     ("装備・仲間・依頼.md", "party.html", "装備・仲間・依頼"),
+    ("装備と素材.md", "equipment-materials.html", "装備と素材"),
     ("用語・FAQ.md", "faq.html", "用語・FAQ"),
     ("スキルと戦闘の変更案内.md", "skills-combat.html", "スキルと戦闘の変更案内"),
 ]
