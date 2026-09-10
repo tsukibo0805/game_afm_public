@@ -1,12 +1,13 @@
 # Au Fil des Mers プレイヤー向けサイト
 
-Discordゲーム「Au Fil des Mers」の公開案内、図解ガイド、スキル一覧、西・中央・東の島マップの現在地ビューアです。
+Discordゲーム「Au Fil des Mers」の公開案内、図解ガイド、装備と素材、スキル一覧、西・中央・東の島マップの現在地ビューアです。
 制作リポジトリ `game_afm` とは分け、GitHub Pages で静的配信するためのコピーです。
 
 ## 含めるもの
 
 - ゲーム紹介
-- プレイヤー向けガイド（遊び方、戦闘、成長、装備と素材など）
+- プレイヤー向けガイド（遊び方、戦闘、成長など）
+- 27装備の必要素材、作り方、成長、奉納、再入手経路
 - プレイヤー向け説明画像18点
 - 西・中央・東の島マップと現在地ビューア
 - 職業ツリーから探せる職業スキル一覧
@@ -40,6 +41,7 @@ GitHub の Settings → Pages で、Source を `main` の `/ (root)` にしま�
 https://tsukibo0805.github.io/game_afm_public/
 https://tsukibo0805.github.io/game_afm_public/guide/images.html
 https://tsukibo0805.github.io/game_afm_public/map/
+https://tsukibo0805.github.io/game_afm_public/equipment/
 https://tsukibo0805.github.io/game_afm_public/skills/
 ```
 

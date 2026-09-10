@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>装備と素材 — Au Fil des Mers</title>
+  <link rel="stylesheet" href="../site.css">
+</head>
+<body>
+<nav class="site-nav"><a class="brand" href="../index.html">Au Fil des Mers</a><a href="../index.html">紹介</a><a href="../guide/index.html">遊び方</a><a href="../guide/images.html">図解</a><a href="../map/index.html">地図</a><a href="../equipment/index.html" class="is-current">装備</a><a href="../skills/index.html">スキル</a></nav>
+<main class="page">
+<h1>装備と素材</h1>
+<p>装備は、戦い方を決めながら育て、節目で新しいスキルを得る成長要素です。 ここでは、装備を手に入れてから作成・成長・奉納し、もう一度作るまでの流れをまとめます。</p>
+<h2>まず知っておくこと</h2>
+<ul>
+<li>主人公には武器・魔石・霊符の3つの装備枠がある</li>
+<li>装備の確認と付け替えは <code>/equipment</code>、素材の所持数は <code>/items</code> で確認する</li>
+<li>装備を外しても失わず、成長値もそのまま残る</li>
+<li>属性素材5個だけなら同じ系統・属性からランダム作成、固有素材1個も加えると装備を指定して作成できる</li>
+<li>固有素材は複数個持てる。対応装備を持っていても入手・購入できる</li>
+<li>同じ種類の装備も複数個所持でき、入手した各装備は成長値0の別個体として追加される</li>
+<li><code>/equipment</code> では <code>装備名 [現在成長値/100]</code> で表示され、同名・同成長値の装備は選択肢番号で区別する</li>
+</ul>
+<h2>3つの装備枠</h2>
+<table>
+<tr><th>装備</th><th>主な役割</th><th>系統・属性</th></tr>
+<tr><td>武器</td><td>力寄りの能力補正と攻撃距離を決める</td><td>近距離・中距離・遠距離</td></tr>
+<tr><td>魔石</td><td>魔力寄りの能力補正と魔法属性を扱う</td><td>風・火・水・大地</td></tr>
+<tr><td>霊符</td><td>霊感寄りの能力補正と霊的な属性を扱う</td><td>聖・邪</td></tr>
+</table>
+<p>装備によって使える技も変わります。付け替え後は <code>/skills</code> で5ターンの設定とパッシブを確認してください。</p>
+<h2>属性素材と固有素材</h2>
+<p>装備作成には2種類の素材を使います。</p>
+<table>
+<tr><th>素材</th><th>役割</th><th>例</th></tr>
+<tr><td>属性素材</td><td>作る装備の系統・属性を決める共通素材</td><td>剛打の武具片、風の魔石片、白い霊糸</td></tr>
+<tr><td>固有素材</td><td>作る装備を1種類に指定する素材</td><td>銘入りの鍔、竜巻の羽根、祈祷墨</td></tr>
+</table>
+<p>属性素材と固有素材は、どちらも <code>/items</code> の「素材」に表示され、複数個所持できます。</p>
+<h2>武器職人で装備を作る</h2>
+<p>西方教会の近くの武器屋や港町の武器職人では、次の2通りから作成方法を選べます。</p>
+<ol>
+<li>属性素材5個を使い、同じ系統・属性の3装備からランダムに1つ作る</li>
+<li>属性素材5個と固有素材1個を使い、対応装備を指定して作る</li>
+</ol>
+<p>作成を確定したときだけ素材を消費します。作った装備は自動装備されないため、使う場合は <code>/equipment</code> から装備してください。 すでに同じ種類を持っていても、指定作成とランダム作成の候補からは除外されません。</p>
+<h2>27装備と必要素材</h2>
+<p>「register履歴」は、登録時に選べる装備を一度でも入手すると、対応する固有素材が主要よろず屋へ並ぶ経路です。 「地域在庫」は、その地域のよろず屋へ到達すれば最初から並びます。販売対象の固有素材は1個100Gで、同じ素材を持っていても繰り返し購入できます。 「神獣中心」は店頭販売がなく、召喚した神獣からの入手が中心です。なお、ほかの区分の固有素材も神獣の報酬候補になることがあります。</p>
+<table>
+<tr><th>装備</th><th>属性素材</th><th>固有素材</th><th>主な確定・再入手経路</th></tr>
+<tr><td>剣</td><td>剛打の武具片 x5</td><td>銘入りの鍔 x1</td><td>register履歴で主要よろず屋</td></tr>
+<tr><td>斧</td><td>剛打の武具片 x5</td><td>重刃の楔 x1</td><td>神獣中心</td></tr>
+<tr><td>拳甲</td><td>剛打の武具片 x5</td><td>拳甲の芯革 x1</td><td>中央・港湾市場のよろず屋</td></tr>
+<tr><td>鞭</td><td>持ち手の武具片 x5</td><td>しなり革 x1</td><td>register履歴で主要よろず屋</td></tr>
+<tr><td>槍</td><td>持ち手の武具片 x5</td><td>貫き穂先 x1</td><td>港町のよろず屋</td></tr>
+<tr><td>鎖鎌</td><td>持ち手の武具片 x5</td><td>鎖輪 x1</td><td>神獣中心</td></tr>
+<tr><td>弓</td><td>射抜の武具片 x5</td><td>張り弦 x1</td><td>register履歴で主要よろず屋</td></tr>
+<tr><td>投剣</td><td>射抜の武具片 x5</td><td>均衡刃 x1</td><td>神獣中心</td></tr>
+<tr><td>砲</td><td>射抜の武具片 x5</td><td>点火機構 x1</td><td>中央・港湾市場のよろず屋</td></tr>
+<tr><td>陽炎の魔石</td><td>風の魔石片 x5</td><td>陽炎の砂 x1</td><td>register履歴で主要よろず屋</td></tr>
+<tr><td>竜巻の魔石</td><td>風の魔石片 x5</td><td>竜巻の羽根 x1</td><td>神獣中心</td></tr>
+<tr><td>砂嵐の魔石</td><td>風の魔石片 x5</td><td>黄砂の核 x1</td><td>中央・港湾市場のよろず屋</td></tr>
+<tr><td>電の魔石</td><td>炎の魔石片 x5</td><td>雷焼けの導線 x1</td><td>register履歴で主要よろず屋</td></tr>
+<tr><td>溶解の魔石</td><td>炎の魔石片 x5</td><td>溶けた硝子 x1</td><td>神獣中心</td></tr>
+<tr><td>灼熱の魔石</td><td>炎の魔石片 x5</td><td>赤熱の核 x1</td><td>東・還り水の郷のよろず屋</td></tr>
+<tr><td>泉の魔石</td><td>水の魔石片 x5</td><td>清泉の雫 x1</td><td>register履歴で主要よろず屋</td></tr>
+<tr><td>氷の魔石</td><td>水の魔石片 x5</td><td>氷晶の核 x1</td><td>東・還り水の郷のよろず屋</td></tr>
+<tr><td>霧の魔石</td><td>水の魔石片 x5</td><td>霧露の薄瓶 x1</td><td>神獣中心</td></tr>
+<tr><td>山の魔石</td><td>大地の魔石片 x5</td><td>山鳴りの礫 x1</td><td>register履歴で主要よろず屋</td></tr>
+<tr><td>森の魔石</td><td>大地の魔石片 x5</td><td>若木の樹脂 x1</td><td>神獣中心</td></tr>
+<tr><td>鉱の魔石</td><td>大地の魔石片 x5</td><td>星鉱の粒 x1</td><td>港町のよろず屋</td></tr>
+<tr><td>裁きの霊符</td><td>白い霊糸 x5</td><td>裁きの白片 x1</td><td>register履歴で主要よろず屋</td></tr>
+<tr><td>護りの霊符</td><td>白い霊糸 x5</td><td>護り糸 x1</td><td>神獣中心</td></tr>
+<tr><td>祈りの霊符</td><td>白い霊糸 x5</td><td>祈祷墨 x1</td><td>港町のよろず屋</td></tr>
+<tr><td>毒の霊符</td><td>黒い霊糸 x5</td><td>毒墨 x1</td><td>register履歴で主要よろず屋</td></tr>
+<tr><td>影の霊符</td><td>黒い霊糸 x5</td><td>影染めの糸 x1</td><td>神獣中心</td></tr>
+<tr><td>呪いの霊符</td><td>黒い霊糸 x5</td><td>呪印の黒糸 x1</td><td>東・還り水の郷のよろず屋</td></tr>
+</table>
+<h2>装備を育てる</h2>
+<p>戦闘開始時に装備していた武器・魔石・霊符は、実際に経過した戦闘ターン数だけ成長します。</p>
+<ul>
+<li>成長値50: 装備固有技のスキル書を得る</li>
+<li>成長値100: 西方教会の奉納礼拝堂で奉納できる</li>
+<li>同じ種類の装備を再入手: 成長値0の新しい装備として追加される</li>
+</ul>
+<p>得たスキル書は <code>/skills</code> から使用します。技の効果は公開サイトの「スキル」でも確認できます。</p>
+<h2>奉納と再作成</h2>
+<p>成長値100の装備を奉納すると、選んだ装備個体を消費して100成長技のスキル書を得ます。装備中だった場合は、その装備枠が空になります。同じ種類の別個体は残ります。対応技を習得済み、または同じ書を所持中でも奉納でき、書の所持数へ1冊加算されます。</p>
+<p>奉納前の確認画面には、再作成に必要な属性素材5個と固有素材1個が表示されます。奉納後も装備の入手履歴は残るため、register履歴区分の固有素材は主要よろず屋で引き続き購入できます。</p>
+<h2>関連ガイド</h2>
+<ul>
+<li>装備の付け替え、使い魔、パーティ、依頼は<a href="../guide/party.html">装備・仲間・依頼</a></li>
+<li>成長とスキル書の使い方は<a href="../guide/growth.html">スキルと成長</a></li>
+<li>店に商品が出る条件は<a href="../guide/faq.html">用語・FAQ</a></li>
+</ul>
+</main>
+<footer class="site-footer">Au Fil des Mers プレイヤー向け案内。ゲーム本体とは別の公開サイトです。<a href="../rights.html">権利と利用条件</a></footer>
+</body>
+</html>

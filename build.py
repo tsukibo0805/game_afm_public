@@ -84,7 +84,7 @@ IMAGE_CARDS = [
 ]
 
 
-def rewrite_links(text: str, in_guide: bool) -> str:
+def rewrite_links(text: str, in_guide: bool, guide_prefix: str = "") -> str:
     def repl(match: re.Match[str]) -> str:
         label, url = match.group(1), match.group(2)
         if any(url.startswith(prefix) or url == prefix.rstrip("/") for prefix in SKIP_LINK_PREFIXES):
@@ -95,6 +95,8 @@ def rewrite_links(text: str, in_guide: bool) -> str:
                 mapped = mapped[len("guide/") :]
             elif not in_guide and mapped.endswith(".html") and not mapped.startswith("../") and not mapped.startswith("guide/"):
                 mapped = f"guide/{mapped}"
+            if guide_prefix and "/" not in mapped:
+                mapped = f"{guide_prefix}{mapped}"
             return f"[{label}]({mapped})"
         if url.endswith(".png"):
             return label
@@ -204,6 +206,7 @@ def nav_html(current: str, prefix: str) -> str:
         ("guide/index.html", "遊び方", current == "guide"),
         ("guide/images.html", "図解", current == "images"),
         ("map/index.html", "地図", current == "map"),
+        ("equipment/index.html", "装備", current == "equipment"),
         ("skills/index.html", "スキル", current == "skills"),
     ]
     items = []
@@ -337,6 +340,7 @@ def copy_map() -> None:
   <a href="../guide/index.html">遊び方</a>
   <a href="../guide/images.html">図解</a>
   <a href="index.html" class="is-current">地図</a>
+  <a href="../equipment/index.html">装備</a>
   <a href="../skills/index.html">スキル</a>
 </nav>
   <header class="top-bar">
@@ -558,6 +562,15 @@ def build_guides() -> None:
     write(OUT / "guide" / "index.html", page_html("遊び方", markdown_to_html(guide_index) + extra, "guide", "../"))
 
 
+def build_equipment_page() -> None:
+    source = SRC_GUIDES / "装備と素材.md"
+    text = rewrite_links(source.read_text(encoding="utf-8"), in_guide=True, guide_prefix="../guide/")
+    write(
+        OUT / "equipment" / "index.html",
+        page_html("装備と素材", markdown_to_html(text), "equipment", "../"),
+    )
+
+
 def image_alt_texts() -> dict[str, str]:
     result: dict[str, str] = {}
     for source_name in ("初見プレイヤー向け説明画像原稿.md", "ゲームシステム別説明画像原稿.md"):
@@ -621,6 +634,7 @@ def main() -> None:
     copy_map()
     copy_skills()
     build_guides()
+    build_equipment_page()
     build_image_guide()
     build_rights_page()
     print(f"built {OUT}")
