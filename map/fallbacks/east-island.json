@@ -28,7 +28,7 @@
       "choices": [
         {
           "id": "east-kazeho-village-to-landing",
-          "displayName": "灰の海岸へ戻る",
+          "displayName": "灰の海岸へ向かう",
           "action": "Move",
           "toNode": "east-landing-coast"
         },
@@ -47,7 +47,7 @@
       "choices": [
         {
           "id": "east-kaerimizu-village-to-kazeho",
-          "displayName": "風穂村へ戻る",
+          "displayName": "風穂村へ向かう",
           "action": "Move",
           "toNode": "east-kazeho-village"
         },
@@ -77,7 +77,7 @@
       "choices": [
         {
           "id": "east-blackstone-waystation-to-kaerimizu",
-          "displayName": "還り水の郷へ戻る",
+          "displayName": "還り水の郷へ向かう",
           "action": "Move",
           "toNode": "east-kaerimizu-village"
         },
@@ -96,7 +96,7 @@
       "choices": [
         {
           "id": "east-volcano-fork-to-blackstone",
-          "displayName": "黒石の中継所へ戻る",
+          "displayName": "黒石の中継所へ向かう",
           "action": "Move",
           "toNode": "east-blackstone-waystation"
         },
@@ -115,7 +115,7 @@
       "choices": [
         {
           "id": "east-old-circulation-road-to-volcano",
-          "displayName": "火山麓へ戻る",
+          "displayName": "火山麓へ向かう",
           "action": "Move",
           "toNode": "east-volcano-fork"
         },
@@ -166,7 +166,7 @@
       "choices": [
         {
           "id": "east-ash-rainbow-move-spirit-valley",
-          "displayName": "精霊の谷へ戻る",
+          "displayName": "精霊の谷へ向かう",
           "action": "Move",
           "toNode": "east-spirit-valley"
         }
@@ -198,7 +198,7 @@
       "choices": [
         {
           "id": "east-spirit-valley-to-kaerimizu",
-          "displayName": "還り水の郷へ戻る",
+          "displayName": "還り水の郷へ向かう",
           "action": "Move",
           "toNode": "east-kaerimizu-village"
         },
@@ -217,7 +217,7 @@
       "choices": [
         {
           "id": "east-mountainside-old-road-to-refuge",
-          "displayName": "泉守りの隠れ里へ戻る",
+          "displayName": "泉守りの隠れ里へ向かう",
           "action": "Move",
           "toNode": "east-springkeeper-refuge"
         },

@@ -31,7 +31,7 @@
       "choices": [
         {
           "id": "west-north-reef-move-start",
-          "displayName": "始まりの地へ戻る",
+          "displayName": "始まりの地へ向かう",
           "action": "Move",
           "toNode": "west-start"
         }
@@ -80,7 +80,7 @@
         },
         {
           "id": "west-port-move-mountain-c",
-          "displayName": "山岳街道へ戻る",
+          "displayName": "山岳街道へ向かう",
           "action": "Move",
           "toNode": "west-mountain-c"
         }
@@ -168,7 +168,7 @@
       "choices": [
         {
           "id": "west-star-cycle-move-rune-cave",
-          "displayName": "ルーン洞窟へ戻る",
+          "displayName": "ルーン洞窟へ向かう",
           "action": "Move",
           "toNode": "west-rune-cave"
         }
