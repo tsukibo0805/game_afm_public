@@ -33,6 +33,7 @@
 
     "central-first-gate": { "x": 380, "y": 550, "shortLabel": "第一検問門" },
     "central-white-stone-road": { "x": 530, "y": 590, "shortLabel": "白石街道" },
+    "central-farm-district": { "x": 510, "y": 495, "shortLabel": "農園地帯" },
     "central-harmony-outer-temple": { "x": 680, "y": 560, "shortLabel": "外宮" },
     "central-capital-outer-gate": { "x": 840, "y": 530, "shortLabel": "帝都外門" },
 

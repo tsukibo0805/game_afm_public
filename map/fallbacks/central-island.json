@@ -302,6 +302,12 @@
           "toNode": "central-first-gate"
         },
         {
+          "id": "central-white-stone-road-to-farm-district",
+          "displayName": "農園地帯へ向かう",
+          "action": "Move",
+          "toNode": "central-farm-district"
+        },
+        {
           "id": "central-white-stone-road-to-harmony-outer-temple",
           "displayName": "調和神殿外宮へ向かう",
           "action": "Move",
@@ -433,10 +439,35 @@
           "toNode": "central-old-spirit-shrine"
         },
         {
+          "id": "central-abandoned-coach-road-to-farm-district",
+          "displayName": "農園地帯へ向かう",
+          "action": "Move",
+          "toNode": "central-farm-district"
+        },
+        {
           "id": "central-abandoned-coach-road-to-water-sound-shrine",
           "displayName": "水音の祠へ向かう",
           "action": "Move",
           "toNode": "central-water-sound-shrine"
+        }
+      ]
+    },
+    {
+      "id": "central-farm-district",
+      "displayName": "農園地帯",
+      "type": "Village",
+      "choices": [
+        {
+          "id": "central-farm-district-to-white-stone-road",
+          "displayName": "白石街道へ向かう",
+          "action": "Move",
+          "toNode": "central-white-stone-road"
+        },
+        {
+          "id": "central-farm-district-to-abandoned-coach-road",
+          "displayName": "廃駅馬車道へ向かう",
+          "action": "Move",
+          "toNode": "central-abandoned-coach-road"
         }
       ]
     },
