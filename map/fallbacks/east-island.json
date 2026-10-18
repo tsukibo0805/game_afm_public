@@ -15,7 +15,7 @@
       "choices": [
         {
           "id": "east-landing-coast-to-kazeho",
-          "displayName": "封印石片を追って風穂村へ向かう",
+          "displayName": "風穂村へ向かう",
           "action": "Move",
           "toNode": "east-kazeho-village"
         }
@@ -34,7 +34,7 @@
         },
         {
           "id": "east-kazeho-village-to-kaerimizu",
-          "displayName": "アステルと還り水の郷へ向かう",
+          "displayName": "還り水の郷へ向かう",
           "action": "Move",
           "toNode": "east-kaerimizu-village"
         }
@@ -53,13 +53,13 @@
         },
         {
           "id": "east-kaerimizu-village-to-blackstone",
-          "displayName": "黒石の中継所を調べる",
+          "displayName": "黒石の中継所へ向かう",
           "action": "Move",
           "toNode": "east-blackstone-waystation"
         },
         {
           "id": "east-kaerimizu-village-to-spirit-valley",
-          "displayName": "アステルの案内で精霊の谷へ向かう",
+          "displayName": "精霊の谷へ向かう",
           "action": "Move",
           "toNode": "east-spirit-valley"
         }
@@ -83,7 +83,7 @@
         },
         {
           "id": "east-blackstone-waystation-to-volcano",
-          "displayName": "輸送跡を追って火山麓へ向かう",
+          "displayName": "火山麓へ向かう",
           "action": "Move",
           "toNode": "east-volcano-fork"
         }
@@ -121,7 +121,7 @@
         },
         {
           "id": "east-old-circulation-road-to-ritual",
-          "displayName": "火口下の古祭場へ急ぐ",
+          "displayName": "火口下の古祭場へ向かう",
           "action": "Move",
           "toNode": "east-crater-ritual-site"
         }

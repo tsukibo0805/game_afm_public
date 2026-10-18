@@ -6,19 +6,66 @@
       "id": "sea-west-central-route",
       "displayName": "中央の島への船",
       "type": "Sea",
-      "choices": []
+      "choices": [
+        {
+          "id": "sea-west-central-route-wait",
+          "displayName": "そのまま乗って待つ",
+          "action": "Rest"
+        }
+      ]
     },
     {
       "id": "sea-central-west-route",
       "displayName": "西の島への船",
       "type": "Sea",
-      "choices": []
+      "choices": [
+        {
+          "id": "sea-central-west-route-wait",
+          "displayName": "そのまま乗って待つ",
+          "action": "Rest"
+        }
+      ]
     },
     {
       "id": "central-almar-port",
       "displayName": "アルマル港",
       "type": "Town",
       "choices": [
+        {
+          "id": "central-almar-port-walk",
+          "displayName": "港を歩く",
+          "action": "WalkTown"
+        },
+        {
+          "id": "central-almar-port-explore",
+          "displayName": "港を調べる",
+          "action": "Explore"
+        },
+        {
+          "id": "central-almar-port-visit-immigration-office",
+          "displayName": "渡航管理所へ行く",
+          "action": "VisitImmigrationOffice"
+        },
+        {
+          "id": "central-almar-port-visit-quest-board",
+          "displayName": "依頼掲示板を見る",
+          "action": "VisitQuestBoard"
+        },
+        {
+          "id": "central-almar-port-visit-shipwright",
+          "displayName": "船大工を訪ねる",
+          "action": "VisitShipwright"
+        },
+        {
+          "id": "central-almar-port-visit-job-center",
+          "displayName": "職業斡旋所を訪ねる",
+          "action": "VisitJobCenter"
+        },
+        {
+          "id": "central-almar-port-visit-weapon-smith",
+          "displayName": "港湾工房の武器職人を訪ねる",
+          "action": "VisitWeaponSmith"
+        },
         {
           "id": "central-almar-port-sail-west",
           "displayName": "西の島へ出航する",
@@ -45,7 +92,7 @@
         },
         {
           "id": "central-almar-port-to-old-spirit-shrine",
-          "displayName": "旧精霊祠へ向かう",
+          "displayName": "港外れの旧道を調べる",
           "action": "Move",
           "toNode": "central-old-spirit-shrine"
         }
@@ -100,6 +147,21 @@
       "type": "Port",
       "choices": [
         {
+          "id": "central-north-naval-port-inspect-naval-port",
+          "displayName": "港内を確認する",
+          "action": "InspectNavalPort"
+        },
+        {
+          "id": "central-north-naval-port-visit-repair-dock",
+          "displayName": "修理ドックへ行く",
+          "action": "VisitRepairDock"
+        },
+        {
+          "id": "central-north-naval-port-inspect-incident-site",
+          "displayName": "事件現場を見る",
+          "action": "InspectIncidentSite"
+        },
+        {
           "id": "central-north-naval-port-to-north-supply-road",
           "displayName": "北岸街道へ向かう",
           "action": "Move",
@@ -119,6 +181,11 @@
       "type": "Lighthouse",
       "choices": [
         {
+          "id": "central-ash-lighthouse-fort-explore",
+          "displayName": "灯台の記録を調べる",
+          "action": "Explore"
+        },
+        {
           "id": "central-ash-lighthouse-fort-to-north-naval-port",
           "displayName": "北岸連絡港へ向かう",
           "action": "Move",
@@ -137,6 +204,46 @@
       "displayName": "北東中継都市",
       "type": "Town",
       "choices": [
+        {
+          "id": "central-east-blockade-port-lighthouse-start",
+          "displayName": "港湾窓口の職員と話す",
+          "action": "VisitMayor"
+        },
+        {
+          "id": "central-east-blockade-port-lighthouse-partial",
+          "displayName": "港湾窓口へ途中経過を報告する",
+          "action": "VisitMayor"
+        },
+        {
+          "id": "central-east-blockade-port-lighthouse-report",
+          "displayName": "港湾窓口へ調査結果を報告する",
+          "action": "VisitMayor"
+        },
+        {
+          "id": "central-east-blockade-port-lighthouse-after",
+          "displayName": "港湾窓口の職員と話す",
+          "action": "VisitMayor"
+        },
+        {
+          "id": "central-east-blockade-port-visit-quest-board",
+          "displayName": "依頼掲示板を見る",
+          "action": "VisitQuestBoard"
+        },
+        {
+          "id": "central-east-blockade-port-visit-job-center",
+          "displayName": "職業斡旋所を訪ねる",
+          "action": "VisitJobCenter"
+        },
+        {
+          "id": "central-east-blockade-port-visit-weapon-smith",
+          "displayName": "荷車工房の武器職人を訪ねる",
+          "action": "VisitWeaponSmith"
+        },
+        {
+          "id": "central-east-blockade-port-explore-sightseeing",
+          "displayName": "荷車市場を巡る",
+          "action": "Explore"
+        },
         {
           "id": "central-east-blockade-port-to-ash-lighthouse-fort",
           "displayName": "潮見灯台へ向かう",
@@ -162,6 +269,21 @@
       "type": "Market",
       "choices": [
         {
+          "id": "central-harbor-market-walk",
+          "displayName": "市場を歩く",
+          "action": "WalkTown"
+        },
+        {
+          "id": "central-harbor-market-explore",
+          "displayName": "掲示と荷札を調べる",
+          "action": "Explore"
+        },
+        {
+          "id": "central-harbor-market-general-store",
+          "displayName": "よろず屋を訪ねる",
+          "action": "VisitGeneralStore"
+        },
+        {
           "id": "central-harbor-market-to-almar-port",
           "displayName": "アルマル港へ向かう",
           "action": "Move",
@@ -184,6 +306,16 @@
       "type": "Town",
       "choices": [
         {
+          "id": "central-south-post-town-walk",
+          "displayName": "宿場を歩く",
+          "action": "WalkTown"
+        },
+        {
+          "id": "central-south-post-town-explore",
+          "displayName": "事件の掲示を調べる",
+          "action": "Explore"
+        },
+        {
           "id": "central-south-post-town-to-harbor-market",
           "displayName": "港湾市場へ向かう",
           "action": "Move",
@@ -194,6 +326,21 @@
           "displayName": "南岸神殿へ向かう",
           "action": "Move",
           "toNode": "central-south-shrine"
+        },
+        {
+          "id": "central-south-post-town-craftsman-start",
+          "displayName": "宿屋の主人と話す",
+          "action": "VisitMayor"
+        },
+        {
+          "id": "central-south-post-town-craftsman-report",
+          "displayName": "帰ってきた職人に会う",
+          "action": "Rest"
+        },
+        {
+          "id": "central-south-post-town-craftsman-after",
+          "displayName": "宿の様子を見る",
+          "action": "Rest"
         }
       ]
     },
@@ -202,6 +349,31 @@
       "displayName": "南岸神殿",
       "type": "Shrine",
       "choices": [
+        {
+          "id": "central-south-shrine-part4-investigate",
+          "displayName": "安らぎの鈴が鳴る追悼集会を調べる",
+          "action": "Explore"
+        },
+        {
+          "id": "central-south-shrine-memorial",
+          "displayName": "追悼札を見る",
+          "action": "Explore"
+        },
+        {
+          "id": "central-south-shrine-talk-clergy",
+          "displayName": "生き残った神官と話す",
+          "action": "VisitMayor"
+        },
+        {
+          "id": "central-south-shrine-inspect-site",
+          "displayName": "封鎖線の外から現場を見る",
+          "action": "InspectIncidentSite"
+        },
+        {
+          "id": "central-south-shrine-visit-ship-guardian",
+          "displayName": "船守りの小祠を見る",
+          "action": "VisitShrine"
+        },
         {
           "id": "central-south-shrine-to-south-post-town",
           "displayName": "南岸宿場へ向かう",
@@ -228,6 +400,11 @@
       "type": "Village",
       "choices": [
         {
+          "id": "central-shioho-fishing-village-explore",
+          "displayName": "荷受け場を調べる",
+          "action": "Explore"
+        },
+        {
           "id": "central-shioho-fishing-village-to-south-shrine",
           "displayName": "南岸神殿へ向かう",
           "action": "Move",
@@ -238,6 +415,12 @@
           "displayName": "水門市へ向かう",
           "action": "Move",
           "toNode": "central-black-current-ferry-ruins"
+        },
+        {
+          "id": "central-shioho-fishing-village-to-mining-ruins",
+          "displayName": "採掘場跡地へ向かう",
+          "action": "Move",
+          "toNode": "central-mining-ruins"
         }
       ]
     },
@@ -246,6 +429,36 @@
       "displayName": "水門市",
       "type": "Town",
       "choices": [
+        {
+          "id": "central-black-current-ferry-ruins-part4-investigate",
+          "displayName": "神学派の夜間輸送を追う",
+          "action": "InspectNavalPort"
+        },
+        {
+          "id": "central-black-current-ferry-ruins-visit-quest-board",
+          "displayName": "水運組合の掲示板を見る",
+          "action": "VisitQuestBoard"
+        },
+        {
+          "id": "central-black-current-ferry-ruins-general-store",
+          "displayName": "水運市場のよろず屋を訪ねる",
+          "action": "VisitGeneralStore"
+        },
+        {
+          "id": "central-black-current-ferry-ruins-visit-job-center",
+          "displayName": "職業斡旋所を訪ねる",
+          "action": "VisitJobCenter"
+        },
+        {
+          "id": "central-black-current-ferry-ruins-inspect-old-ledger",
+          "displayName": "水運組合の旧帳簿を調べる",
+          "action": "InspectNavalPort"
+        },
+        {
+          "id": "central-black-current-ferry-ruins-explore-sightseeing",
+          "displayName": "水門と運河を巡る",
+          "action": "Explore"
+        },
         {
           "id": "central-black-current-ferry-ruins-to-shioho-fishing-village",
           "displayName": "潮穂の漁村へ向かう",
@@ -287,6 +500,21 @@
           "displayName": "白石街道へ向かう",
           "action": "Move",
           "toNode": "central-white-stone-road"
+        },
+        {
+          "id": "central-first-gate-inspect-medicine",
+          "displayName": "足止めされた行商人の列を見る",
+          "action": "WalkTown"
+        },
+        {
+          "id": "central-first-gate-deliver-herb",
+          "displayName": "煌めく草を薬師へ渡す",
+          "action": "WalkTown"
+        },
+        {
+          "id": "central-first-gate-revisit-laborers",
+          "displayName": "人夫小屋の様子を見る",
+          "action": "WalkTown"
         }
       ]
     },
@@ -302,16 +530,16 @@
           "toNode": "central-first-gate"
         },
         {
-          "id": "central-white-stone-road-to-farm-district",
-          "displayName": "農園地帯へ向かう",
-          "action": "Move",
-          "toNode": "central-farm-district"
-        },
-        {
           "id": "central-white-stone-road-to-harmony-outer-temple",
           "displayName": "調和神殿外宮へ向かう",
           "action": "Move",
           "toNode": "central-harmony-outer-temple"
+        },
+        {
+          "id": "central-white-stone-road-to-farm-district",
+          "displayName": "農園地帯へ向かう",
+          "action": "Move",
+          "toNode": "central-farm-district"
         }
       ]
     },
@@ -359,6 +587,46 @@
       "type": "Capital",
       "choices": [
         {
+          "id": "central-almaria-capital-inspect-crowd",
+          "displayName": "人だかりの様子を見に行く",
+          "action": "WalkTown"
+        },
+        {
+          "id": "central-almaria-capital-walk-town",
+          "displayName": "帝都の街路を歩く",
+          "action": "WalkTown"
+        },
+        {
+          "id": "central-almaria-capital-follow-serena",
+          "displayName": "セレナを訪ねる",
+          "action": "VisitMayor"
+        },
+        {
+          "id": "central-almaria-capital-report-record-investigation",
+          "displayName": "セレナへ調査結果を報告する",
+          "action": "VisitMayor"
+        },
+        {
+          "id": "central-almaria-capital-visit-book-shop",
+          "displayName": "帝都の本屋を訪ねる",
+          "action": "VisitBookShop"
+        },
+        {
+          "id": "central-almaria-capital-visit-job-center",
+          "displayName": "帝都職業院を訪ねる",
+          "action": "VisitJobCenter"
+        },
+        {
+          "id": "central-almaria-capital-visit-weapon-smith",
+          "displayName": "帝都工房の武器職人を訪ねる",
+          "action": "VisitWeaponSmith"
+        },
+        {
+          "id": "central-almaria-capital-explore-sightseeing",
+          "displayName": "白石の街角を巡る",
+          "action": "Explore"
+        },
+        {
           "id": "central-almaria-capital-to-capital-outer-gate",
           "displayName": "帝都外門へ向かう",
           "action": "Move",
@@ -384,9 +652,14 @@
         },
         {
           "id": "central-almaria-capital-to-east-military-gate",
-          "displayName": "東部照会書を携えて帝都東軍門へ向かう",
+          "displayName": "帝都東軍門へ向かう",
           "action": "Move",
           "toNode": "central-capital-east-military-gate"
+        },
+        {
+          "id": "central-almaria-capital-receive-analysis-introduction",
+          "displayName": "セレナを訪ねる",
+          "action": "VisitMayor"
         }
       ],
       "facilities": [
@@ -401,10 +674,45 @@
       "type": "Prison",
       "choices": [
         {
+          "id": "central-capital-prison-sleep",
+          "displayName": "惰眠を貪る",
+          "action": "Explore"
+        },
+        {
+          "id": "central-capital-prison-curse-guards",
+          "displayName": "悪態をつく",
+          "action": "WalkTown"
+        },
+        {
+          "id": "central-capital-prison-call-guard",
+          "displayName": "看守を呼ぶ",
+          "action": "Rest"
+        },
+        {
+          "id": "central-capital-prison-talk-cellmate",
+          "displayName": "同室の女に話しかける",
+          "action": "Gather"
+        },
+        {
+          "id": "central-capital-prison-wait",
+          "displayName": "牢内で待つ",
+          "action": "Rest"
+        },
+        {
           "id": "central-capital-prison-exit",
           "displayName": "開いた牢を出る",
           "action": "Move",
           "toNode": "central-almaria-capital"
+        },
+        {
+          "id": "central-capital-prison-stay-after-raid",
+          "displayName": "牢に残って様子を見る",
+          "action": "Rest"
+        },
+        {
+          "id": "central-capital-prison-follow-elna",
+          "displayName": "エルナたちを追う",
+          "action": "Gather"
         }
       ]
     },
@@ -439,35 +747,16 @@
           "toNode": "central-old-spirit-shrine"
         },
         {
-          "id": "central-abandoned-coach-road-to-farm-district",
-          "displayName": "農園地帯へ向かう",
-          "action": "Move",
-          "toNode": "central-farm-district"
-        },
-        {
           "id": "central-abandoned-coach-road-to-water-sound-shrine",
           "displayName": "水音の祠へ向かう",
           "action": "Move",
           "toNode": "central-water-sound-shrine"
-        }
-      ]
-    },
-    {
-      "id": "central-farm-district",
-      "displayName": "農園地帯",
-      "type": "Village",
-      "choices": [
-        {
-          "id": "central-farm-district-to-white-stone-road",
-          "displayName": "白石街道へ向かう",
-          "action": "Move",
-          "toNode": "central-white-stone-road"
         },
         {
-          "id": "central-farm-district-to-abandoned-coach-road",
-          "displayName": "廃駅馬車道へ向かう",
+          "id": "central-abandoned-coach-road-to-farm-district",
+          "displayName": "農園地帯へ向かう",
           "action": "Move",
-          "toNode": "central-abandoned-coach-road"
+          "toNode": "central-farm-district"
         }
       ]
     },
@@ -476,6 +765,16 @@
       "displayName": "水音の祠",
       "type": "Shrine",
       "choices": [
+        {
+          "id": "central-water-sound-shrine-explore",
+          "displayName": "取水口を調べる",
+          "action": "Explore"
+        },
+        {
+          "id": "central-water-sound-shrine-visit-familiar-shrine",
+          "displayName": "潮祠を訪れる",
+          "action": "VisitShrine"
+        },
         {
           "id": "central-water-sound-shrine-to-abandoned-coach-road",
           "displayName": "廃駅馬車道へ向かう",
@@ -499,6 +798,26 @@
       "type": "Village",
       "choices": [
         {
+          "id": "central-sealed-valley-walk-town",
+          "displayName": "村を歩く",
+          "action": "WalkTown"
+        },
+        {
+          "id": "central-sealed-valley-explore",
+          "displayName": "水場と家々を調べる",
+          "action": "Explore"
+        },
+        {
+          "id": "central-sealed-valley-part4-follow-ilinea",
+          "displayName": "救護所で旧道への足取りを確かめる",
+          "action": "Rest"
+        },
+        {
+          "id": "central-sealed-valley-part4-epilogue",
+          "displayName": "救護所で結末を見届ける",
+          "action": "Rest"
+        },
+        {
           "id": "central-sealed-valley-to-water-sound-shrine",
           "displayName": "水音の祠へ向かう",
           "action": "Move",
@@ -509,6 +828,12 @@
           "displayName": "東部関門へ向かう",
           "action": "Move",
           "toNode": "central-east-gate-cape"
+        },
+        {
+          "id": "central-sealed-valley-to-static-abyss-watergate",
+          "displayName": "救護所の旧道から古代水門へ向かう",
+          "action": "Move",
+          "toNode": "central-static-abyss-ancient-watergate"
         }
       ]
     },
@@ -556,6 +881,11 @@
       "type": "Road",
       "choices": [
         {
+          "id": "central-iron-marker-road-observe-convoys",
+          "displayName": "軍用荷車と避難民の流れを見る",
+          "action": "Explore"
+        },
+        {
           "id": "central-iron-marker-road-to-east-military-gate",
           "displayName": "帝都東軍門へ向かう",
           "action": "Move",
@@ -575,6 +905,11 @@
       "type": "Road",
       "choices": [
         {
+          "id": "central-ash-cargo-hollow-inspect-convoy",
+          "displayName": "襲撃された輸送隊を調べる",
+          "action": "Explore"
+        },
+        {
           "id": "central-ash-cargo-hollow-to-iron-marker-road",
           "displayName": "鉄標街道へ向かう",
           "action": "Move",
@@ -591,6 +926,12 @@
           "displayName": "封鎖された検査庫へ入る",
           "action": "Move",
           "toNode": "central-old-cargo-inspection-depot"
+        },
+        {
+          "id": "central-ash-cargo-hollow-to-seal-warehouse-entrance",
+          "displayName": "封印石倉庫へ向かう",
+          "action": "Move",
+          "toNode": "central-seal-warehouse-entrance"
         }
       ]
     },
@@ -599,6 +940,24 @@
       "displayName": "旧荷役検査庫",
       "type": "Ruins",
       "choices": [
+        {
+          "id": "central-old-cargo-summon-feather",
+          "displayName": "オーロラの羽を捧げる",
+          "action": "SummonMidboss",
+          "target": "aurora-feather"
+        },
+        {
+          "id": "central-old-cargo-summon-scale",
+          "displayName": "オーロラの鱗を捧げる",
+          "action": "SummonMidboss",
+          "target": "aurora-scale"
+        },
+        {
+          "id": "central-old-cargo-summon-drop",
+          "displayName": "オーロラの雫を捧げる",
+          "action": "SummonMidboss",
+          "target": "aurora-drop"
+        },
         {
           "id": "central-old-cargo-move-ash-hollow",
           "displayName": "灰荷の窪地へ向かう",
@@ -613,6 +972,21 @@
       "type": "Town",
       "choices": [
         {
+          "id": "central-eastern-analysis-institute-researcher-house",
+          "displayName": "テオの研究室を訪ねる",
+          "action": "VisitResearcherHouse"
+        },
+        {
+          "id": "central-eastern-analysis-institute-review-records",
+          "displayName": "少女について照会する",
+          "action": "Explore"
+        },
+        {
+          "id": "central-eastern-analysis-institute-talk-berta",
+          "displayName": "少女を探す老婆に声をかける",
+          "action": "WalkTown"
+        },
+        {
           "id": "central-eastern-analysis-institute-to-ash-cargo-hollow",
           "displayName": "灰荷の窪地へ向かう",
           "action": "Move",
@@ -620,9 +994,14 @@
         },
         {
           "id": "central-eastern-analysis-institute-to-border-garrison",
-          "displayName": "境海駐屯市へ急ぐ",
+          "displayName": "境海駐屯市へ向かう",
           "action": "Move",
           "toNode": "central-border-sea-garrison-city"
+        },
+        {
+          "id": "central-eastern-analysis-institute-report-serena",
+          "displayName": "セレナへ内密に報告する",
+          "action": "VisitMayor"
         }
       ]
     },
@@ -632,10 +1011,32 @@
       "type": "Town",
       "choices": [
         {
-          "id": "central-border-sea-garrison-city-to-eastern-blockade-port",
-          "displayName": "逃走した別働隊を追う",
+          "id": "central-border-sea-garrison-city-defend-storehouse",
+          "displayName": "封印石保管庫を守る",
+          "action": "Explore"
+        },
+        {
+          "id": "central-border-sea-garrison-city-to-old-ship-repair-entrance",
+          "displayName": "旧船修理場へ向かう",
           "action": "Move",
-          "toNode": "central-eastern-blockade-port"
+          "toNode": "central-old-ship-repair-entrance"
+        },
+        {
+          "id": "central-border-sea-garrison-city-to-sakaishio-village",
+          "displayName": "境潮村へ向かう",
+          "action": "Move",
+          "toNode": "central-sakaishio-village"
+        },
+        {
+          "id": "central-border-sea-garrison-city-to-analysis-institute-return",
+          "displayName": "東部分析院へ向かう",
+          "action": "Move",
+          "toNode": "central-eastern-analysis-institute"
+        },
+        {
+          "id": "central-border-sea-garrison-city-review-passage",
+          "displayName": "イリネアの通行記録を照会する",
+          "action": "WalkTown"
         }
       ]
     },
@@ -645,10 +1046,285 @@
       "type": "Port",
       "choices": [
         {
+          "id": "central-eastern-blockade-port-part4-arrival",
+          "displayName": "帰還後の港の様子を確かめる",
+          "action": "Explore"
+        },
+        {
+          "id": "central-eastern-blockade-port-inspect-waterway",
+          "displayName": "封鎖設備を調べる",
+          "action": "Explore"
+        },
+        {
+          "id": "central-eastern-blockade-port-stop-bombing",
+          "displayName": "避難を進めて爆破を止める",
+          "action": "Explore"
+        },
+        {
           "id": "central-eastern-blockade-port-board-pursuit-ship",
-          "displayName": "追跡船に乗る",
+          "displayName": "軍警の追跡船団に参加する",
           "action": "Move",
           "toNode": "sea-central-east-pursuit-route"
+        },
+        {
+          "id": "central-eastern-blockade-port-to-sakaishio-village",
+          "displayName": "境潮村へ向かう",
+          "action": "Move",
+          "toNode": "central-sakaishio-village"
+        }
+      ]
+    },
+    {
+      "id": "central-farm-district",
+      "displayName": "農園地帯",
+      "type": "Field",
+      "choices": [
+        {
+          "id": "central-farm-district-gather-herb",
+          "displayName": "大樹の根元を調べる",
+          "action": "Gather"
+        },
+        {
+          "id": "central-farm-district-to-white-stone-road",
+          "displayName": "白石街道へ向かう",
+          "action": "Move",
+          "toNode": "central-white-stone-road"
+        },
+        {
+          "id": "central-farm-district-to-abandoned-coach-road",
+          "displayName": "廃駅馬車道へ向かう",
+          "action": "Move",
+          "toNode": "central-abandoned-coach-road"
+        }
+      ]
+    },
+    {
+      "id": "central-seal-warehouse-entrance",
+      "displayName": "倉庫入口",
+      "type": "Ruins",
+      "choices": [
+        {
+          "id": "central-seal-warehouse-entrance-to-loading",
+          "displayName": "荷捌き場へ進む",
+          "action": "Move",
+          "toNode": "central-seal-warehouse-loading"
+        },
+        {
+          "id": "central-seal-warehouse-entrance-to-hollow",
+          "displayName": "灰荷の窪地へ向かう",
+          "action": "Move",
+          "toNode": "central-ash-cargo-hollow"
+        }
+      ]
+    },
+    {
+      "id": "central-seal-warehouse-loading",
+      "displayName": "荷捌き場",
+      "type": "Ruins",
+      "choices": [
+        {
+          "id": "central-seal-warehouse-loading-to-entrance",
+          "displayName": "倉庫入口へ向かう",
+          "action": "Move",
+          "toNode": "central-seal-warehouse-entrance"
+        },
+        {
+          "id": "central-seal-warehouse-loading-to-storage",
+          "displayName": "保管庫へ進む",
+          "action": "Move",
+          "toNode": "central-seal-warehouse-storage"
+        }
+      ]
+    },
+    {
+      "id": "central-seal-warehouse-storage",
+      "displayName": "封印石保管庫",
+      "type": "Ruins",
+      "choices": [
+        {
+          "id": "central-seal-warehouse-storage-explore",
+          "displayName": "周囲を探索する",
+          "action": "Explore"
+        },
+        {
+          "id": "central-seal-warehouse-storage-to-loading",
+          "displayName": "荷捌き場へ向かう",
+          "action": "Move",
+          "toNode": "central-seal-warehouse-loading"
+        },
+        {
+          "id": "central-seal-warehouse-storage-to-control",
+          "displayName": "管理室へ進む",
+          "action": "Move",
+          "toNode": "central-seal-warehouse-control"
+        }
+      ]
+    },
+    {
+      "id": "central-seal-warehouse-control",
+      "displayName": "管理室",
+      "type": "Ruins",
+      "choices": [
+        {
+          "id": "central-seal-warehouse-control-to-storage",
+          "displayName": "封印石保管庫へ向かう",
+          "action": "Move",
+          "toNode": "central-seal-warehouse-storage"
+        }
+      ]
+    },
+    {
+      "id": "central-old-ship-repair-entrance",
+      "displayName": "修理場入口",
+      "type": "Ruins",
+      "choices": [
+        {
+          "id": "central-old-ship-repair-entrance-to-courtyard",
+          "displayName": "中庭へ進む",
+          "action": "Move",
+          "toNode": "central-old-ship-repair-courtyard"
+        },
+        {
+          "id": "central-old-ship-repair-entrance-to-city",
+          "displayName": "境海駐屯市へ向かう",
+          "action": "Move",
+          "toNode": "central-border-sea-garrison-city"
+        },
+        {
+          "id": "central-old-ship-repair-entrance-to-eastern-blockade-port",
+          "displayName": "東端封鎖港へ向かう",
+          "action": "Move",
+          "toNode": "central-eastern-blockade-port"
+        }
+      ]
+    },
+    {
+      "id": "central-old-ship-repair-courtyard",
+      "displayName": "中庭",
+      "type": "Ruins",
+      "choices": [
+        {
+          "id": "central-old-ship-repair-courtyard-to-entrance",
+          "displayName": "修理場入口へ向かう",
+          "action": "Move",
+          "toNode": "central-old-ship-repair-entrance"
+        },
+        {
+          "id": "central-old-ship-repair-courtyard-to-materials",
+          "displayName": "資材置き場へ進む",
+          "action": "Move",
+          "toNode": "central-old-ship-repair-materials"
+        },
+        {
+          "id": "central-old-ship-repair-courtyard-to-quarters",
+          "displayName": "作業員詰所へ進む",
+          "action": "Move",
+          "toNode": "central-old-ship-repair-quarters"
+        }
+      ]
+    },
+    {
+      "id": "central-old-ship-repair-materials",
+      "displayName": "資材置き場",
+      "type": "Ruins",
+      "choices": [
+        {
+          "id": "central-old-ship-repair-materials-explore",
+          "displayName": "周囲を探索する",
+          "action": "Explore"
+        },
+        {
+          "id": "central-old-ship-repair-materials-to-courtyard",
+          "displayName": "中庭へ向かう",
+          "action": "Move",
+          "toNode": "central-old-ship-repair-courtyard"
+        },
+        {
+          "id": "central-old-ship-repair-materials-to-workshop",
+          "displayName": "修理棟へ進む",
+          "action": "Move",
+          "toNode": "central-old-ship-repair-workshop"
+        }
+      ]
+    },
+    {
+      "id": "central-old-ship-repair-quarters",
+      "displayName": "作業員詰所",
+      "type": "Ruins",
+      "choices": [
+        {
+          "id": "central-old-ship-repair-quarters-explore",
+          "displayName": "周囲を探索する",
+          "action": "Explore"
+        },
+        {
+          "id": "central-old-ship-repair-quarters-to-courtyard",
+          "displayName": "中庭へ向かう",
+          "action": "Move",
+          "toNode": "central-old-ship-repair-courtyard"
+        },
+        {
+          "id": "central-old-ship-repair-quarters-to-workshop",
+          "displayName": "修理棟へ進む",
+          "action": "Move",
+          "toNode": "central-old-ship-repair-workshop"
+        }
+      ]
+    },
+    {
+      "id": "central-old-ship-repair-workshop",
+      "displayName": "修理棟",
+      "type": "Ruins",
+      "choices": [
+        {
+          "id": "central-old-ship-repair-workshop-to-materials",
+          "displayName": "資材置き場へ向かう",
+          "action": "Move",
+          "toNode": "central-old-ship-repair-materials"
+        },
+        {
+          "id": "central-old-ship-repair-workshop-to-quarters",
+          "displayName": "作業員詰所へ向かう",
+          "action": "Move",
+          "toNode": "central-old-ship-repair-quarters"
+        },
+        {
+          "id": "central-old-ship-repair-workshop-to-slipway",
+          "displayName": "進水路へ進む",
+          "action": "Move",
+          "toNode": "central-old-ship-repair-slipway"
+        }
+      ]
+    },
+    {
+      "id": "central-old-ship-repair-slipway",
+      "displayName": "進水路",
+      "type": "Ruins",
+      "choices": [
+        {
+          "id": "central-old-ship-repair-slipway-to-workshop",
+          "displayName": "修理棟へ向かう",
+          "action": "Move",
+          "toNode": "central-old-ship-repair-workshop"
+        },
+        {
+          "id": "central-old-ship-repair-slipway-to-basin",
+          "displayName": "船溜まりへ進む",
+          "action": "Move",
+          "toNode": "central-old-ship-repair-basin"
+        }
+      ]
+    },
+    {
+      "id": "central-old-ship-repair-basin",
+      "displayName": "船溜まり",
+      "type": "Ruins",
+      "choices": [
+        {
+          "id": "central-old-ship-repair-basin-to-slipway",
+          "displayName": "進水路へ向かう",
+          "action": "Move",
+          "toNode": "central-old-ship-repair-slipway"
         }
       ]
     }
