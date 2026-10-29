@@ -197,8 +197,7 @@ function facilityIcon(facilityId, className) {
   return group;
 }
 
-function mapLabel(nodeId) {
-  const point = state.positions[nodeId] || {};
+function mapLabel(nodeId, point = state.positions[nodeId] || {}) {
   if (point.shortLabel) {
     return point.shortLabel;
   }
@@ -207,8 +206,7 @@ function mapLabel(nodeId) {
   return match ? match[1] : name;
 }
 
-function nodeRadius(nodeId) {
-  const point = state.positions[nodeId] || {};
+function nodeRadius(nodeId, point = state.positions[nodeId] || {}) {
   if (point.r) {
     return point.r;
   }
@@ -231,6 +229,72 @@ function buildPositions() {
     }
   });
   state.positions = positions;
+}
+
+function drawNodes(layer, ids, positions) {
+  ids.forEach((id) => {
+    const point = positions[id];
+    if (!point) return;
+    const radius = nodeRadius(id, point);
+    const facilities = facilitiesForNode(id);
+    const facilityNames = facilities.map((facility) => facility.label);
+    const group = svgEl("g", {
+      class: `node type-${nodeType(id)}`,
+      "data-id": id,
+      tabindex: state.nodesById[id] ? "0" : "-1",
+      role: "button",
+      "aria-label": facilityNames.length > 0 ? `${displayName(id)}。施設: ${facilityNames.join("、")}` : displayName(id),
+    });
+    group.appendChild(svgEl("circle", { class: "pulse", cx: point.x, cy: point.y, r: radius + 2 }));
+    group.appendChild(svgEl("circle", { class: "node-ring", cx: point.x, cy: point.y, r: radius + 10 }));
+    group.appendChild(svgEl("circle", { class: `node-core type-${nodeType(id)}`, cx: point.x, cy: point.y, r: radius }));
+    const labelAnchor = point.labelAnchor || "middle";
+    const label = svgEl("text", {
+      class: "node-label", x: labelAnchor === "end" ? point.x - 22 : point.x,
+      y: point.y + radius + 18, "text-anchor": labelAnchor,
+    });
+    label.textContent = mapLabel(id, point);
+    group.appendChild(label);
+    const markerGap = 24;
+    const markerStartX = point.x - ((facilities.length - 1) * markerGap) / 2;
+    facilities.forEach((facility, index) => {
+      const icon = facilityIcon(facility.id, `facility-marker facility-${facility.id}`);
+      icon.setAttribute("transform", `translate(${markerStartX + index * markerGap} ${point.y - radius - 18})`);
+      icon.setAttribute("aria-hidden", "true");
+      group.appendChild(icon);
+    });
+    const flag = svgEl("text", {
+      class: "current-flag", x: point.x,
+      y: point.y - radius - (facilities.length > 0 ? 40 : 12), "text-anchor": "middle",
+    });
+    flag.textContent = "現在地";
+    flag.style.display = "none";
+    group.appendChild(flag);
+    if (state.nodesById[id]) {
+      group.addEventListener("click", () => setCurrent(id));
+      group.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          setCurrent(id);
+        }
+      });
+    }
+    layer.appendChild(group);
+  });
+}
+
+function drawEdges(layer, edges, positions, ids) {
+  edges.forEach((edge) => {
+    if (!ids.has(edge.from) || !ids.has(edge.to)) return;
+    const from = positions[edge.from];
+    const to = positions[edge.to];
+    if (!from || !to) return;
+    layer.appendChild(svgEl("line", {
+      class: `edge${edge.external ? " is-external" : ""}`,
+      "data-from": edge.from, "data-to": edge.to,
+      x1: from.x, y1: from.y, x2: to.x, y2: to.y,
+    }));
+  });
 }
 
 function drawMap() {
@@ -262,91 +326,35 @@ function drawMap() {
   svg.appendChild(edgesLayer);
   svg.appendChild(nodesLayer);
 
-  uniqueEdges(state.map.nodes).forEach((edge) => {
-    const from = state.positions[edge.from];
-    const to = state.positions[edge.to];
-    if (!from || !to) {
-      return;
-    }
-    edgesLayer.appendChild(
-      svgEl("line", {
-        class: `edge${edge.external ? " is-external" : ""}`,
-        "data-from": edge.from,
-        "data-to": edge.to,
-        x1: from.x,
-        y1: from.y,
-        x2: to.x,
-        y2: to.y,
-      })
-    );
-  });
-
+  const internalIds = new Set((state.layout.submaps || []).flatMap((submap) => Object.keys(submap.nodes).filter((id) => !state.layout.nodes[id])));
   const renderIds = [
-    ...state.map.nodes.map((node) => node.id),
+    ...state.map.nodes.map((node) => node.id).filter((id) => !internalIds.has(id)),
     ...Object.keys(state.layout.externalNodes || {}),
   ];
+  drawEdges(edgesLayer, uniqueEdges(state.map.nodes), state.positions, new Set(renderIds));
+  drawNodes(nodesLayer, renderIds, state.positions);
+  drawSubmaps();
+}
 
-  renderIds.forEach((id) => {
-    const point = state.positions[id];
-    if (!point) {
-      return;
-    }
-    const radius = nodeRadius(id);
-    const facilities = facilitiesForNode(id);
-    const facilityNames = facilities.map((facility) => facility.label);
-    const group = svgEl("g", {
-      class: `node type-${nodeType(id)}`,
-      "data-id": id,
-      tabindex: state.nodesById[id] ? "0" : "-1",
-      role: "button",
-      "aria-label": facilityNames.length > 0 ? `${displayName(id)}。施設: ${facilityNames.join("、")}` : displayName(id),
-    });
-    group.appendChild(svgEl("circle", { class: "pulse", cx: point.x, cy: point.y, r: radius + 2 }));
-    group.appendChild(svgEl("circle", { class: "node-ring", cx: point.x, cy: point.y, r: radius + 10 }));
-    group.appendChild(
-      svgEl("circle", { class: `node-core type-${nodeType(id)}`, cx: point.x, cy: point.y, r: radius })
-    );
-
-    const labelAnchor = point.labelAnchor || "middle";
-    const labelX = labelAnchor === "end" ? point.x - 22 : point.x;
-    const label = svgEl("text", {
-      class: "node-label",
-      x: labelX,
-      y: point.y + radius + 18,
-      "text-anchor": labelAnchor,
-    });
-    label.textContent = mapLabel(id);
-    group.appendChild(label);
-
-    const markerGap = 24;
-    const markerStartX = point.x - ((facilities.length - 1) * markerGap) / 2;
-    facilities.forEach((facility, index) => {
-      const icon = facilityIcon(facility.id, `facility-marker facility-${facility.id}`);
-      icon.setAttribute("transform", `translate(${markerStartX + index * markerGap} ${point.y - radius - 18})`);
-      icon.setAttribute("aria-hidden", "true");
-      group.appendChild(icon);
-    });
-
-    const flag = svgEl("text", {
-      class: "current-flag",
-      x: point.x,
-      y: point.y - radius - (facilities.length > 0 ? 40 : 12),
-      "text-anchor": "middle",
-    });
-    flag.textContent = "現在地";
-    flag.style.display = "none";
-    group.appendChild(flag);
-
-    if (state.nodesById[id]) {
-      group.addEventListener("click", () => setCurrent(id));
-      group.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          setCurrent(id);
-        }
-      });
-    }
-    nodesLayer.appendChild(group);
+function drawSubmaps() {
+  const container = document.getElementById("submap-list");
+  container.replaceChildren();
+  (state.layout.submaps || []).forEach((submap) => {
+    const section = document.createElement("section");
+    section.className = "submap";
+    const heading = document.createElement("h3");
+    heading.textContent = submap.title;
+    const svg = svgEl("svg", { viewBox: submap.viewBox.join(" "), role: "group", "aria-label": `${submap.title}の内部接続図`, class: "submap-svg is-dense" });
+    const [x, y, width, height] = submap.viewBox;
+    svg.appendChild(svgEl("rect", { x, y, width, height, class: "submap-ground" }));
+    const edges = svgEl("g", { class: "submap-edges" });
+    const nodes = svgEl("g", { class: "submap-nodes" });
+    svg.append(edges, nodes);
+    const ids = Object.keys(submap.nodes);
+    drawEdges(edges, uniqueEdges(state.map.nodes), submap.nodes, new Set(ids));
+    drawNodes(nodes, ids, submap.nodes);
+    section.append(heading, svg);
+    container.appendChild(section);
   });
 }
 

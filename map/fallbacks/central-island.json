@@ -1042,6 +1042,12 @@
           "toNode": "central-old-ship-repair-entrance"
         },
         {
+          "id": "central-border-sea-garrison-city-to-eastern-blockade-port",
+          "displayName": "東端封鎖港へ向かう",
+          "action": "Move",
+          "toNode": "central-eastern-blockade-port"
+        },
+        {
           "id": "central-border-sea-garrison-city-to-sakaishio-village",
           "displayName": "境潮村へ向かう",
           "action": "Move",
@@ -1085,6 +1091,12 @@
           "displayName": "軍警の追跡船団に参加する",
           "action": "Move",
           "toNode": "sea-central-east-pursuit-route"
+        },
+        {
+          "id": "central-eastern-blockade-port-to-border-garrison",
+          "displayName": "境海駐屯市へ向かう",
+          "action": "Move",
+          "toNode": "central-border-sea-garrison-city"
         },
         {
           "id": "central-eastern-blockade-port-to-sakaishio-village",
@@ -1209,12 +1221,6 @@
           "displayName": "境海駐屯市へ向かう",
           "action": "Move",
           "toNode": "central-border-sea-garrison-city"
-        },
-        {
-          "id": "central-old-ship-repair-entrance-to-eastern-blockade-port",
-          "displayName": "東端封鎖港へ向かう",
-          "action": "Move",
-          "toNode": "central-eastern-blockade-port"
         }
       ]
     },

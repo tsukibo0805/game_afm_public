@@ -43,22 +43,38 @@
     "central-capital-east-military-gate": { "x": 1190, "y": 450, "shortLabel": "東軍門" },
     "central-iron-marker-road": { "x": 1330, "y": 410, "shortLabel": "鉄標街道" },
     "central-ash-cargo-hollow": { "x": 1460, "y": 470, "shortLabel": "灰荷窪地" },
-    "central-seal-warehouse-entrance": {"x": 1250, "y": 610, "shortLabel": "倉庫入口"},
-    "central-seal-warehouse-loading": {"x": 1250, "y": 700, "shortLabel": "荷捌き場"},
-    "central-seal-warehouse-storage": {"x": 1250, "y": 790, "shortLabel": "封印石保管庫"},
-    "central-seal-warehouse-control": {"x": 1250, "y": 880, "shortLabel": "倉庫管理室"},
-    "central-old-ship-repair-entrance": {"x": 1710, "y": 590, "shortLabel": "修理場入口"},
-    "central-old-ship-repair-courtyard": {"x": 1710, "y": 670, "shortLabel": "中庭"},
-    "central-old-ship-repair-materials": {"x": 1600, "y": 740, "shortLabel": "資材置き場"},
-    "central-old-ship-repair-quarters": {"x": 1800, "y": 740, "shortLabel": "作業員詰所"},
-    "central-old-ship-repair-workshop": {"x": 1710, "y": 810, "shortLabel": "修理棟"},
-    "central-old-ship-repair-slipway": {"x": 1640, "y": 880, "shortLabel": "進水路"},
-    "central-old-ship-repair-basin": {"x": 1800, "y": 890, "shortLabel": "船溜まり"},
+    "central-seal-warehouse-entrance": {"x": 1250, "y": 610, "shortLabel": "封印石保管庫"},
+    "central-old-ship-repair-entrance": {"x": 1710, "y": 590, "shortLabel": "旧船修理場"},
     "central-old-cargo-inspection-depot": { "x": 1460, "y": 590, "shortLabel": "旧検査庫" },
     "central-eastern-analysis-institute": { "x": 1590, "y": 420, "shortLabel": "分析院" },
     "central-border-sea-garrison-city": { "x": 1710, "y": 470, "shortLabel": "駐屯市" },
     "central-eastern-blockade-port": { "x": 1790, "y": 360, "r": 18, "shortLabel": "封鎖港" }
   },
+  "submaps": [
+    {
+      "title": "封印石保管庫",
+      "viewBox": [0, 0, 680, 480],
+      "nodes": {
+        "central-seal-warehouse-entrance": {"x": 340, "y": 70, "shortLabel": "入口"},
+        "central-seal-warehouse-loading": {"x": 340, "y": 175, "shortLabel": "荷捌き場"},
+        "central-seal-warehouse-storage": {"x": 340, "y": 280, "shortLabel": "封印石保管庫"},
+        "central-seal-warehouse-control": {"x": 340, "y": 385, "shortLabel": "倉庫管理室"}
+      }
+    },
+    {
+      "title": "旧船修理場",
+      "viewBox": [0, 0, 680, 480],
+      "nodes": {
+        "central-old-ship-repair-entrance": {"x": 340, "y": 65, "shortLabel": "入口"},
+        "central-old-ship-repair-courtyard": {"x": 340, "y": 145, "shortLabel": "中庭"},
+        "central-old-ship-repair-materials": {"x": 160, "y": 240, "shortLabel": "資材置き場"},
+        "central-old-ship-repair-quarters": {"x": 520, "y": 240, "shortLabel": "作業員詰所"},
+        "central-old-ship-repair-workshop": {"x": 340, "y": 320, "shortLabel": "修理棟"},
+        "central-old-ship-repair-slipway": {"x": 220, "y": 405, "shortLabel": "進水路"},
+        "central-old-ship-repair-basin": {"x": 500, "y": 405, "shortLabel": "船溜まり"}
+      }
+    }
+  ],
   "externalNodes": {
     "sea-central-east-pursuit-route": {
       "x": 1830,

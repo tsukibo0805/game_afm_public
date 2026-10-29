@@ -208,6 +208,7 @@ def nav_html(current: str, prefix: str) -> str:
         ("map/index.html", "地図", current == "map"),
         ("equipment/index.html", "装備", current == "equipment"),
         ("skills/index.html", "スキル", current == "skills"),
+        ("enemies/index.html", "敵", current == "enemies"),
     ]
     items = []
     for href, label, active in links:
@@ -342,6 +343,7 @@ def copy_map() -> None:
   <a href="index.html" class="is-current">地図</a>
   <a href="../equipment/index.html">装備</a>
   <a href="../skills/index.html">スキル</a>
+  <a href="../enemies/index.html">敵</a>
 </nav>
   <header class="top-bar">
     <h1>島マップ</h1>
@@ -391,6 +393,7 @@ def copy_map() -> None:
 
     <section class="panel map-wrap">
       <svg id="map" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="島のノード接続図"></svg>
+      <div id="submap-list" class="submap-list"></div>
     </section>
   </main>
   <footer class="site-footer">Au Fil des Mers プレイヤー向け案内。<a href="../rights.html">権利と利用条件</a></footer>
@@ -571,6 +574,156 @@ def build_equipment_page() -> None:
     )
 
 
+ENEMY_ATTRIBUTES = {
+    "power": {"None": "なし", "Close": "近距離", "Medium": "中距離", "Long": "遠距離"},
+    "magic": {"None": "なし", "Wind": "風", "Fire": "火", "Water": "水", "Earth": "大地"},
+    "spirit": {"None": "なし", "Holy": "聖", "Dark": "邪"},
+}
+
+
+def enemy_catalog() -> list[dict[str, object]]:
+    """三島の戦闘からユニット別の公開情報を取り出す。行動順は返さない。"""
+    def read_json(path: Path) -> dict:
+        return json.loads(path.read_text(encoding="utf-8"))
+
+    enemies = {enemy["id"]: enemy for enemy in read_json(ROOT / "data/enemies.json")["enemies"]}
+    parties = {party["id"]: party for party in read_json(ROOT / "data/enemy-parties.json")["parties"]}
+    skills = {skill["id"]: skill for skill in read_json(ROOT / "data/skills.json")["skills"]}
+    locations = {}
+    for map_id in ("west-island", "central-island", "east-island"):
+        island = read_json(ROOT / "data/maps" / f"{map_id}.json")
+        for node in island["nodes"]:
+            locations[node["id"]] = {
+                "id": node["id"], "name": node["displayName"],
+                "islandId": map_id, "islandName": island["displayName"],
+            }
+
+    appearances: dict[str, set[str]] = {}
+    for path in sorted((ROOT / "AfmBatch/Data/Stories").glob("*.json")):
+        story = read_json(path)
+        area = story["area"]
+        if area not in locations:
+            continue
+        for events in story.get("choices", {}).values():
+            for event in events:
+                party_id = event.get("battle", {}).get("enemyPartyId")
+                if party_id:
+                    for enemy_id in parties[party_id]["enemyIds"]:
+                        appearances.setdefault(enemy_id, set()).add(area)
+
+    result = []
+    for enemy_id, areas in appearances.items():
+        enemy = enemies[enemy_id]
+        abilities = []
+        # actions is the runtime skill source. Sorting the set discards both order and frequency.
+        skill_ids = set(enemy["actions"])
+        if enemy.get("passiveSkillId"):
+            skill_ids.add(enemy["passiveSkillId"])
+        for skill_id in sorted(skill_ids):
+            if skill_id == "BasicAttack":
+                abilities.append({"id": skill_id, "name": "通常攻撃", "activation": "通常攻撃"})
+            else:
+                skill = skills[skill_id]
+                activation = skill["activation"]
+                abilities.append({
+                    "id": skill_id, "name": skill["setName"],
+                    "activation": "P・常時" if activation == "P" else (
+                        "A・通常技" if activation == "A" else f"{activation}・準備{activation[1:]}ターン"
+                    ),
+                })
+        result.append({
+            "id": enemy_id, "name": enemy["name"],
+            "maxHp": enemy["maxHp"], "strength": enemy["strength"],
+            "attributes": {axis: values[enemy["attributes"][axis]] for axis, values in ENEMY_ATTRIBUTES.items()},
+            "locations": [locations[area] for area in sorted(areas)],
+            "skills": sorted(abilities, key=lambda skill: (skill["activation"] == "P・常時", skill["name"])),
+        })
+    island_order = {island: index for index, island in enumerate(("west-island", "central-island", "east-island"))}
+    return sorted(result, key=lambda enemy: (
+        min(island_order[place["islandId"]] for place in enemy["locations"]), enemy["name"], enemy["id"],
+    ))
+
+
+def build_enemy_page() -> None:
+    catalog = enemy_catalog()
+    escape = html.escape
+
+    def attribute(value: object) -> str:
+        return escape(json.dumps(value, ensure_ascii=False, separators=(",", ":")), quote=True)
+
+    locations = {place["id"]: place for enemy in catalog for place in enemy["locations"]}
+    location_options = "".join(
+        f'<option value="{escape(place["id"], quote=True)}" data-island="{place["islandId"]}">'
+        f'{escape(place["islandName"])} · {escape(place["name"])}</option>'
+        for place in sorted(locations.values(), key=lambda place: (place["islandId"], place["name"]))
+    )
+    element_names = [label for values in ENEMY_ATTRIBUTES.values() for key, label in values.items() if key != "None"]
+    element_names.append("属性なし")
+    element_options = "".join(f'<option value="{name}">{name}</option>' for name in element_names)
+    cards = []
+    for enemy in catalog:
+        places = enemy["locations"]
+        traits = enemy["attributes"]
+        elements = [value for value in traits.values() if value != "なし"] or ["属性なし"]
+        search = " ".join([enemy["name"], *traits.values(), *elements,
+                           *(place["name"] + " " + place["islandName"] for place in places),
+                           *(skill["name"] for skill in enemy["skills"])])
+        tags = "".join(f'<span class="enemy-tag">{escape(value)}</span>' for value in elements)
+        place_items = "".join(
+            f'<li>{escape(place["islandName"])} · {escape(place["name"])}</li>' for place in places
+        )
+        skill_items = "".join(
+            '<li><span class="enemy-skill-name" '
+            f'data-skill-id="{escape(skill["id"], quote=True)}">{escape(skill["name"])}</span> '
+            f'<span class="enemy-skill-kind">{escape(skill["activation"])}</span></li>'
+            for skill in enemy["skills"]
+        )
+        cards.append(
+            f'<article class="enemy-card" id="{escape(enemy["id"], quote=True)}" '
+            f'data-search="{escape(search, quote=True)}" '
+            f'data-islands="{attribute(sorted({place["islandId"] for place in places}))}" '
+            f'data-locations="{attribute([place["id"] for place in places])}" '
+            f'data-elements="{attribute(elements)}">'
+            '<details><summary>'
+            f'<h2 class="enemy-name">{escape(enemy["name"])}</h2>'
+            f'<span class="enemy-tags">{tags}</span></summary>'
+            '<div class="enemy-detail"><h3>登場場所</h3>'
+            f'<ul class="enemy-locations">{place_items}</ul>'
+            '<h3>基本情報</h3><dl class="enemy-stats">'
+            f'<div><dt>基準HP</dt><dd>{enemy["maxHp"]}</dd></div>'
+            f'<div><dt>能力値</dt><dd>{enemy["strength"]}</dd></div></dl>'
+            '<dl class="enemy-traits">'
+            f'<div><dt>力の属性</dt><dd>{traits["power"]}</dd></div>'
+            f'<div><dt>魔力の属性</dt><dd>{traits["magic"]}</dd></div>'
+            f'<div><dt>霊感の属性</dt><dd>{traits["spirit"]}</dd></div></dl>'
+            f'<h3>所持スキル</h3><ul class="enemy-skills">{skill_items}</ul>'
+            '</div></details></article>'
+        )
+    body = (
+        '<h1>敵</h1><p>敵の名前、登場場所、所持スキルから探せます。'
+        '敵を開くと、属性と基本情報を確認できます。</p>'
+        '<p>三島で登場する敵をユニットごとに掲載しています。能力値は力・魔力・霊感に共通の値です。'
+        'ボス戦のHPは4人参加時の基準値で、参加人数によって変わります。</p>'
+        '<form id="enemy-filters" role="search" aria-label="敵の絞り込み">'
+        '<label for="enemy-search">名前・場所・スキル<input id="enemy-search" type="search" placeholder="例：ゴブリン、修理場、飛行"></label>'
+        '<label for="enemy-island">島<select id="enemy-island"><option value="">すべての島</option>'
+        '<option value="west-island">西の島</option><option value="central-island">中央の島</option>'
+        '<option value="east-island">東の島</option></select></label>'
+        f'<label for="enemy-location">登場場所<select id="enemy-location"><option value="">すべての場所</option>{location_options}</select></label>'
+        f'<label for="enemy-element">属性<select id="enemy-element"><option value="">すべての属性</option>{element_options}</select></label>'
+        '<button id="enemy-reset" type="reset">絞り込みを解除</button></form>'
+        f'<p id="enemy-count" role="status" aria-live="polite">{len(catalog)} / {len(catalog)} ユニット</p>'
+        '<p id="enemy-empty" hidden>条件に合う敵がいません。検索語や絞り込みを変更してください。</p>'
+        '<div class="enemy-grid">' + "".join(cards) + '</div>'
+    )
+    page = page_html("敵", body, "enemies", "../")
+    page = page.replace('  <link rel="stylesheet" href="../site.css">',
+                        '  <link rel="stylesheet" href="../site.css">\n  <link rel="stylesheet" href="catalog.css">', 1)
+    page = page.replace('<main class="page">', '<main class="page enemy-page">', 1)
+    page = page.replace('</body>', '  <script src="catalog.js"></script>\n</body>', 1)
+    write(OUT / "enemies/index.html", page)
+
+
 def image_alt_texts() -> dict[str, str]:
     result: dict[str, str] = {}
     for source_name in ("初見プレイヤー向け説明画像原稿.md", "ゲームシステム別説明画像原稿.md"):
@@ -635,6 +788,7 @@ def main() -> None:
     copy_skills()
     build_guides()
     build_equipment_page()
+    build_enemy_page()
     build_image_guide()
     build_rights_page()
     print(f"built {OUT}")

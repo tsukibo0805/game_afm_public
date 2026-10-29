@@ -1,6 +1,6 @@
 # Au Fil des Mers プレイヤー向けサイト
 
-Discordゲーム「Au Fil des Mers」の公開案内、図解ガイド、装備と素材、スキル一覧、西・中央・東の島マップの現在地ビューアです。
+Discordゲーム「Au Fil des Mers」の公開案内、図解ガイド、装備と素材、スキル・敵一覧、西・中央・東の島マップの現在地ビューアです。
 制作リポジトリ `game_afm` とは分け、GitHub Pages で静的配信するためのコピーです。
 
 ## 含めるもの
@@ -13,6 +13,7 @@ Discordゲーム「Au Fil des Mers」の公開案内、図解ガイド、装備�
 - 職業ツリーから探せる職業スキル一覧
 - 装備一覧から探せる50・100ターン装備スキル一覧
 - 犬・猫・鳥の系統別に探せる使い魔専用スキル一覧
+- 登場場所・所持スキル・属性をユニットごとに探せる敵一覧（行動順は掲載しない）
 
 含めないもの:
 
@@ -43,6 +44,7 @@ https://tsukibo0805.github.io/game_afm_public/guide/images.html
 https://tsukibo0805.github.io/game_afm_public/map/
 https://tsukibo0805.github.io/game_afm_public/equipment/
 https://tsukibo0805.github.io/game_afm_public/skills/
+https://tsukibo0805.github.io/game_afm_public/enemies/
 ```
 
 Jekyll を使わないため、ルートに `.nojekyll` を置いてあります。
@@ -54,6 +56,7 @@ Jekyll を使わないため、ルートに `.nojekyll` を置いてあります
 - マップ試作: `tools/west-island-map-preview/`
 - スキル一覧の表示テンプレート: `tools/job-skills-preview/`
 - スキル効果・習得方法の正本: `docs/ゲームデザイン/スキル一覧.md`
+- 敵一覧: `data/enemies.json`、`data/enemy-parties.json`、`data/skills.json`、三島の`data/maps/`と`AfmBatch/Data/Stories/`から生成。三島の戦闘イベントに登場するユニットを対象とし、未配置・検証用の敵を含めない。スキルは現行戦闘の`actions`を重複・順序・回数を除いて取り出し、`passiveSkillId`も含める。
 - 案内文: `docs/ゲーム紹介.md` と `docs/ユーザー向け/`
 - 説明画像: `docs/ユーザー向け/*.png`
 - 三島の概略図: `image/maps/west-island.png`、`central-island.png`、`east-island.png`
