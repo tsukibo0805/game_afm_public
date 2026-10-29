@@ -5,7 +5,6 @@
   "defaultNodeId": "west-start",
   "islandPath": "M180,730 C110,640 78,520 92,400 C108,268 178,168 300,128 C430,86 560,88 680,128 C800,168 918,186 948,270 C980,360 952,430 910,510 C868,590 892,650 850,730 C808,810 700,910 540,938 C380,966 250,888 200,800 C176,760 198,748 180,730 Z",
   "nodes": {
-    "west-graveyard": { "x": 250, "y": 350 },
     "west-spirit-forest-a": { "x": 338, "y": 558, "shortLabel": "精霊森" },
     "west-church": { "x": 498, "y": 622 },
     "west-start": { "x": 518, "y": 822 },
@@ -28,7 +27,7 @@
         "west-spirit-forest-b": { "x": 340, "y": 280, "shortLabel": "B 白花の分かれ道" },
         "west-spirit-forest-c": { "x": 150, "y": 180, "shortLabel": "C 歌忘れの小径" },
         "west-spirit-forest-d": { "x": 420, "y": 160, "shortLabel": "D 墓守の根道" },
-        "west-graveyard": { "x": 420, "y": 55, "shortLabel": "墓地（森の外）" }
+        "west-graveyard": { "x": 420, "y": 55, "shortLabel": "森の墓地" }
       }
     }
   ],
@@ -44,8 +43,7 @@
   },
   "regions": [
     { "id": "coast", "label": "漂着海岸", "x": 430, "y": 930 },
-    { "id": "forest", "label": "精霊森", "x": 168, "y": 168 },
-    { "id": "mountain", "label": "山岳地帯", "x": 628, "y": 148 },
+    { "id": "mountain", "label": "山岳地帯", "x": 628, "y": 365 },
     { "id": "port", "label": "港町", "x": 848, "y": 118 }
   ]
 }
