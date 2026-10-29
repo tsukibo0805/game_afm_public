@@ -95,6 +95,11 @@
           "displayName": "港外れの旧道を調べる",
           "action": "Move",
           "toNode": "central-old-spirit-shrine"
+        },
+        {
+          "id": "central-almar-port-explore-sightseeing",
+          "displayName": "岸辺の暮らしに目を留める",
+          "action": "Explore"
         }
       ],
       "facilities": [
@@ -294,6 +299,11 @@
           "displayName": "南岸宿場へ向かう",
           "action": "Move",
           "toNode": "central-south-post-town"
+        },
+        {
+          "id": "central-harbor-market-explore-sightseeing",
+          "displayName": "市場の軒先を眺める",
+          "action": "Explore"
         }
       ],
       "facilities": [
@@ -341,6 +351,11 @@
           "id": "central-south-post-town-craftsman-after",
           "displayName": "宿の様子を見る",
           "action": "Rest"
+        },
+        {
+          "id": "central-south-post-town-explore-sightseeing",
+          "displayName": "宿場の軒先を眺める",
+          "action": "Explore"
         }
       ]
     },
@@ -932,6 +947,11 @@
           "displayName": "封印石倉庫へ向かう",
           "action": "Move",
           "toNode": "central-seal-warehouse-entrance"
+        },
+        {
+          "id": "central-ash-cargo-hollow-explore-sightseeing",
+          "displayName": "灰の路肩に足を止める",
+          "action": "Explore"
         }
       ]
     },
